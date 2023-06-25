@@ -38,3 +38,5 @@ next-env.d.ts
 db/auto.cnf
 db/binlog.index
 db/ib_buffer_pool
+db/mysql.sock
+
