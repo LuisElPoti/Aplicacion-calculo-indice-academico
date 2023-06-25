@@ -35,8 +35,6 @@ yarn-error.log*
 next-env.d.ts
 
 #DB
-db/auto.cnf
-db/binlog.index
-db/ib_buffer_pool
-db/mysql.sock
+/db
+
 
