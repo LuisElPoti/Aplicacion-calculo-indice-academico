@@ -14,7 +14,6 @@ RUN npm install
 COPY . .
 
 # Establece el puerto de la aplicación desde el archivo .env
-
 ARG NEXTJS_PORT
 
 ENV PORT=$NEXTJS_PORT
@@ -24,3 +23,5 @@ EXPOSE $PORT
 
 # Comando para ejecutar la aplicación
 CMD ["npm", "run", "dev"]
+
+

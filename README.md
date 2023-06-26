@@ -27,3 +27,11 @@ La Aplicación para Cálculo de Índice Académico consiste en un software dise�
 1. Ejecutar el comando `docker-compose up` para levantar el contenedor de la base de datos y la aplicación
 
 2. Dirigirse al navegador y entrar a la dirección `localhost:15000`
+
+## Trabajar con la base de datos
+
+1. Ejecutar el comando `docker-compose up db` para levantar el contenedor de la base de datos
+
+2. Ejecutar el comando `npx prisma db pull` para actualizar el esquema de la base de datos
+
+3. Ejecutar el comando `npx prisma generate` para generar los modelos de la base de datos
