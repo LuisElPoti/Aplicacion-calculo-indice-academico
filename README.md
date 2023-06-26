@@ -32,6 +32,8 @@ La Aplicación para Cálculo de Índice Académico consiste en un software dise�
 
 1. Ejecutar el comando `docker-compose up db` para levantar el contenedor de la base de datos
 
-2. Ejecutar el comando `npx prisma db pull` para actualizar el esquema de la base de datos
+2. Ejecutar los archivos SQL `tables.sql` y `data.sql` para crear las tablas y poblar la base de datos
 
-3. Ejecutar el comando `npx prisma generate` para generar los modelos de la base de datos
+3. Ejecutar el comando `npx prisma db pull` para actualizar el esquema de la base de datos
+
+4. Ejecutar el comando `npx prisma generate` para generar los modelos de la base de datos

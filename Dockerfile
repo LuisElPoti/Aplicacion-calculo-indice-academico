@@ -21,6 +21,8 @@ ENV PORT=$NEXTJS_PORT
 # Expone el puerto 15000 para acceder a la aplicación Next.js
 EXPOSE $PORT
 
+RUN npx prisma generate
+
 # Comando para ejecutar la aplicación
 CMD ["npm", "run", "dev"]
 
