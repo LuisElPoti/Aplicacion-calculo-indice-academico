@@ -13,8 +13,14 @@ RUN npm install
 # Copia el resto de los archivos de la aplicación
 COPY . .
 
-# Expone el puerto 3000 para acceder a la aplicación Next.js
-EXPOSE 3000
+# Establece el puerto de la aplicación desde el archivo .env
+
+ARG NEXTJS_PORT
+
+ENV PORT=$NEXTJS_PORT
+
+# Expone el puerto 15000 para acceder a la aplicación Next.js
+EXPOSE $PORT
 
 # Comando para ejecutar la aplicación
 CMD ["npm", "run", "dev"]

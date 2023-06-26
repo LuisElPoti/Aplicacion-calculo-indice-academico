@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Aplicacion de Cálculo de Índice Académico
 
-## Getting Started
+## Integrantes del equipo
 
-First, run the development server:
+1. Pazzis Paulino
+2. Paola Saldaña
+3. Luis Adames
+4. Allen Silverio
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Descripción del proyecto
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+La Aplicación para Cálculo de Índice Académico consiste en un software diseñado para el cálculo del índice académico dentro de una institución educativa. En ese sentido, brindará mecanismos a los maestros para llevar control de las asignaturas que imparte y a los estudiantes información sobre su condición académica, tanto por trimestre como de manera general, en base a las asignaturas que previamente seleccionó.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Puertos
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- 15000: Puerto de la aplicación NextJS
+- 18000: Puerto de la base de datos MySQL
 
-## Learn More
+## Requerimientos
 
-To learn more about Next.js, take a look at the following resources:
+1. Tener instalado Docker Desktop en el equipo.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Tener instalado NodeJS y npm en el equipo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Correr la aplicacion
 
-## Deploy on Vercel
+1. Ejecutar el comando `docker-compose up` para levantar el contenedor de la base de datos y la aplicación
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. Dirigirse al navegador y entrar a la dirección `localhost:15000`
