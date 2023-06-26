@@ -30,10 +30,14 @@ La Aplicación para Cálculo de Índice Académico consiste en un software dise�
 
 ## Trabajar con la base de datos
 
-1. Ejecutar el comando `docker-compose up db` para levantar el contenedor de la base de datos
+1. Cambiar el valor de las variables `DB_PORT` a `18000` y `DB_HOST` a `localhost` en el archivo `.env` para que la terminal se pueda conectar al contenedor de la base de datos
 
-2. Ejecutar los archivos SQL `tables.sql` y `data.sql` para crear las tablas y poblar la base de datos
+2. Ejecutar el comando `docker-compose up db` para levantar el contenedor de la base de datos
 
-3. Ejecutar el comando `npx prisma db pull` para actualizar el esquema de la base de datos
+3. Ejecutar los archivos SQL `tables.sql` y `data.sql` para crear las tablas y poblar la base de datos desde su IDE preferido
 
-4. Ejecutar el comando `npx prisma generate` para generar los modelos de la base de datos
+4. Ejecutar el comando `npx prisma db pull` para actualizar el esquema de la base de datos de la aplicación
+
+5. Ejecutar el comando `npx prisma generate` para generar los modelos de la base de datos de la aplicación
+
+6. Cambiar el valor de las variables `DB_PORT` a `3306` y `DB_HOST` a `mysql` en el archivo `.env` para que el contenedor de la aplicación pueda conectarse al contenedor de la base de datos
