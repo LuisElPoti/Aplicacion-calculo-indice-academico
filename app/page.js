@@ -1,5 +1,3 @@
-import MenuPrincipal from "./components/MenuPrincipal"
-import FiltroReporteSeleccion from "./components/FiltroReporteSeleccion"
 import Link from 'next/link';
 
 
@@ -9,9 +7,7 @@ import Link from 'next/link';
 
   return (
     <>
-      <MenuPrincipal/>
-      <FiltroReporteSeleccion/>
-      
+    <h1>Pagina Root</h1>
     </>
     
 
