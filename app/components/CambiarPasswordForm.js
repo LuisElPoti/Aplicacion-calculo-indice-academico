@@ -3,7 +3,7 @@ import {Logo} from "./Logo";
 
 function CambiarPasswordForm() {
   return (
-    <div className="cambiar-password" >
+    <form action="" method="" className="cambiar-password" >
     <Logo
       gradehubStyle={{
         fontSize: "32px",
@@ -29,11 +29,11 @@ function CambiarPasswordForm() {
           top: "619px",
         }}
         >
-        <div className="acceder">Acceder</div>
+        <div className="acceder">Cambiar Contraseña</div>
       </button>
     
     <div className="cambiar-contrase-a">Cambiar Contraseña</div>
-  </div>
+  </form>
   )
 }
 
