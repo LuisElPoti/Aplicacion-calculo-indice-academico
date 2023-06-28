@@ -1,6 +1,6 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
 /* Login Form */
 .login-form {
@@ -349,6 +349,7 @@
   height: 78px;
   position: relative;
   width: 1036px;
+  
 }
 
 .encabezado .perfil {
@@ -440,7 +441,7 @@
 /*ContenedorInformacion*/
 
 .contenedor-info {
-  background-color: #f7fcff;
+  background-color: white;
   border-radius: 52px;
   height: 767px;
   position: relative;
@@ -639,33 +640,27 @@
 
 /*ContenedorIndiceGeneral*/
 
-.box {
-  background-color: transparent;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  outline: black;
-}
 
-.box .indicador-wrapper {
+
+.indicador-wrapper {
   border: 0px none;
   height: 297px;
   position: relative;
   width: 359px;
 }
 
-.box .indicador {
-  background-color: #f6f4fd;
+.indicador {
+  background-color: white;
   border-radius: 48px;
   height: 297px;
   left: 0;
-  position: fixed;
+  position: relative;
   top: 0;
   width: 359px;
+
 }
 
-.box .text-wrapper {
+.text-wrapper {
   color: #1f1f37;
   font-family: "Poppins-SemiBold", Helvetica;
   font-size: 16px;
@@ -678,7 +673,7 @@
   top: 257px;
 }
 
-.box .indice-general-frame {
+ .indice-general-frame {
   border: 1px solid;
   border-color: #1f1f37;
   height: 215px;
@@ -691,7 +686,7 @@
 /*ContenedorIndicadores*/
 
 .indicadores {
-  background-color: #eceeff;
+  background-color: white;
   border-radius: 48px;
   height: 297px;
   position: relative;
@@ -770,8 +765,7 @@
 /* Menu Principal Sidebar */
 .menu-principal {
   background-color: #ffffff;
-  height: 1024px;
-  position: relative;
+  height: 1000px;
   width: 285px;
 }
 
@@ -901,6 +895,118 @@
   width: 169px;
 }
 
+/* Menu Principal Admin */
+.menu-principal {
+  height: 1024px;
+  width: 285px;
+}
+
+.menu-principal .frame {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  position: relative;
+  width: fit-content;
+}
+
+.menu-principal .div {
+  background-color: #ffffff;
+  height: 1024px;
+  min-width: 285px;
+  position: relative;
+}
+
+.menu-principal .logout {
+  align-items: flex-start;
+  display: flex;
+  gap: 23px;
+  left: 37px;
+  position: absolute;
+  top: 964px;
+  width: fit-content;
+}
+
+.menu-principal .img-2 {
+  height: 24px;
+  min-width: 24px;
+  position: relative;
+}
+
+.menu-principal .text-wrapper {
+  color: #c7c5d0;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: 169px;
+}
+
+.menu-principal .logo-instance {
+  left: 46px !important;
+  position: absolute !important;
+  top: 65px !important;
+}
+
+.menu-principal .frame-2 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  left: 10px;
+  position: absolute;
+  top: 190px;
+  width: fit-content;
+}
+
+.menu-principal .div-2 {
+  align-items: flex-start;
+  display: flex;
+  gap: 13px;
+  position: relative;
+  width: fit-content;
+}
+
+.menu-principal .chevron-right {
+  height: 17px;
+  min-width: 17px;
+  position: relative;
+}
+
+.menu-principal .asignatura {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  position: relative;
+  width: fit-content;
+}
+
+.menu-principal .calificaciones {
+  align-items: center;
+  display: flex;
+  gap: 19px;
+  position: relative;
+  width: fit-content;
+}
+
+.menu-principal .icon-file-text {
+  height: 23.41px;
+  margin-left: -1px;
+  min-width: 19px;
+  position: relative;
+}
+
+.menu-principal .frame-3 {
+  align-items: flex-start;
+  display: flex;
+  gap: 17px;
+  padding: 0px 10px 10px;
+  position: relative;
+  width: fit-content;
+}
 
 
 

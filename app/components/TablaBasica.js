@@ -19,8 +19,8 @@ const rows = [
 
 function TablaBasica() {
   return (
-    <TableContainer component={Paper} sx={{ width: 700 , fontfamily: 'Poppins' }}>
-      <Table sx={{ width: 700, height: 400}} aria-label="simple table">
+    <TableContainer component={Paper} sx={{ width: 730 , fontfamily: 'Poppins', height:400 }}>
+      <Table sx={{ width: 700, height: 100}} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Asignatura</TableCell>
