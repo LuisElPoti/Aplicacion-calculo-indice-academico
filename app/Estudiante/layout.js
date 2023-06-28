@@ -23,7 +23,11 @@ function RootLayout({ children }) {
                     {/* <!-- Header and container element --> */}
                     <div class="col-span-10 grid grid-rows-2 ml-12 pt-12">
                         {/* <!-- Header --> */}
-                        <div class="row-span-2 pl-12 pt-5"> <Encabezado /> {children}</div>
+                        <div class="row-span-2 pl-12 pt-5"> 
+                        <Encabezado /> 
+                        <div className='ContenidoDinamico'></div>
+                        {children}
+                        </div>
 
                         {/* <!-- Container element --> */}
                         

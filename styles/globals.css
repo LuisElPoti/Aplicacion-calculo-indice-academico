@@ -349,6 +349,7 @@
   height: 78px;
   position: relative;
   width: 1036px;
+  
 }
 
 .encabezado .perfil {
@@ -440,7 +441,7 @@
 /*ContenedorInformacion*/
 
 .contenedor-info {
-  background-color: #f7fcff;
+  background-color: white;
   border-radius: 52px;
   height: 767px;
   position: relative;
@@ -639,33 +640,27 @@
 
 /*ContenedorIndiceGeneral*/
 
-.box {
-  background-color: transparent;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  outline: black;
-}
 
-.box .indicador-wrapper {
+
+.indicador-wrapper {
   border: 0px none;
   height: 297px;
   position: relative;
   width: 359px;
 }
 
-.box .indicador {
-  background-color: #f6f4fd;
+.indicador {
+  background-color: white;
   border-radius: 48px;
   height: 297px;
   left: 0;
-  position: fixed;
+  position: relative;
   top: 0;
   width: 359px;
+
 }
 
-.box .text-wrapper {
+.text-wrapper {
   color: #1f1f37;
   font-family: "Poppins-SemiBold", Helvetica;
   font-size: 16px;
@@ -678,7 +673,7 @@
   top: 257px;
 }
 
-.box .indice-general-frame {
+ .indice-general-frame {
   border: 1px solid;
   border-color: #1f1f37;
   height: 215px;
@@ -691,7 +686,7 @@
 /*ContenedorIndicadores*/
 
 .indicadores {
-  background-color: #eceeff;
+  background-color: white;
   border-radius: 48px;
   height: 297px;
   position: relative;
@@ -770,8 +765,7 @@
 /* Menu Principal Sidebar */
 .menu-principal {
   background-color: #ffffff;
-  height: 1024px;
-  position: relative;
+  height: 1000px;
   width: 285px;
 }
 
