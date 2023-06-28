@@ -7,8 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Administradores {
-  id                Int             @id
+model administradores {
+  id                Int             @id @default(autoincrement())
   nombre            String?         @db.VarChar(50)
   apellido          String?         @db.VarChar(50)
   telefono          String?         @db.VarChar(13)
@@ -19,58 +19,58 @@ model Administradores {
   documento         String?         @db.VarChar(15)
   matricula         String?         @db.VarChar(7)
   activo            Boolean?
-  Tipo_Documento    Tipo_Documento? @relation(fields: [id_tipo_documento], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "administradores_ibfk_1")
+  tipo_documento    tipo_documento? @relation(fields: [id_tipo_documento], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "administradores_ibfk_1")
 
   @@index([id_tipo_documento], map: "id_tipo_documento")
 }
 
-model Areas_Academicas {
-  id          Int           @id
+model areas_academicas {
+  id          Int           @id @default(autoincrement())
   nombre      String?       @db.VarChar(50)
   descripcion String?       @db.VarChar(200)
-  Asignaturas Asignaturas[]
-  Carreras    Carreras[]
-  Profesores  Profesores[]
+  asignaturas asignaturas[]
+  carreras    carreras[]
+  profesores  profesores[]
 }
 
-model Asignaturas {
-  id                Int               @id
+model asignaturas {
+  id                Int               @id @default(autoincrement())
   clave             String?           @db.VarChar(7)
   creditos          Int?
   nombre            String?           @db.VarChar(25)
   id_area_academica Int?
   activo            Boolean?
-  Areas_Academicas  Areas_Academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "asignaturas_ibfk_1")
-  Secciones         Secciones[]
+  areas_academicas  areas_academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "asignaturas_ibfk_1")
+  secciones         secciones[]
 
   @@index([id_area_academica], map: "id_area_academica")
 }
 
-model Carreras {
-  id                Int               @id
+model carreras {
+  id                Int               @id @default(autoincrement())
   nombre            String?           @db.VarChar(50)
   descripcion       String?           @db.VarChar(200)
   id_area_academica Int?
-  Areas_Academicas  Areas_Academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "carreras_ibfk_1")
-  Estudiantes       Estudiantes[]
+  areas_academicas  areas_academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "carreras_ibfk_1")
+  estudiantes       estudiantes[]
 
   @@index([id_area_academica], map: "id_area_academica")
 }
 
-model Estados_Historico {
-  id                  Int                   @id
+model estados_historico {
+  id                  Int                   @id @default(autoincrement())
   nombre              String?               @db.VarChar(20)
-  Historico_Academico Historico_Academico[]
+  historico_academico historico_academico[]
 }
 
-model Estados_Periodo {
-  id       Int        @id
+model estados_periodo {
+  id       Int        @id @default(autoincrement())
   nombre   String?    @db.VarChar(20)
-  Periodos Periodos[]
+  periodos periodos[]
 }
 
-model Estudiantes {
-  id                  Int                   @id
+model estudiantes {
+  id                  Int                   @id @default(autoincrement())
   nombre              String?               @db.VarChar(50)
   apellido            String?               @db.VarChar(50)
   indice_general      Decimal?              @db.Decimal(3, 2)
@@ -83,58 +83,58 @@ model Estudiantes {
   documento           String?               @db.VarChar(15)
   matricula           String?               @db.VarChar(7)
   activo              Boolean?
-  Carreras            Carreras?             @relation(fields: [id_carrera], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "estudiantes_ibfk_1")
-  Tipo_Documento      Tipo_Documento?       @relation(fields: [id_tipo_documento], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "estudiantes_ibfk_2")
-  Historico_Academico Historico_Academico[]
+  carreras            carreras?             @relation(fields: [id_carrera], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "estudiantes_ibfk_1")
+  tipo_documento      tipo_documento?       @relation(fields: [id_tipo_documento], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "estudiantes_ibfk_2")
+  historico_academico historico_academico[]
 
   @@index([id_carrera], map: "id_carrera")
   @@index([id_tipo_documento], map: "id_tipo_documento")
 }
 
-model Historico_Academico {
-  id_historico          Int                @id
+model historico_academico {
+  id_historico          Int                @id @default(autoincrement())
   id_estudiante         Int?
   id_seccion            Int?
   calificacion_numerica Int?
   calificacion_literal  Decimal?           @db.Decimal(4, 1)
   puntos_honor          Decimal?           @db.Decimal(6, 2)
   id_estado_historico   Int?
-  Estudiantes           Estudiantes?       @relation(fields: [id_estudiante], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "historico_academico_ibfk_1")
-  Secciones             Secciones?         @relation(fields: [id_seccion], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "historico_academico_ibfk_2")
-  Estados_Historico     Estados_Historico? @relation(fields: [id_estado_historico], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "historico_academico_ibfk_3")
+  estudiantes           estudiantes?       @relation(fields: [id_estudiante], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "historico_academico_ibfk_1")
+  secciones             secciones?         @relation(fields: [id_seccion], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "historico_academico_ibfk_2")
+  estados_historico     estados_historico? @relation(fields: [id_estado_historico], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "historico_academico_ibfk_3")
 
   @@index([id_estado_historico], map: "id_estado_historico")
   @@index([id_estudiante], map: "id_estudiante")
   @@index([id_seccion], map: "id_seccion")
 }
 
-model Horario_Secciones {
-  id          Int        @id
+model horario_secciones {
+  id          Int        @id @default(autoincrement())
   id_seccion  Int?
   dia         String?    @db.VarChar(8)
   hora_inicio Int?
   hora_fin    Int?
   aula        String?    @db.VarChar(6)
-  Secciones   Secciones? @relation(fields: [id_seccion], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "horario_secciones_ibfk_1")
+  secciones   secciones? @relation(fields: [id_seccion], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "horario_secciones_ibfk_1")
 
   @@index([id_seccion], map: "id_seccion")
 }
 
-model Periodos {
-  id                Int              @id
+model periodos {
+  id                Int              @id @default(autoincrement())
   id_trimestre      Int?
   id_estado_periodo Int?
   a_o               Int?             @map("año")
-  Trimestres        Trimestres?      @relation(fields: [id_trimestre], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "periodos_ibfk_1")
-  Estados_Periodo   Estados_Periodo? @relation(fields: [id_estado_periodo], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "periodos_ibfk_2")
-  Secciones         Secciones[]
+  trimestres        trimestres?      @relation(fields: [id_trimestre], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "periodos_ibfk_1")
+  estados_periodo   estados_periodo? @relation(fields: [id_estado_periodo], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "periodos_ibfk_2")
+  secciones         secciones[]
 
   @@index([id_estado_periodo], map: "id_estado_periodo")
   @@index([id_trimestre], map: "id_trimestre")
 }
 
-model Profesores {
-  id                Int               @id
+model profesores {
+  id                Int               @id @default(autoincrement())
   nombre            String?           @db.VarChar(50)
   apellido          String?           @db.VarChar(50)
   id_area_academica Int?
@@ -146,45 +146,45 @@ model Profesores {
   documento         String?           @db.VarChar(15)
   matricula         String?           @db.VarChar(7)
   activo            Boolean?
-  Areas_Academicas  Areas_Academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "profesores_ibfk_1")
-  Tipo_Documento    Tipo_Documento?   @relation(fields: [id_tipo_documento], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "profesores_ibfk_2")
-  Secciones         Secciones[]
+  areas_academicas  areas_academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "profesores_ibfk_1")
+  tipo_documento    tipo_documento?   @relation(fields: [id_tipo_documento], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "profesores_ibfk_2")
+  secciones         secciones[]
 
   @@index([id_area_academica], map: "id_area_academica")
   @@index([id_tipo_documento], map: "id_tipo_documento")
 }
 
-model Secciones {
-  id                  Int                   @id
+model secciones {
+  id                  Int                   @id @default(autoincrement())
   numero              Int?
   capacidad           Int?
   id_asignatura       Int?
   id_profesor         Int?
   cupo                Int?
   id_periodo          Int?
-  Historico_Academico Historico_Academico[]
-  Horario_Secciones   Horario_Secciones[]
-  Asignaturas         Asignaturas?          @relation(fields: [id_asignatura], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "secciones_ibfk_1")
-  Profesores          Profesores?           @relation(fields: [id_profesor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "secciones_ibfk_2")
-  Periodos            Periodos?             @relation(fields: [id_periodo], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "secciones_ibfk_3")
+  historico_academico historico_academico[]
+  horario_secciones   horario_secciones[]
+  asignaturas         asignaturas?          @relation(fields: [id_asignatura], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "secciones_ibfk_1")
+  profesores          profesores?           @relation(fields: [id_profesor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "secciones_ibfk_2")
+  periodos            periodos?             @relation(fields: [id_periodo], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "secciones_ibfk_3")
 
   @@index([id_asignatura], map: "id_asignatura")
   @@index([id_periodo], map: "id_periodo")
   @@index([id_profesor], map: "id_profesor")
 }
 
-model Tipo_Documento {
-  id              Int               @id
+model tipo_documento {
+  id              Int               @id @default(autoincrement())
   nombre          String?           @db.VarChar(50)
   descripcion     String?           @db.VarChar(200)
-  Administradores Administradores[]
-  Estudiantes     Estudiantes[]
-  Profesores      Profesores[]
+  administradores administradores[]
+  estudiantes     estudiantes[]
+  profesores      profesores[]
 }
 
-model Trimestres {
-  id         Int        @id
+model trimestres {
+  id         Int        @id @default(autoincrement())
   mes_inicio String?    @db.VarChar(10)
   mes_fin    String?    @db.VarChar(10)
-  Periodos   Periodos[]
+  periodos   periodos[]
 }
