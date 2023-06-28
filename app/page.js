@@ -8,6 +8,8 @@ import TablaBasica from './components/TablaBasica';
   return (
     <>
     <h1>Pagina Root</h1>
+    <TablaBasica />
+
     </>
     
 
