@@ -340,3 +340,429 @@
   top: 0;
   width: 973px;
 }
+
+/*Encabezado*/
+
+.encabezado {
+  height: 78px;
+  position: relative;
+  width: 1036px;
+}
+
+.encabezado .perfil {
+  align-items: center;
+  display: flex;
+  gap: 17px;
+  left: 770px;
+  position: absolute;
+  top: 0;
+  width: fit-content;
+}
+
+.encabezado .nombre-rol {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: fit-content;
+}
+
+.encabezado .paola-salda-a {
+  color: #1f1f37;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: 148px;
+}
+
+.encabezado .estudiante {
+  color: #0068ff;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.encabezado .foto-perfil {
+  height: 59px;
+  min-width: 60px;
+  position: relative;
+}
+
+.encabezado .chevron-down {
+  height: 24px;
+  min-width: 24px;
+  position: relative;
+}
+
+.encabezado .titulo-fecha {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: fit-content;
+}
+
+.encabezado .men-principal {
+  color: #1f1f37;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.encabezado .junio {
+  color: #0068ff;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+/*ContenedorInformacion*/
+
+.contenedor-info {
+  background-color: #f7fcff;
+  border-radius: 52px;
+  height: 767px;
+  position: relative;
+  width: 271px;
+}
+
+.contenedor-info .informacion-general {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  left: 25px;
+  position: absolute;
+  top: 122px;
+  width: fit-content;
+}
+
+.contenedor-info .ID {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .element {
+  color: #000000;
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .div {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  left: 25px;
+  position: absolute;
+  top: 212px;
+  width: fit-content;
+}
+
+.contenedor-info .carrera {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .ingenier-a-de {
+  color: #000000;
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .informacion-general-2 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  left: 25px;
+  position: absolute;
+  top: 330px;
+  width: fit-content;
+}
+
+.contenedor-info .indice-trimestral {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .text-wrapper {
+  color: #000000;
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .informacion-general-3 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  left: 25px;
+  position: absolute;
+  top: 417px;
+  width: fit-content;
+}
+
+.contenedor-info .indice-general {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .element-2 {
+  color: #000000;
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .informacion-general-4 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  left: 25px;
+  position: absolute;
+  top: 502px;
+  width: fit-content;
+}
+
+.contenedor-info .correo-institucional {
+  color: #000000;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .element-est-intec {
+  color: #000000;
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.contenedor-info .informaci-n-general {
+  color: #000000;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  left: 40px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 52px;
+}
+
+.contenedor-info .info-general-imagen {
+  height: 121px;
+  left: 18px;
+  position: absolute;
+  top: 621px;
+  width: 233px;
+}
+
+/*ContenedorIndiceGeneral*/
+
+.box {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  outline: black;
+}
+
+.box .indicador-wrapper {
+  border: 0px none;
+  height: 297px;
+  position: relative;
+  width: 359px;
+}
+
+.box .indicador {
+  background-color: #f6f4fd;
+  border-radius: 48px;
+  height: 297px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 359px;
+}
+
+.box .text-wrapper {
+  color: #1f1f37;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  left: 97px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 257px;
+}
+
+.box .indice-general-frame {
+  border: 1px solid;
+  border-color: #1f1f37;
+  height: 215px;
+  left: 72px;
+  position: absolute;
+  top: 30px;
+  width: 215px;
+}
+
+/*ContenedorIndicadores*/
+
+.indicadores {
+  background-color: #eceeff;
+  border-radius: 48px;
+  height: 297px;
+  position: relative;
+  width: 359px;
+}
+
+.indicadores .creditos-aprobados {
+  color: #1f1f37;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 10px;
+  font-weight: 500;
+  left: 188px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 237px;
+}
+
+.indicadores .trimestres-cursados {
+  color: #1f1f37;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 10px;
+  font-weight: 500;
+  left: 67px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 109px;
+}
+
+.indicadores .asignaturas {
+  color: #1f1f37;
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 10px;
+  font-weight: 500;
+  left: 63px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 252px;
+}
+
+.indicadores .div {
+  border: 1px solid;
+  border-color: #1f1f37;
+  height: 80px;
+  left: 55px;
+  position: absolute;
+  top: 25px;
+  width: 80px;
+}
+
+.indicadores .creditos-aprobados-2 {
+  border: 1px solid;
+  border-color: #1f1f37;
+  height: 152px;
+  left: 164px;
+  position: absolute;
+  top: 72px;
+  width: 152px;
+}
+
+.indicadores .trimestres-aprobadas {
+  border: 1px solid;
+  border-color: #1f1f37;
+  height: 80px;
+  left: 55px;
+  position: absolute;
+  top: 168px;
+  width: 80px;
+}
+
+
