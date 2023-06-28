@@ -233,6 +233,7 @@
   position: absolute;
   top: 377px;
   width: 176px;
+
 }
 
 .cambiar-password .confimar-contrase-a {
@@ -257,6 +258,10 @@
   position: absolute;
   top: 420px;
   width: 427px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+
 }
 
 .cambiar-password .id-textbox {
@@ -268,6 +273,10 @@
   position: absolute;
   top: 300px;
   width: 427px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+
 }
 
 .cambiar-password .confirm-password {
@@ -279,6 +288,10 @@
   position: absolute;
   top: 551px;
   width: 427px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+
 }
 
 .cambiar-password .cambiar-contrase-a {
@@ -293,6 +306,8 @@
   text-align: center;
   top: 180px;
   width: 480px;
+  outline: none;
+  border: none;
 }
 
 /* cambiar-password page*/

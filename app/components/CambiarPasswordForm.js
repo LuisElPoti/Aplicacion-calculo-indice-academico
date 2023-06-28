@@ -19,14 +19,16 @@ function CambiarPasswordForm() {
     <div className="ID">ID</div>
     <div className="nueva-contrase-a">Nueva Contraseña</div>
     <div className="confimar-contrase-a">Confimar contraseña</div>
-    <div className="new-password-textbox" />
-    <div className="id-textbox" />
-    <div className="confirm-password" />
+
+    
+    <div> <input type='password' className="new-password-textbox" name="new-password"/> </div>
+    <input type= 'text' className="id-textbox" name="id-usuario" />
+    <input type='password' className="confirm-password" name="confirm-password" />
 
     <button type="submit" className="boton-oscuro" style={{
-          left: "159px",
+          left: "110px",
           position: "absolute",
-          top: "619px",
+          top: "650px",
         }}
         >
         <div className="acceder">Cambiar Contraseña</div>
