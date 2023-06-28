@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import TablaBasica from './components/TablaBasica';
+import FiltroReporteSeleccion from './components/FiltroReporteSeleccion';
+
 
 
  function page() {
@@ -7,9 +8,7 @@ import TablaBasica from './components/TablaBasica';
 
   return (
     <>
-    <h1>Pagina Root</h1>
-    <TablaBasica />
-
+    <FiltroReporteSeleccion/>
     </>
     
 
