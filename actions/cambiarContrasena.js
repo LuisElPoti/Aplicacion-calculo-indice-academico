@@ -1,5 +1,7 @@
 'use server'
 
+import { redirect } from 'next/navigation'
+
 const {PrismaClient} =  require('@prisma/client')
 const prisma = new PrismaClient()
 
@@ -48,6 +50,7 @@ export async function CambiarContraseña(data){
                     break;
             }
             console.log("Contraseña modificada con éxito");
+            redirect('/cambiarPassword');
         }
     }
 }
