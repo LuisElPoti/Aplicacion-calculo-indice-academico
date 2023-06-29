@@ -1,25 +1,25 @@
 CREATE TABLE IF NOT EXISTS `Tipo_Documento` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `nombre` varchar(50),
     `descripcion` varchar(200),
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `Trimestres` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `mes_inicio` varchar(10),
     `mes_fin` varchar(10),
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `Estados_Periodo` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `nombre` varchar(20),
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `Periodos` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `id_trimestre` int,
     `id_estado_periodo` int,
     `año` int,
@@ -30,14 +30,14 @@ CREATE TABLE IF NOT EXISTS `Periodos` (
 
 
 CREATE TABLE IF NOT EXISTS `Areas_Academicas` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `nombre` varchar(50),
     `descripcion` varchar(200),
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `Asignaturas` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `clave` varchar(7),
     `creditos` int,
     `nombre` varchar(25),
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `Asignaturas` (
 );
 
 CREATE TABLE IF NOT EXISTS `Carreras` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `nombre` varchar(50),
     `descripcion` varchar(200),
     `id_area_academica` int,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `Carreras` (
 
 
 CREATE TABLE IF NOT EXISTS `Estudiantes` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `nombre` varchar(50),
     `apellido` varchar(50),
     `indice_general` decimal(3,2),
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `Estudiantes` (
 );
 
 CREATE TABLE IF NOT EXISTS `Profesores` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `nombre` varchar(50),
     `apellido` varchar(50),
     `id_area_academica` int,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `Profesores` (
 );
 
 CREATE TABLE IF NOT EXISTS `Administradores` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `nombre` varchar(50),
     `apellido` varchar(50),
     `telefono` varchar(13),
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `Administradores` (
 );
 
 CREATE TABLE IF NOT EXISTS `Secciones` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `numero` int,
     `capacidad` int,
     `id_asignatura` int,
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `Secciones` (
 );
 
 CREATE TABLE IF NOT EXISTS `Horario_Secciones` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `id_seccion` int,
     `dia` varchar(8),
     `hora_inicio` int,
@@ -136,13 +136,13 @@ CREATE TABLE IF NOT EXISTS `Horario_Secciones` (
 );
 
 CREATE TABLE IF NOT EXISTS `Estados_Historico` (
-    `id` int,
+    `id` int AUTO_INCREMENT,
     `nombre` varchar(20),
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `Historico_Academico` (
-    `id_historico` int,
+    `id_historico` int AUTO_INCREMENT,
     `id_estudiante` int,
     `id_seccion` int,
     `calificacion_numerica` int,

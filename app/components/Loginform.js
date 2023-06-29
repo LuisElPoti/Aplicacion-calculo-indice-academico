@@ -1,9 +1,10 @@
 import React from 'react';
 import {Logo} from "./Logo";
+import {HacerLogin} from "@/actions/login.js";
 
 export const LoginForm = ({ style }) => {
   return (
-    <form action="" method="" className="login-form" style={style}>
+    <form action={HacerLogin} method="" className="login-form" style={style}>
       <Logo
         gradehubStyle={{
           fontSize: "32px",
@@ -35,11 +36,11 @@ export const LoginForm = ({ style }) => {
 
       {/* Textbox para ingresar Usuario */}
       <div className="txt-login-id">
-        <input type='text' className="ingrese-su-ID" name="id-usuario"/>
+        <input type='text' className="ingrese-su-ID" required name="id-usuario"/>
       </div>
       
       <div className="password-login">
-        <input type='password' className="ingrese-su-contrase" name="password-usuario"/>
+        <input type='password' className="ingrese-su-contrase" required name="password-usuario"/>
       </div>
     </form>
   );

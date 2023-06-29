@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function Encabezado() {
+function EncabezadoAdmin() {
   return (
     <div className="encabezado">
       <div className="perfil">
@@ -20,4 +20,4 @@ function Encabezado() {
   )
 }
 
-export default Encabezado;
+export default EncabezadoAdmin;
