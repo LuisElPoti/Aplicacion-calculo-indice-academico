@@ -1,9 +1,10 @@
 import React from "react";
 import {Logo} from "./Logo";
+import { CambiarContraseña } from "@/actions/cambiarContrasena";
 
 function CambiarPasswordForm() {
   return (
-    <form action="" method="" className="cambiar-password" >
+    <form action={CambiarContraseña} method="" className="cambiar-password" >
     <Logo
       gradehubStyle={{
         fontSize: "32px",
