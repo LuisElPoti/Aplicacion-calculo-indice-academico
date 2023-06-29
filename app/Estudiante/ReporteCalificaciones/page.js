@@ -1,22 +1,37 @@
 import React from 'react'
-import FiltroReporteSeleccion from "../../components/FiltroReporteSeleccion"
+export default function ReporteCalificaciones() {
+  const menuItemsYear = [
+      { value: 2020, label: '2020' },
+      { value: 2021, label: '2021' },
+      { value: 2022, label: '2022' },
+    ];
 
+    const menuItemsTrimestre = [
+      { value: 1, label: 'Feb-Abr' },
+      { value: 2, label: "May-Jul" },
+      { value: 3, label: "Ago-Oct" },
+      { value: 4, label: "Nov-Ene" },
+    ];
 
- function ReporteCalificaciones() {
+  const headers = ['Asignatura', 'Seccion', 'Alpha', 'Calificacion', 'Puntos', 'Créditos'];
+
   const data = [
-    { header: 'ID', content: '1104081' },
-    { header: 'Nombre', content: 'Paola Saldana' },
-    { header: 'Programa', content: 'Ingeniería de software (IDS)' },
-    // Add more fields as needed
+    { Asignatura: 'Estructuras de Datos - IDS305', Seccion: 1, Alpha: 'A+', Horario: '96', Puntos: '8', Creditos:'4' },
+    { Asignatura: 'Estructuras de Datos - IDS305', Seccion: 2, Alpa: 'B-', Horario: '83', Puntos: '7', Creditos:'4' },
   ];
   
-  return (
-    <>
-    <FiltroReporteSeleccion /> 
-    </>
-
+return (
+  <>
   
-  )
+  <div className='flex'>
+  <FiltroReporteSeleccion items={menuItemsYear} label="Año"/> 
+  <FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre"/> 
+  </div>
+
+  <TablaBasica headers={headers} data={data} />
+  
+  </>
+  
+)
 }
 
-export default ReporteCalificaciones

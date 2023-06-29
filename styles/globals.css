@@ -1057,6 +1057,17 @@
   width: fit-content;
 }
 
+/* Tarjeta Reporte calificaciones */
+.bg-tarjeta-roja {
+  background-color: #ED6F71;
+  width: 475px;
+  height: 150px;
+  border-radius: 48px;
+  color: white;
+  font-family: "Poppins-SemiBold", Helvetica;;
+  height: fit-content;
+}
+
 
 
 
