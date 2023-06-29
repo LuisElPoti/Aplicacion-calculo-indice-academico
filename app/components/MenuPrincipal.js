@@ -30,7 +30,7 @@ function MenuPrincipal() {
           <div className="cerrar-sesi-n">Cerrar sesión</div>
         </div>
         <Logo
-          logo="/images/logo.svg"
+          logo="/images/Logo.svg"
           style={{
             left: "46px",
             position: "absolute",

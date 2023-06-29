@@ -1,19 +1,10 @@
 import Link from 'next/link';
-import FiltroReporteSeleccion from './components/FiltroReporteSeleccion';
-
-
+import MenuPrincipalAdmin from './components/MenuPrincipalAdmin';
 
  function page() {
 
-
   return (
-    <>
-    <FiltroReporteSeleccion/>
-    </>
-    
-
-
-  
+    <MenuPrincipalAdmin/>
   )
 }
 export default page
