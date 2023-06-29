@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function Tarjeta({ headerValues }) {
+export default function Tarjeta({ headerValues, className }) {
   return (
-    <div className='tarjeta flex bg-tarjeta-roja p-5 m-3'>
+    <div className={`tarjeta flex ${className}`}>
       <Image src="/images/cuate.svg" width={150} height={300} />
       <div className='content pl-5'>
         {headerValues.map((header) => (

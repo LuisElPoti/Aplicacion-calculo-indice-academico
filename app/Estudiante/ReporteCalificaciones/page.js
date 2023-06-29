@@ -2,6 +2,7 @@ import React from 'react'
 import FiltroReportes from '../../components/FiltroReportes';
 import TablaBasica from '../../components/TablaBasica';
 import Tarjeta from '../../components/Tarjeta';
+import BotonGuardar from '../../components/BotonGuardar';
 
 export default function ReporteCalificaciones() {
   const menuItemsYear = [
@@ -41,9 +42,14 @@ return (
 
   <FiltroReportes items={menuItemsYear} label="Año"/> 
   <FiltroReportes items={menuItemsTrimestre} label="Trimestre"/> 
+
   </div>
 
-  <Tarjeta headerValues={headerValues} backgroundColor="#ED6F71"/>
+  <div className='contenedor-tarjetas flex mb-6'>
+  <Tarjeta headerValues={headerValues} className="bg-tarjeta-roja"/>
+  <Tarjeta headerValues={headerValues} className="bg-tarjeta-morada"/>
+  </div>
+  
   <TablaBasica headers={headers} data={data} />
 
   
