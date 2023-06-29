@@ -1,4 +1,7 @@
 import React from 'react'
+import FiltroReportes from '../../components/FiltroReportes';
+import TablaBasica from '../../components/TablaBasica';
+
 export default function ReporteCalificaciones() {
   const menuItemsYear = [
       { value: 2020, label: '2020' },
@@ -24,8 +27,8 @@ return (
   <>
   
   <div className='flex'>
-  <FiltroReporteSeleccion items={menuItemsYear} label="Año"/> 
-  <FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre"/> 
+  <FiltroReportes items={menuItemsYear} label="Año"/> 
+  <FiltroReportes items={menuItemsTrimestre} label="Trimestre"/> 
   </div>
 
   <TablaBasica headers={headers} data={data} />
