@@ -1,5 +1,6 @@
 'use server'
 
+import Administrador from '@/app/Administrador/page'
 import { redirect } from 'next/navigation'
 
 const {PrismaClient} =  require('@prisma/client')
@@ -42,6 +43,7 @@ export async function HacerLogin(data){
                 console.log("Usuario o contraseña no encontrados")
             }
             else{
+                console.log("Bienvenido Administrador")
                 redirect('/Estudiante/MenuPrincipal')
             }
 

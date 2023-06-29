@@ -16,11 +16,11 @@ export async function CambiarContraseña(data){
     const administrador = await prisma.administradores.findFirst({ where: { matricula: id_usuario } });
 
     if (estudiante) {
-        tipoUsuario = 'estudiante';
+        tipoUsuario = 'Estudiante';
     } else if (profesor) {
-        tipoUsuario = 'profesor';
+        tipoUsuario = 'Profesor';
     } else if (administrador) {
-        tipoUsuario = 'administrador';
+        tipoUsuario = 'Administrador';
     } else {
         console.log("Usuario o contraseña no encontrados");
     }
@@ -50,8 +50,7 @@ export async function CambiarContraseña(data){
                     break;
             }
             console.log("Contraseña modificada con éxito");
-            redirect('/cambiarPassword');
+            redirect("/"+tipoUsuario+"/MenuPrincipal");
         }
     }
 }
-
