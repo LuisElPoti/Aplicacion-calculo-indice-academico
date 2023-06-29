@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation'
 
+
 const {PrismaClient} =  require('@prisma/client')
 const prisma = new PrismaClient()
 
