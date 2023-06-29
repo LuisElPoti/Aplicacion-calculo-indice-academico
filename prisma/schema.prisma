@@ -37,7 +37,7 @@ model asignaturas {
   id                Int               @id @default(autoincrement())
   clave             String?           @db.VarChar(7)
   creditos          Int?
-  nombre            String?           @db.VarChar(25)
+  nombre            String?           @db.VarChar(80)
   id_area_academica Int?
   activo            Boolean?
   areas_academicas  areas_academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "asignaturas_ibfk_1")
@@ -48,7 +48,7 @@ model asignaturas {
 
 model carreras {
   id                Int               @id @default(autoincrement())
-  nombre            String?           @db.VarChar(50)
+  nombre            String?           @db.VarChar(80)
   descripcion       String?           @db.VarChar(200)
   id_area_academica Int?
   areas_academicas  areas_academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "carreras_ibfk_1")
