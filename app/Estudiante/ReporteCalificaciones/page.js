@@ -45,7 +45,7 @@ return (
 
   </div>
 
-  <div className='contenedor-tarjetas flex mb-6'>
+  <div className='contenedor-tarjetas flex mb-8 mt-4 justify-between'>
   <Tarjeta headerValues={headerValues} className="bg-tarjeta-roja"/>
   <Tarjeta headerValues={headerValues} className="bg-tarjeta-morada"/>
   </div>
