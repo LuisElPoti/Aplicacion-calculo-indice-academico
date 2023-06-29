@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+
 /*
 function createData(Asignatura, Seccion, Aula, Horario, Profesor) {
   return { Asignatura, Seccion, Aula, Horario, Profesor };
