@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `Asignaturas` (
     `id` int AUTO_INCREMENT,
     `clave` varchar(7),
     `creditos` int,
-    `nombre` varchar(25),
+    `nombre` varchar(80),
     `id_area_academica` int,
     `activo` bool,
     PRIMARY KEY (`id`),
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `Asignaturas` (
 
 CREATE TABLE IF NOT EXISTS `Carreras` (
     `id` int AUTO_INCREMENT,
-    `nombre` varchar(50),
+    `nombre` varchar(80),
     `descripcion` varchar(200),
     `id_area_academica` int,
     PRIMARY KEY (`id`),
