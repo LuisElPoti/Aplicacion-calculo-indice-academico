@@ -9,16 +9,16 @@ function MenuPrincipal() {
           
           <img className="bar-chart" alt="Bar chart" src="/icons/bar-chart.svg"/>
             
-            <div className="men-principal">Menú Principal</div>
+            <div className="men-principal menu-item">Menú Principal</div>
           </div>
-          <div className="asignatura-menu-item">
+          <div className="asignatura-menu-item menu-item">
 
           <img className="book" alt="Book" src="/icons/book.svg"/>
         
             <div className="asignaturas">Asignaturas</div>    
             <img className="chevron-down" alt="Chevron down" src="/icons/chevron-down.svg"/>
           </div>
-          <div className="calificaciones-menu">
+          <div className="calificaciones-menu menu-item">
 
              <img className="icon-file-text" alt="Icon file text" src="/icons/file-text.svg"/>
             
