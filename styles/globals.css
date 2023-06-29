@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Color Segun Usuario */
+.color-estudiante{ 
+  color: #0068FF;
+}
+
+.color-profesor{
+  color: #F9DB38;
+}
+
+
 /* Login Form */
 .login-form {
 
