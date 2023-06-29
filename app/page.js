@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import TablaBasica from './components/TablaBasica';
-
+import Tarjeta from './components/Tarjeta';
 
  function page() {
 
@@ -11,12 +11,25 @@ import TablaBasica from './components/TablaBasica';
       { Asignatura: 'Estructuras de Datos - IDS305', Seccion: 2, Aula: 'GC-303', Horario: 'LU-MI 16/18', Profesor: 'Allen Silverio' },
     ];
 
+    const headerValues = [
+      { headerName: 'ID', headerValue: '1104220' },
+      { headerName: 'Nombre', headerValue: 'Allen Silverio' },
+      { headerName: 'Programa', headerValue: 'Ingeniería de Software' },
+      { headerName: 'Asignatura', headerValue: 'Matematicas' }
+
+    ];
+
   return (
     <>
     <div>
       <h1>My App</h1>
-      <TablaBasica headers={headers} data={data} />
+      
     </div>
+
+    
+    <Tarjeta headerValues={headerValues} backgroundColor="#ED6F71"/>
+
+    
   
     </>
    

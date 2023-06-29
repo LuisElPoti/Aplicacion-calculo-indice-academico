@@ -12,11 +12,11 @@ export const metadata = {
 
 
 
-function RootLayout({ children }) {
+function RootLayout({ children, title }) {
 
         const userName = 'Paola Saldaña';
         const role = 'Estudiante';
-        const menuTitle = 'Menú Principal';
+        const menuTitle = title;
         const color ='color-profesor';
 
     return (
