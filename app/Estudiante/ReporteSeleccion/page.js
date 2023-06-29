@@ -1,7 +1,21 @@
 import React from 'react'
+import FilreiReporteSeleccion from '@/app/components/FiltroReporteSeleccion'
+import TablaBasica from '@/app/components/TablaBasica'
+import BotonGuardar from '@/app/components/BotonGuardar'
 
-export default function ReporteSleccion() {
+ function ReporteSeleccion() {
   return (
-    <div>ReporteSleccion</div>
+
+<>
+    <FilreiReporteSeleccion/>
+    <TablaBasica/>
+    <BotonGuardar/>
+
+</>
+
+
+
   )
 }
+
+export default ReporteSeleccion

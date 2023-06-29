@@ -19,7 +19,7 @@ const rows = [
 
 function TablaBasica() {
   return (
-    <TableContainer component={Paper} sx={{ width: 730 , fontfamily: 'Poppins', height:400 }}>
+    <TableContainer className='rounded-3xl' component={Paper} sx={{ width: 730 , fontfamily: 'Poppins', height:400 }}>
       <Table sx={{ width: 700, height: 100}} aria-label="simple table">
         <TableHead>
           <TableRow>

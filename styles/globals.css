@@ -1008,6 +1008,45 @@
   width: fit-content;
 }
 
+/* BotonGuardar */
+.boton-azul {
+  align-items: flex-start;
+  display: flex;
+  position: relative;
+  width: fit-content;
+  background-color: #0068ff;
+  border-radius: 50%;
+}
+
+.boton-azul .texto-boton {
+  align-items: center;
+  background-color: #0068ff;
+  border-radius: 25px;
+  box-shadow: 0px 4px 25px #0068ff63;
+  display: flex;
+  gap: 11px;
+  height: 44px;
+  justify-content: center;
+  padding: 15px 68px;
+  position: relative;
+  width: 141px;
+}
+
+.boton-azul .acceder {
+  color: #ffffff;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-bottom: -4px;
+  margin-left: -26px;
+  margin-right: -26px;
+  margin-top: -6px;
+  position: relative;
+  width: fit-content;
+}
+
 
 
 
