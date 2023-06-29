@@ -1,10 +1,9 @@
 import React from 'react'
-import FiltroReporteSeleccion from '@/app/components/FiltroReporteSeleccion'
-import TablaBasica from '@/app/components/TablaBasica'
-import BotonGuardar from '@/app/components/BotonGuardar'
+import FiltroReportes from "../../components/FiltroReportes";
+import TablaBasica from '../../components/TablaBasica';
+import BotonGuardar from '../../components/BotonGuardar';
 
- function ReporteSeleccion() {
-
+export default function ReporteSeleccion() {
   const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
 
   const data = [
@@ -15,7 +14,7 @@ import BotonGuardar from '@/app/components/BotonGuardar'
   return (
 
 <>
-    <FiltroReporteSeleccion/>
+    <FiltroReportes/>
     <TablaBasica headers={headers} data={data}/>
     <BotonGuardar/>
 </>
@@ -25,4 +24,4 @@ import BotonGuardar from '@/app/components/BotonGuardar'
   )
 }
 
-export default ReporteSeleccion
+

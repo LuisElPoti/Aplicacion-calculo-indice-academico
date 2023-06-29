@@ -16,7 +16,7 @@ function RootLayout({ children, title }) {
 
         const userName = 'Paola Saldaña';
         const role = 'Estudiante';
-        const menuTitle = title;
+        const menuTitle = 'Menú Principal';
         const color ='color-profesor';
 
     return (
