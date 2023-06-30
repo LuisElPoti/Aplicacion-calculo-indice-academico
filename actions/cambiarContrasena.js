@@ -30,19 +30,19 @@ export async function CambiarContraseña(data){
             console.log("Error, La contraseña no coincide");
         } else {
             switch (tipoUsuario) {
-                case 'estudiante':
+                case 'Estudiante':
                     await prisma.estudiantes.update({
                         where: { matricula: id_usuario },
                         data: { contrase_a: nueva_password },
                     });
                     break;
-                case 'profesor':
+                case 'Profesor':
                     await prisma.profesores.update({
                         where: { matricula: id_usuario },
                         data: { contrase_a: nueva_password },
                     });
                     break;
-                case 'administrador':
+                case 'Administrador':
                     await prisma.administradores.update({
                         where: { matricula: id_usuario },
                         data: { contrase_a: nueva_password },
