@@ -13,6 +13,7 @@ export default function FiltroReportes({ items = [], label }) {
 
   const handleChange = (event) => {
     setSelectedItem(event.target.value);
+    console.log(event.target.value);
   };
 
   return (

@@ -1,44 +1,50 @@
-import Image from "next/image"
-import {Logo} from "./Logo"
+"use client"
+import { useState } from "react";
+import Link from "next/link";
+import { AiFillHome, AiFillBook, AiFillStar, AiOutlineDown, AiOutlineUp, AiOutlineProject } from "react-icons/ai";
 
-function MenuPrincipal() {
+const Sidebar = () => {
+  const [showSubMenu, setShowSubMenu] = useState(false);
+
+  const toggleSubMenu = () => {
+    setShowSubMenu(!showSubMenu);
+  };
+
   return (
-    <div className="menu-principal">
-        <div className="frame">
-          <div className="menu-principal-menu">
-          
-          <img className="bar-chart" alt="Bar chart" src="/icons/bar-chart.svg"/>
-            
-            <div className="men-principal menu-item">Menú Principal</div>
-          </div>
-          <div className="asignatura-menu-item menu-item">
-
-          <img className="book" alt="Book" src="/icons/book.svg"/>
-        
-            <div className="asignaturas">Asignaturas</div>    
-            <img className="chevron-down" alt="Chevron down" src="/icons/chevron-down.svg"/>
-          </div>
-          <div className="calificaciones-menu menu-item">
-
-             <img className="icon-file-text" alt="Icon file text" src="/icons/file-text.svg"/>
-            
-            <div className="calificaciones">Calificaciones</div>
-          </div>
-        </div>
-        <div className="logout-menu-item">
-          <img className="log-in" alt="Log in" src="/icons/log-out.svg" />
-          <div className="cerrar-sesi-n">Cerrar sesión</div>
-        </div>
-        <Logo
-          logo="/images/Logo.svg"
-          style={{
-            left: "46px",
-            position: "absolute",
-            top: "65px",
-          }}
-        />
+    <div className=" pl-5 pt-20 text-white h-screen sidebar">
+      <div className="mb-10 pr-5">
+        <img src="/images/logo.svg" alt="Logo" className="w-50  mx-auto" /> {/* adjust this path to your logo */}
       </div>
-  )
-}
+      <ul className="pl-8">
+        <li className="mb-6 flex items-center gap-2 nav-link">
+          <AiOutlineProject />
+          <Link href="/Estudiante/MenuPrincipal">Menu Principal</Link>
+        </li>
+        <li className="mb-6 nav-link">
+          <div className="flex items-center gap-2 cursor-pointer mb-3" onClick={toggleSubMenu}>
+            <AiFillBook />
+            <p>Asignaturas</p>
+            {showSubMenu ? <AiOutlineUp /> : <AiOutlineDown />}
+          </div>
+          {showSubMenu && (
+            <ul className="ml-6 mb-2">
+              <li className="mb-3 nav-link">
+                <Link href="/Estudiante/SeleccionAsignatura">Selección de Asignaturas</Link>
+              </li>
+              <li className="mb-2 nav-link">
+                <Link href="/Estudiante/ReporteSeleccion">Reporte de Selección</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+        <li className="mb-6 flex items-center gap-2 nav-link">
+          <AiFillStar />
+          <Link href="/Estudiante/ReporteCalificaciones">Calificaciones</Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
-export default MenuPrincipal;
+export default Sidebar;
+
