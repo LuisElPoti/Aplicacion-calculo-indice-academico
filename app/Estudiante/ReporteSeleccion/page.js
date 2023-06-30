@@ -53,11 +53,11 @@ return (
 <div className='flex'>
 <FiltroReporteSeleccion items={menuItemsYear} label="Año" onChange={handleOnChangeAño}/> 
 <FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre" onChange={handleOnChangeTrim} /> 
+<BotonGuardar texto="Generar reporte" className="azul" />
+
 </div>
   <TablaBasica headers={headers} data={data}/>
-  <BotonGuardar/>
-</>
-
+  <BotonGuardar texto="Generar reporte" className="azul" /></>
 )
 }
 
