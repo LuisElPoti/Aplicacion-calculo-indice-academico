@@ -1,9 +1,9 @@
 'use client'
 import React, {useState} from 'react';
-import Cookies from 'js-cookie';
 import FiltroReporteSeleccion from '@/app/components/FiltroReportes'
 import TablaBasica from '@/app/components/TablaBasica'
 import BotonGuardar from '@/app/components/BotonGuardar'
+import { getCookie } from "cookies-next";
 
 
 async function ReporteSeleccion() {
@@ -23,7 +23,8 @@ const menuItemsTrimestre = [
 
 const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
 
-const id_usuario = Cookies.get('ID')?.value;
+
+const id_usuario = getCookie("ID");
 console.log(id_usuario)
 const [año, setAño] = useState('');
 const [trimestre, setTrimestre] = useState('');
