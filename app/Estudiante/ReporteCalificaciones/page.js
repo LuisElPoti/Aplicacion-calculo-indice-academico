@@ -41,13 +41,16 @@ export default function ReporteCalificaciones() {
 return (
   <>
   
-  <div className='flex'>
+ 
   
-
+  <form action="" method="" className='flex'>
   <FiltroReportes items={menuItemsYear} label="Año"/> 
   <FiltroReportes items={menuItemsTrimestre} label="Trimestre"/> 
+  <BotonGuardar/>
+  </form>
+  
 
-  </div>
+ 
 
   <div className='contenedor-tarjetas flex mb-8 mt-4 justify-between'>
   <Tarjeta headerValues={headerValuesRedCard} imageSource={"../images/cuate.svg"} className="bg-tarjeta-roja"/>
