@@ -1,9 +1,10 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Cookies from 'js-cookie';
 import FiltroReporteSeleccion from '@/app/components/FiltroReportes'
 import TablaBasica from '@/app/components/TablaBasica'
 import BotonGuardar from '@/app/components/BotonGuardar'
+
 
 async function ReporteSeleccion() {
 const menuItemsYear = [
@@ -24,14 +25,28 @@ const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
 
 const id_usuario = Cookies.get('id_usuario');
 
-const historico_academico = await getSeleccion(id_usuario, 2023, 1)
+const requestData = {
+  id: id_usuario,
+  a_o: 2023,
+  trimestre: 1,
+};
 
+const response = await fetch('http://localhost:3000/api/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
+  });
 
-const data = historico_academico.map((historico) => {
+  const historico_academico = await response.json();
+
+  const data = historico_academico.map((historico) => {
   const asignatura = historico.secciones?.asignaturas?.nombre || 'Prueba';
   const seccion = historico.secciones?.numero || 'Prueba';
   var aula = ''
   var horario = ''; 
+
   for (let i = 0; i < historico.secciones.horario_secciones.length; i++) {
     aula += historico.secciones.horario_secciones[i].aula + '  ';
     horario += historico.secciones.horario_secciones[i].hora_inicio + '/' + historico.secciones.horario_secciones[i].hora_fin + '  ';
@@ -62,60 +77,4 @@ return (
 )
 }
 
-async function getSeleccion(id, a_o, trimestre){
-  const {PrismaClient} =  require('@prisma/client')
-  const prisma = new PrismaClient()
-  const resultado = await prisma.historico_academico.findMany({
-    select: {
-      secciones: {
-        select: {
-          profesores: {
-            select: {
-              nombre: true,
-              apellido: true
-            }
-          },
-          numero: true,
-          horario_secciones: {
-            select: {
-              aula: true,
-              hora_fin: true,
-              hora_inicio: true
-            }
-          },
-          asignaturas: {
-            select: {
-              nombre: true
-            }
-          }
-        }
-      }
-    },
-    where: {
-      AND:[
-        {
-          estudiantes:{
-            is:{ matricula: id }
-          }
-        },
-        {
-          secciones:{
-            periodos:{
-              is:{a_o: a_o}
-            }
-          }
-        },
-        {
-          secciones:{
-            periodos:{
-              is:{id_trimestre: trimestre}
-            }
-          }
-        }
-      ]
-    }
-      
-  });
-  return resultado;
-}
 export default ReporteSeleccion
