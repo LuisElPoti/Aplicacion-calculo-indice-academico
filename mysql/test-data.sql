@@ -79,11 +79,11 @@ VALUES
 ;
 
 INSERT INTO Administradores(nombre, apellido, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
-VALUES ('Gustavo', 'Mejia', '0000000000', 'Calle Gustavo Mejia Ricart', 'Pepito1234', 'Gustavo.Mejia@institucion.edu.do', 1, '123456789', '3000001',  true)
+VALUES ('Gustavo', 'Mejia', '0000000000', 'Calle Gustavo Mejia Ricart', 'Pepito1234', 'Gustavo.Mejia@institucion.edu.do', 1, '123456789', '3000001',  true);
 
 INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
 VALUES 
-    ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@institucion.edu.do', 2, '40112345672', '1101001', true),
+    ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@institucion.edu.do', 2, '40112345672', '1101001', true);
 
 INSERT INTO Profesores (nombre, apellido, id_area_academica, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
 VALUES
@@ -117,30 +117,30 @@ VALUES
 INSERT INTO `Horario_Secciones` (`id_seccion`, `dia`, `hora_inicio`, `hora_fin`, `aula`)
 VALUES (1, 'LUNES', 13, 14, 'GC235'),
        (2, 'MARTES', 9, 11, 'AH215'),
-       (3, 'MIERCOLES', 20, 22, 'FD415'),
+       (3, 'MIER', 20, 22, 'FD415'),
        (4, 'JUEVES', 13, 14, 'GC235'),
        (5, 'VIERNES', 9, 11, 'AH215'),
        (6, 'MARTES', 20, 22, 'FD415'),
        (7, 'LUNES', 13, 14, 'GC235'),
        (8, 'MARTES', 9, 11, 'AH215'),
-       (9, 'MIERCOLES', 20, 22, 'FD415'),
+       (9, 'MIERC', 20, 22, 'FD415'),
        (10, 'JUEVES', 13, 14, 'GC235'),
        (11, 'VIERNES', 9, 11, 'AH215'),
        (12, 'SABADO', 20, 22, 'FD415'),
        (13, 'LUNES', 13, 14, 'GC235'),
        (14, 'MARTES', 9, 11, 'AH215'),
-       (15, 'MIERCOLES', 20, 22, 'FD415'),
+       (15, 'MIERC', 20, 22, 'FD415'),
        (16, 'JUEVES', 13, 14, 'GC235'),
        (17, 'VIERNES', 9, 11, 'AH215'),
        (18, 'SABADO', 20, 22, 'FD415');
 
-INSERT INTO `Estado_Historico` (`nombre`)
+INSERT INTO `Estados_Historico` (`nombre`)
 VALUES ('Aprobado'),
        ('Reprobado'),
        ('Retirado'),
        ('En Curso');
 
-INSERT INTO `Historial_Academico` (`id_estudiante`, `id_seccion`, `calificacion_numerica`, `calificacion_literal`, `puntos_honor`, `id_estado_historico`)
+INSERT INTO `Historico_Academico` (`id_estudiante`, `id_seccion`, `calificacion_numerica`, `calificacion_literal`, `puntos_honor`, `id_estado_historico`)
 VALUES (1, 1, 85, 'B+', 4*3.5, 1),
        (1, 2, 90, 'A', 4*4, 1),
        (1, 4, 90, 'A', 4*3, 1),

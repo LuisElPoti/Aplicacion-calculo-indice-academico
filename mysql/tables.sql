@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `Secciones` (
 CREATE TABLE IF NOT EXISTS `Horario_Secciones` (
     `id` int AUTO_INCREMENT,
     `id_seccion` int,
-    `dia` varchar(8),
+    `dia` varchar(20),
     `hora_inicio` int,
     `hora_fin` int,
     `aula` varchar(6),
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `Historico_Academico` (
     `id_estudiante` int,
     `id_seccion` int,
     `calificacion_numerica` int,
-    `calificacion_literal` decimal(4,1),
+    `calificacion_literal` varchar(2),
     `puntos_honor` decimal(6,2),
     `id_estado_historico` int,
     PRIMARY KEY (`id_historico`),

@@ -96,7 +96,7 @@ model historico_academico {
   id_estudiante         Int?
   id_seccion            Int?
   calificacion_numerica Int?
-  calificacion_literal  Decimal?           @db.Decimal(4, 1)
+  calificacion_literal  String?            @db.VarChar(2)
   puntos_honor          Decimal?           @db.Decimal(6, 2)
   id_estado_historico   Int?
   estudiantes           estudiantes?       @relation(fields: [id_estudiante], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "historico_academico_ibfk_1")

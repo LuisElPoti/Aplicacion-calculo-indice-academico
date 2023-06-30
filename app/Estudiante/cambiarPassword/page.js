@@ -1,4 +1,4 @@
-import CambiarPasswordForm from "../components/CambiarPasswordForm";
+import CambiarPasswordForm from "../../components/CambiarPasswordForm";
 import Image from "next/image";
 
 export default function CambiarPassword() {

@@ -1131,7 +1131,15 @@
   height: fit-content;
   font-size: 0.9rem;
 }
+/* Menu pt2 */
+.sidebar {
+  background-color: white;
+  width: 300px;
+}
 
+.nav-link {
+  color: #BDBBC9;
+}
 .calcular-indice-form {
 
   background-color: white;
