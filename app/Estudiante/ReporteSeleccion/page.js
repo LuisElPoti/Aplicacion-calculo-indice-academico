@@ -57,7 +57,7 @@ return (
 
 </div>
   <TablaBasica headers={headers} data={data}/>
-  <BotonGuardar texto="Generar reporte" className="azul" /></>
+  </>
 )
 }
 

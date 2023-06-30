@@ -1079,11 +1079,12 @@
   border-radius: 25px;
   box-shadow: 2px 2px 2px gray;
   height: 49px;
-  width: 246px;
+  width: 236px;
   margin-top: 10px;
   border-radius: 31px;
   border: none;
   outline: none;
+
 }
 
 .crear-usuario-form .ingresar-nombre{
@@ -1149,8 +1150,8 @@
 
   background-color: white;
   border-radius: 31px;
-  width: 909px;
-  height: 668px;
+  width: fit-content;
+  height: fit-content;
   left: 300x;
 }
 
@@ -1187,6 +1188,7 @@
 
 .azuloscuro {
   background-color: #1f1f37;
+  box-shadow: #1f1f37;
   font-family: "Poppins-Medium", Helvetica;
   width: fit-content;
   height: fit-content;
@@ -1194,7 +1196,7 @@
   border-radius: 20px;
   padding: 5px;
   margin: 5px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -1202,13 +1204,14 @@
 
 .azul {
   background-color: #0068FF;
+  box-shadow: 10px 10px 30px 0.05px #0068FF;
   font-family: "Poppins-Medium", Helvetica;
   width: fit-content;
   height: fit-content;
   color: white;
   border-radius: 20px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
 
@@ -1216,13 +1219,14 @@
 
 .amarillo {
   background-color: #F9DB38;
+  box-shadow: 10px 10px 10px 0.3px rgba(249,219,56,0.50);
   font-family: "Poppins-Medium", Helvetica;
   width: fit-content;
   height: fit-content;
   color: #1f1f37;
   border-radius: 20px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
