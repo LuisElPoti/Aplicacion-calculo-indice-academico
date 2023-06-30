@@ -32,7 +32,7 @@ function RootLayout({ children, title }) {
                     {/* <!-- Header and container element --> */}
                     <div class="col-span-10 grid grid-rows-2 ml-12 pt-12">
                         {/* <!-- Header --> */}
-                        <div class="row-span-2 pl-12 pt-5"> 
+                        <div class="row-span-2 pl-14 pt-5 pr-16"> 
                         <Encabezado
                         userName={userName}
                         role={role}
