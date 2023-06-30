@@ -1,5 +1,5 @@
-import MenuPrincipal from '../components/MenuPrincipalAdmin'
-import EncabezadoAdmin from '../components/EncabezadoAdmin'
+import MenuPrincipal from '../components/MenuPrincipal'
+import EncabezadoAdmin from '../components/Encabezado'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
 
@@ -16,7 +16,7 @@ function RootLayout({ children }) {
 
         <html lang="en">
 
-            <body className={inter.className} style={{backgroundColor:"#F3F6FF"}} >
+            <body className={inter.className} style={{backgroundColor:"#FAFAFA"}} >
 
             <Image src="/images/AdminBackground.svg" style={{position:"absolute", zIndex:"-1", bottom:"0", right:"0"}} width={670} height={600}/>
 
