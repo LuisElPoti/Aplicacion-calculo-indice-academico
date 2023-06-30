@@ -16,7 +16,7 @@ function RootLayout({ children }) {
 
         <html lang="en">
 
-            <body className={inter.className} style={{backgroundColor:"#F3F6FF"}} >
+            <body className={inter.className} style={{backgroundColor:"#FAFAFA"}} >
 
             <Image src="/images/AdminBackground.svg" style={{position:"absolute", zIndex:"-1", bottom:"0", right:"0"}} width={670} height={600}/>
 
