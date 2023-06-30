@@ -1131,3 +1131,41 @@
   height: fit-content;
   font-size: 0.9rem;
 }
+
+.calcular-indice-form {
+
+  background-color: white;
+  border-radius: 31px;
+  width: 909px;
+  height: 668px;
+  left: 300x;
+}
+
+.calcular-indice-form .nombre-textbox {
+  background-color: #F6F5EA;
+  border-radius: 25px;
+  height: 49px;
+  width: 246px;
+  margin-top: 10px;
+  border-radius: 31px;
+  border: none;
+  outline: none;
+}
+
+.calcular-indice-form .ingresar-nombre{
+  color: black;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  left: 30px;
+}
+
+.calcular-indice-form .nombre-header{
+
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  color:#1f1f37;
+}
