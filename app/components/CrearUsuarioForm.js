@@ -74,7 +74,7 @@ function CrearUsuarioForm() {
       let nuevoUsuario;
       const prisma = new PrismaClient();
       if (tipoUsuario === 'estudiante') {
-        nuevoUsuario = await prisma.estudiante.create({
+        nuevoUsuario = await prisma.estudiantes.create({
           data: {
             nombre,
             apellido,
@@ -89,7 +89,7 @@ function CrearUsuarioForm() {
           },
         });
       } else if (tipoUsuario === 'profesor') {
-        nuevoUsuario = await prisma.profesor.create({
+        nuevoUsuario = await prisma.profesores.create({
           data: {
             nombre,
             apellido,
@@ -103,7 +103,7 @@ function CrearUsuarioForm() {
           },
         });
       } else if (tipoUsuario === 'administrador') {
-        nuevoUsuario = await prisma.administrador.create({
+        nuevoUsuario = await prisma.administradores.create({
           data: {
             nombre,
             apellido,
