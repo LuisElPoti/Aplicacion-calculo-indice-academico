@@ -49,14 +49,13 @@ return (
   <BotonGuardar/>
   </form>
   
-
- 
-
+  
   <div className='contenedor-tarjetas flex mb-8 mt-4 justify-between'>
   <Tarjeta headerValues={headerValuesRedCard} imageSource={"../images/cuate.svg"} className="bg-tarjeta-roja"/>
   <Tarjeta headerValues={headerValuesPurpleCard} imageSource={"../images/pana.svg"} className="bg-tarjeta-morada"/>
   </div>
   
+  <h1 className='text-xl mb-6 font-bold'>Calificaciones del trimestre</h1>
   <TablaBasica headers={headers} data={data} />
 
   
