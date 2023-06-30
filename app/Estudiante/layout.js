@@ -35,9 +35,7 @@ function RootLayout({ children, title }) {
                         <div class="row-span-2 pl-14 pt-5 pr-16"> 
                         <Encabezado
                         userName={userName}
-                        role={role}
-                        menuTitle={menuTitle}
-                        color = {color}
+                        
                          /> 
                         <div className='ContenidoDinamico'></div>
                         {children}

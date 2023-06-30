@@ -1,5 +1,5 @@
-import MenuPrincipal from '../components/MenuPrincipalAdmin'
-import EncabezadoAdmin from '../components/EncabezadoAdmin'
+import MenuPrincipal from '../components/MenuPrincipal'
+import EncabezadoAdmin from '../components/Encabezado'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
 

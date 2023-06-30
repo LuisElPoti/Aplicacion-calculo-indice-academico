@@ -4,11 +4,16 @@
 
 /* Color Segun Usuario */
 .color-estudiante{ 
-  color: #0068FF;
+  color: #0068FF !important;
 }
 
-.color-profesor{
-  color: #F9DB38;
+.color-admin{
+  color: #F9DB38 !important;
+  
+}
+
+.color-profesor {
+  color: #D176FF !important;
 }
 
 
