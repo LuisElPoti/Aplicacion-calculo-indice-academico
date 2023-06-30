@@ -3,7 +3,7 @@ import BotonGuardar from '@/app/components/BotonGuardar'
 
 export default function CrearAsignatura() {
   return (
-    <form className='crear-usuario-form m-10' width={900} height={500} >
+    <form className='crear-usuario-form m-10' action="" width={900} height={500} >
 
       <div className='flex'>
         <div className='w-1/2 p-5 m-5'>
