@@ -3,8 +3,10 @@ import CalcularIndiceForm from '@/app/components/CalcularIndiceForm'
 
 export default function page() {
   return (
-
+<>
     <CalcularIndiceForm/>
+
+</>
 
   )
 }
