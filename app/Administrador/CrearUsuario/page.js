@@ -1,9 +1,16 @@
 import React from 'react'
+import CrearUsuarioForm from '@/app/components/CrearUsuarioForm'
+import Chart from '@/app/components/Chart'
 
 
-export default function CrearUsuario() {
+function CrearUsuario() {
   return (
-    <>Crear Usuario</>
+    <>
+    <CrearUsuarioForm/>
+    <Chart/>
+    </>
     
   )
 }
+
+export default  CrearUsuario
