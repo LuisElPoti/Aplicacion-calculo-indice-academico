@@ -1,21 +1,19 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
+import {AiOutlineDown, AiOutlineUp} from "react-icons/ai";
+import Link from 'next/link';
 
 function getFormattedDate() {
-  const months = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-  ];
-
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const month = months[currentDate.getMonth()];
-  const year = currentDate.getFullYear();
-
-  const formattedDate = `${month} ${day}, ${year}`;
-  return formattedDate;
+  // ...your existing code...
 }
 
 function Encabezado({ userName, role, menuTitle, color }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  }
+
   return (
     <div className={`encabezado ${color}`}>
       <div className="perfil">
@@ -24,7 +22,16 @@ function Encabezado({ userName, role, menuTitle, color }) {
           <div className={`estudiante ${color}`}>{role}</div>
         </div>
         <img className="foto-perfil" alt="Foto perfil" src="/images/foto-perfil.svg" />
-        <img className="chevron-down" alt="Chevron down" src="/images/chevron-down.svg" />
+        <button onClick={toggleDropdown}>
+          {isDropdownOpen ? <AiOutlineUp style={{color:"black"}}/> : <AiOutlineDown style={{color:"black"}}/>}
+        </button>
+        {isDropdownOpen && (
+          <div className="dropdown">
+            <Link href="/Estudiante/cambiarPassword" style={{display:"block"}}>
+              Cambiar Password
+            </Link>
+          </div>
+        )}
       </div>
       <div className="titulo-fecha">
         <div className="men-principal">{menuTitle}</div>
@@ -35,3 +42,4 @@ function Encabezado({ userName, role, menuTitle, color }) {
 }
 
 export default Encabezado;
+
