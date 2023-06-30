@@ -6,9 +6,6 @@ import Tarjeta from '@/app/components/Tarjeta';
 import BotonGuardar from '@/app/components/BotonGuardar';
 import Cookies from 'js-cookie';
 
-
-
-
 async function ReporteCalificaciones() {
   const menuItemsYear = [
     { value: 2020, label: '2020' },
@@ -26,10 +23,11 @@ async function ReporteCalificaciones() {
 
   const headers = ['Asignatura', 'Seccion', 'Alpha', 'Calificacion', 'Puntos', 'Créditos'];
   
-  const id_usuario = Cookies.get('id_usuario');
+  const id_usuario = Cookies.get('ID');
+  console.log(id_usuario)
 
   const headerValuesRedCard = [
-    { headerName: 'ID', headerValue: 'RELLENAR BD' },
+    { headerName: 'ID', headerValue: id_usuario },
     { headerName: 'Nombre', headerValue: 'RELLENAR BD' },
     { headerName: 'Programa', headerValue: 'RELLENAR BD' },
   ];
@@ -40,65 +38,14 @@ async function ReporteCalificaciones() {
     { headerName: 'Puntos Acumulados', headerValue: 'RELLENAR BD' },
   ];
 
-  const [año, setAño] = useState('');
-  const [trimestre, setTrimestre] = useState('');
-  const [calificaciones, setCalificaciones] = useState([]);
-  
-
-  useEffect(() => {
-    obtenerCalificaciones();
-  }, [año, trimestre]);
-
-  const obtenerCalificaciones = async () => {
-    const {PrismaClient} =  require('@prisma/client')
-    const prisma = new PrismaClient()
-    
-    try {
-      const resultados = await prisma.historico_academico.findMany({
-        select: {
-          asignaturas: {
-            select: {
-              nombre: true
-            }
-          },
-          secciones: {
-            select: {
-              numero: true
-            }
-          },
-          calificacion_literal: true,
-          calificacion_numerica: true,
-          puntos_honor: true,
-          asignaturas: {
-            select: {
-              creditos: true
-            }
-          }
-        },
-        where: {
-          secciones: {
-            periodos: {
-              año: { in: [año] },
-              id_trimestre: { in: [trimestre] }
-            }
-          },
-          id_estudiante: id_usuario
-        },
-      });
-  
-      setCalificaciones(resultados);
-    } catch (error) {
-      console.error('Error al obtener las calificaciones:', error);
-    }
-  };
-  
+  var data = await getCalificaciones(id_usuario, 2023, 1);
 
 return (
   <>
   
   <div className='flex'>
-  <FiltroReportes items={menuItemsYear} label="Año" value={anio} onChange={(selectedValue) => setAño(selectedValue)}/> 
-  <FiltroReportes items={menuItemsTrimestre} label="Trimestre" value={trimestre} onChange={(selectedValue) => setTrimestre(selectedValue)}/> 
+  <FiltroReportes items={menuItemsYear} label="Año" /> 
+  <FiltroReportes items={menuItemsTrimestre} label="Trimestre" /> 
   <BotonGuardar texto="Generar reporte" className="azul" />  </div>
   
   
@@ -107,14 +54,52 @@ return (
   <Tarjeta headerValues={headerValuesPurpleCard} imageSource={"../images/pana.svg"} className="bg-tarjeta-morada"/>
   </div>
   
-  <TablaBasica headers={headers} data={calificaciones} />
   <h1 className='text-xl mb-6 font-bold'>Calificaciones del trimestre</h1>
   <TablaBasica headers={headers} data={data} />
-
-  
   
   </>
   
 );
+}
+
+
+async function getCalificaciones(id_usuario, año, trimestre){
+  const requestData = {
+    id: id_usuario,
+    a_o: año,
+    trimestre: trimestre,
+  };
+  
+  const response = await fetch('http://localhost:3000/api1/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    });
+  
+    const historico_academico = await response.json();
+    const headers = ['Asignatura', 'Seccion', 'Alpha', 'Calificacion', 'Puntos', 'Créditos'];
+
+    const data = historico_academico.map((historico) => {
+    const asignatura = historico.secciones?.asignaturas?.nombre || 'Prueba';
+    const seccion = historico.secciones?.numero || 'Prueba';
+    
+    const calificacion_numerica = historico.calificacion_numerica || 'Prueba';
+    const alpha = historico.calificacion_literal || 'Prueba';
+
+    const puntos = historico.puntos_honor || 'Prueba';
+    const creditos = historico.secciones?.asignaturas?.creditos || 'Prueba';
+      
+    return {
+      Asignatura: asignatura,
+      Seccion: seccion,
+      Alpha: alpha,
+      Calificacion: calificacion_numerica,
+      Puntos: puntos,
+      Créditos: creditos,
+    };
+  });
+  return data;
 }
 export default ReporteCalificaciones

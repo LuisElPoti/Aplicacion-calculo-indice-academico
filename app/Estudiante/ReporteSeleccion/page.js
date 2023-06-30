@@ -23,27 +23,30 @@ const menuItemsTrimestre = [
 
 const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
 
-const id_usuario = Cookies.get('id_usuario');
-
+const id_usuario = Cookies.get('ID')?.value;
+console.log(id_usuario)
 const [año, setAño] = useState('');
 const [trimestre, setTrimestre] = useState('');
 
-const [data, setData] = useState([]);
+var data = await getSeleccion(id_usuario, 2023, 1);
 
-const handleClick = async () => {
-  const newData = await getSeleccion(id_usuario, año, trimestre);
-  setData(newData)
-};
+async function handleClick() {
+  console.log('1')
+  //const newData = await getSeleccion(id_usuario, año, trimestre);
+  //setData(newData)
+}
 
 const handleOnChangeTrim = (event) => {
-  setTrimestre(event.target.value)
-  console.log(event.target.value)
+  console.log('1')
+  //setTrimestre(event.target.value)
+  //console.log(event.target.value)
 };
 
 
 const handleOnChangeAño = (event) => {
-  setAño(event.target.value)
-  console.log(event.target.value)
+  console.log('2')
+  //setAño(event.target.value)
+  //console.log(event.target.value)
 };
 
 
@@ -53,11 +56,11 @@ return (
 <div className='flex'>
 <FiltroReporteSeleccion items={menuItemsYear} label="Año" onChange={handleOnChangeAño}/> 
 <FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre" onChange={handleOnChangeTrim} /> 
-<BotonGuardar texto="Generar reporte" className="azul" />
+<BotonGuardar texto="Generar reporte" className="azul" onClick={handleClick}/>
 
 </div>
   <TablaBasica headers={headers} data={data}/>
-  </>
+</>
 )
 }
 
