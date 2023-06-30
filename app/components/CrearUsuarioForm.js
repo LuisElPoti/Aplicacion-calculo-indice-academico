@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PrismaClient } from '@prisma/client';
 import BotonGuardar from './BotonGuardar';
 
@@ -9,7 +9,7 @@ function CrearUsuarioForm() {
   const [tipoUsuario, setTipoUsuario] = useState('');
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
-  const [carrera, setCarrera] = useState('');
+  const [carrera, setCarrera] = useState([]);
   const [areaAcademica, setAreaAcademica] = useState('');
   const [telefono, setTelefono] = useState('');
   const [direccion, setDireccion] = useState('');
@@ -66,9 +66,12 @@ function CrearUsuarioForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+  
     try {
       let nuevoUsuario;
+      
       const prisma = new PrismaClient();
+
       if (tipoUsuario === 'estudiante') {
         nuevoUsuario = await prisma.estudiantes.create({
           data: {
@@ -118,6 +121,23 @@ function CrearUsuarioForm() {
     }
   };
 
+  
+ 
+  
+  const obtenerCarreras = async () => {
+    try {
+      const prisma = new PrismaClient();
+      const carrerasDB = await prisma.carreras.findMany();
+      console.log(carrerasDB);
+      setCarrera(carrerasDB || []);
+    } catch (error) {
+      console.error('Error al obtener las carreras:', error);
+    }
+  };
+  useEffect(() => {
+    obtenerCarreras();
+  }, []);
+
   return (
     <form className="crear-usuario-form m-10" width={1300} height={500} onSubmit={handleSubmit}>
       <div className="flex">
@@ -147,7 +167,11 @@ function CrearUsuarioForm() {
                   onChange={handleCarreraChange}
                 >
                   <option value="">Seleccionar carrera</option>
-                  {/* Opciones de carreras */}
+                  {carrera && carrera.map((carreras) => (
+                    <option key={carreras.id} value={carreras.id}>
+                    {carreras.nombre}
+                    </option>
+                  ))}
                 </select>
               </div>
             </>
