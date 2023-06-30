@@ -1,12 +1,11 @@
-'use server'
 
 import { redirect } from 'next/navigation'
-
 
 const {PrismaClient} =  require('@prisma/client')
 const prisma = new PrismaClient()
 
 export async function CambiarContraseña(data){
+    'use server'
     const id_usuario = data.get('id-usuario');
     const nueva_password = data.get('new-password');
     const confirmar_password = data.get('confirm-password');
@@ -52,15 +51,7 @@ export async function CambiarContraseña(data){
             }
             
             console.log("Contraseña modificada con éxito");
-            LanzarMensaje()
             redirect("/"+tipoUsuario+"/MenuPrincipal");
         }
     }
-}
-
-
-import {toast} from 'react-toastify'
-function LanzarMensaje(){
-    'use client'
-    toast.info("Funciona por favor")
 }

@@ -1,5 +1,6 @@
 'use server'
 
+import { cookies } from 'next/headers'
 import Administrador from '@/app/Administrador/page'
 import { redirect } from 'next/navigation'
 
@@ -44,16 +45,23 @@ export async function HacerLogin(data){
             }
             else{
                 console.log("Bienvenido Administrador")
-                redirect('/Estudiante/MenuPrincipal')
+                cookies().set('ID', administrador.matricula)
+                redirect('/Administrador/MenuPrincipal')
             }
 
         }
         else{
             console.log("Bienvenido Profesor")
+            cookies().set('ID', profesor.matricula)
+            redirect('/Profesor/MenuPrincipal')
+
         }
     }
     else{
         console.log("Bienvenido Estudiante")
+        cookies().set('ID', estudiante.matricula)
+        redirect('/Estudiante/MenuPrincipal')
+
     }
     
 }
