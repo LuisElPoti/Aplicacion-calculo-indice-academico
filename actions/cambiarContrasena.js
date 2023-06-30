@@ -49,8 +49,17 @@ export async function CambiarContraseña(data){
                     });
                     break;
             }
+            
             console.log("Contraseña modificada con éxito");
+            LanzarMensaje()
             redirect("/"+tipoUsuario+"/MenuPrincipal");
         }
     }
+}
+
+
+import {toast} from 'react-toastify'
+function LanzarMensaje(){
+    'use client'
+    toast.info("Funciona por favor")
 }
