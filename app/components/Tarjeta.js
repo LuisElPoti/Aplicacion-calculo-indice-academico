@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Tarjeta({ headerValues }) {
   return (
-    <div className='tarjeta flex bg-tarjeta-roja p-5'>
+    <div className='tarjeta flex bg-tarjeta-roja p-5 m-3'>
       <Image src="/images/cuate.svg" width={150} height={300} />
       <div className='content pl-5'>
         {headerValues.map((header) => (

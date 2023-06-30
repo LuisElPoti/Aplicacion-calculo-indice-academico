@@ -37,4 +37,6 @@ next-env.d.ts
 #DB
 /db
 
+#ENV
+.env
 
