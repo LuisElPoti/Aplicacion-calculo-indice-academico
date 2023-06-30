@@ -99,7 +99,7 @@ return (
   <div className='flex'>
   <FiltroReportes items={menuItemsYear} label="Año" value={anio} onChange={(selectedValue) => setAño(selectedValue)}/> 
   <FiltroReportes items={menuItemsTrimestre} label="Trimestre" value={trimestre} onChange={(selectedValue) => setTrimestre(selectedValue)}/> 
-  <BotonGuardar/>
+  <BotonGuardar />  
   </div>
   
   
