@@ -23,7 +23,7 @@ export default function FiltroReportes({ items = [], label }) {
           value={selectedItem}
           onChange={handleChange}
           displayEmpty
-          inputProps={{ 'aria-label': 'Without label' }}
+          inputProps={{ 'aria-label': 'FiltroBusqueda', 'name':'FiltroBusqueda' }}
         >
           
           {items && items.length > 0 && items.map((item) => (

@@ -25,29 +25,36 @@ export default function ReporteCalificaciones() {
     { Asignatura: 'Estructuras de Datos - IDS305', Seccion: 2, Alpa: 'B-', Horario: '83', Puntos: '7', Creditos:'4' },
   ];
 
-  const headerValues = [
-    { headerName: 'ID', headerValue: '1104220' },
-    { headerName: 'Nombre', headerValue: 'Allen Silverio' },
-    { headerName: 'Programa', headerValue: 'Ingeniería de Software' },
-  
+  const headerValuesRedCard = [
+    { headerName: 'ID', headerValue: 'RELLENAR BD' },
+    { headerName: 'Nombre', headerValue: 'RELLENAR BD' },
+    { headerName: 'Programa', headerValue: 'RELLENAR BD' },
+  ];
 
+  const headerValuesPurpleCard= [
+    { headerName: 'Acumulados del Trimestre' },
+    { headerName: 'Indice Trimestral', headerValue: 'RELLENAR BD' },
+    { headerName: 'Puntos Acumulados', headerValue: 'RELLENAR BD' },
   ];
 
   
 return (
   <>
   
-  <div className='flex'>
+ 
   
-
+  <form action="" method="" className='flex'>
   <FiltroReportes items={menuItemsYear} label="Año"/> 
   <FiltroReportes items={menuItemsTrimestre} label="Trimestre"/> 
+  <BotonGuardar/>
+  </form>
+  
 
-  </div>
+ 
 
   <div className='contenedor-tarjetas flex mb-8 mt-4 justify-between'>
-  <Tarjeta headerValues={headerValues} className="bg-tarjeta-roja"/>
-  <Tarjeta headerValues={headerValues} className="bg-tarjeta-morada"/>
+  <Tarjeta headerValues={headerValuesRedCard} imageSource={"../images/cuate.svg"} className="bg-tarjeta-roja"/>
+  <Tarjeta headerValues={headerValuesPurpleCard} imageSource={"../images/pana.svg"} className="bg-tarjeta-morada"/>
   </div>
   
   <TablaBasica headers={headers} data={data} />

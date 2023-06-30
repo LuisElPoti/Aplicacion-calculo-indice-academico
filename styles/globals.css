@@ -1026,8 +1026,7 @@
   display: flex;
   position: relative;
   width: fit-content;
-  background-color: #0068ff;
-  border-radius: 50%;
+
 }
 
 .boton-azul .texto-boton {
@@ -1113,20 +1112,22 @@
  /* Tarjeta Reporte calificaciones */
 .bg-tarjeta-roja {
   background-color: #ED6F71;
-  width: 475px;
-  height: 150px;
+  width: 480px;
+  height: 190px;
   border-radius: 48px;
   color: white;
   font-family: "Poppins-SemiBold", Helvetica;;
   height: fit-content;
+  font-size: 0.9rem;
 }
 
 .bg-tarjeta-morada {
   background-color: #D176FF;
-  width: 475px;
-  height: 150px;
+  width: 480px;
+  height: 190px;
   border-radius: 48px;
   color: white;
   font-family: "Poppins-SemiBold", Helvetica;;
   height: fit-content;
+  font-size: 0.9rem;
 }
