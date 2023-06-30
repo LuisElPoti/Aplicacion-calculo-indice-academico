@@ -10,7 +10,6 @@ function CrearUsuarioForm() {
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [carrera, setCarrera] = useState('');
-  const [indiceGeneral, setIndiceGeneral] = useState('');
   const [areaAcademica, setAreaAcademica] = useState('');
   const [telefono, setTelefono] = useState('');
   const [direccion, setDireccion] = useState('');
@@ -35,9 +34,6 @@ function CrearUsuarioForm() {
     setCarrera(event.target.value);
   };
 
-  const handleIndiceGeneralChange = (event) => {
-    setIndiceGeneral(event.target.value);
-  };
 
   const handleAreaAcademicaChange = (event) => {
     setAreaAcademica(event.target.value);
@@ -78,7 +74,6 @@ function CrearUsuarioForm() {
           data: {
             nombre,
             apellido,
-            indice_general: indiceGeneral,
             carrera,
             telefono,
             direccion,
@@ -124,10 +119,12 @@ function CrearUsuarioForm() {
   };
 
   return (
-    <form className="crear-usuario-form m-10" width={900} height={500} onSubmit={handleSubmit}>
+    <form className="crear-usuario-form m-10" width={1300} height={500} onSubmit={handleSubmit}>
       <div className="flex">
-        <div className="w-1/2 p-5 m-5">
-          <div className="nombre pl-5 l-20">
+
+        
+        <div className="w-1/3 px-5">
+          <div className="mb-5">
             <p className="nombre-header pt-20">Tipo de usuario</p>
             <select
               className="nombre-select p-5"
@@ -153,15 +150,6 @@ function CrearUsuarioForm() {
                   {/* Opciones de carreras */}
                 </select>
               </div>
-              <div className="nombre pl-5 l-20">
-                <p className="nombre-header pt-20">Índice General</p>
-                <input
-                  className="nombre-textbox p-5"
-                  type="text"
-                  value={indiceGeneral}
-                  onChange={handleIndiceGeneralChange}
-                />
-              </div>
             </>
           )}
           {tipoUsuario === 'profesor' && (
@@ -179,8 +167,8 @@ function CrearUsuarioForm() {
           )}
         </div>
 
-        <div className="w-1/2 p-5 m-5">
-          <div className="nombre pl-5 l-20">
+        <div className="w-1/3 px-5">
+          <div className="mb-5">
             <p className="nombre-header pt-20">Nombre</p>
             <input
               className="nombre-textbox p-5"
@@ -188,7 +176,6 @@ function CrearUsuarioForm() {
               value={nombre}
               onChange={handleNombreChange}
             />
-          </div>
           <div className="nombre pl-5 l-20">
             <p className="nombre-header pt-20">Apellido</p>
             <input
@@ -207,6 +194,9 @@ function CrearUsuarioForm() {
               onChange={handleTelefonoChange}
             />
           </div>
+
+          </div>
+
           <div className="nombre pl-5 l-20">
             <p className="nombre-header pt-20">Dirección</p>
             <input
@@ -216,6 +206,10 @@ function CrearUsuarioForm() {
               onChange={handleDireccionChange}
             />
           </div>
+        </div>
+
+        <div className="w-1/3 px-5">
+          <div className="mb-5">
           <div className="nombre pl-5 l-20">
             <p className="nombre-header pt-20">Contraseña</p>
             <input
@@ -245,19 +239,13 @@ function CrearUsuarioForm() {
               onChange={handleDocumentoChange}
             />
           </div>
-          <div className="nombre pl-5 l-20">
-            <p className="nombre-header pt-20">Activo</p>
-            <input
-              className="nombre-checkbox"
-              type="checkbox"
-              checked={activo}
-              onChange={handleActivoChange}
-            />
-          </div>
-          <div className="boton pl-15 l-10 pt-20">
+ 
+          <div className="boton pl-15  pt-20">
             <BotonGuardar texto="Crear usuario" className="amarillo" />
           </div>
+          </div>
         </div>
+
       </div>
     </form>
   );
