@@ -24,7 +24,7 @@ function RootLayout({ children, title }) {
         <html lang="en">
             <body className={inter.className} style={{backgroundColor:"#F3F6FF"}} >
 
-                <div class="grid grid-cols-12">
+                <div class="grid grid-cols-12 gap-0">
                     {/* <!-- Sidebar --> */}
         
                     <div class="col-span-2"><MenuPrincipal /></div>

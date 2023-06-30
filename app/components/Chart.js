@@ -10,16 +10,17 @@ const data = {
   labels: labels,
   datasets: [{
     label: 'Doughnut chart',
-    data: [65, 20],
+    data: [20,30],
     backgroundColor: [
-      'rgba(255, 99, 132)',
-      'rgba(255, 159, 64)'
+      'rgba(209, 118, 255)',
+      'rgba(243, 246, 253)'
     ],
     borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)'
+      'rgba(209, 118, 255)',
+      'rgba(243, 246, 253)'
     ],
     borderWidth: 1,
+    borderRadius: 10,
     hoverBorderWidth: 4,
     hoverBorderColor: [
       'rgb(255, 99, 132)',
@@ -31,11 +32,14 @@ const data = {
 const DoughnutChart = () => {
   return (
     <div className="chart">
-      <h2>Indice General de 4</h2>
+      <div className='titulo-grafico'>
+        <p>Indice General de 4</p></div>
       <Doughnut
         data={data}
         options={{
           maintainAspectRatio: false,
+          width: 300,
+          height: 300,
         }}
       />
     </div>

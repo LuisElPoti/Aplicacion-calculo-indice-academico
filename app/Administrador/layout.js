@@ -1,6 +1,7 @@
 import MenuPrincipal from '../components/MenuPrincipalAdmin'
 import EncabezadoAdmin from '../components/EncabezadoAdmin'
 import { Inter } from 'next/font/google'
+import Image from 'next/image'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -14,7 +15,10 @@ function RootLayout({ children }) {
     return (
 
         <html lang="en">
+
             <body className={inter.className} style={{backgroundColor:"#F3F6FF"}} >
+
+            <Image src="/images/AdminBackground.svg" style={{position:"absolute", zIndex:"-1", bottom:"0", right:"0"}} width={670} height={600}/>
 
                 <div class="grid grid-cols-12">
                     {/* <!-- Sidebar --> */}
