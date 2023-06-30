@@ -1,8 +1,11 @@
 import React from "react";
 import {Logo} from "./Logo";
 import { CambiarContraseña } from "@/actions/cambiarContrasena";
+import { cookies } from 'next/headers'
+
 
 function CambiarPasswordForm() {
+  const id_usuario = cookies().get('ID').value
   return (
     <form action={CambiarContraseña} method="" className="cambiar-password" >
     <Logo
@@ -22,9 +25,9 @@ function CambiarPasswordForm() {
     <div className="confimar-contrase-a">Confimar contraseña</div>
 
     
-    <div> <input type='password' className="new-password-textbox" name="new-password"/> </div>
-    <input type= 'text' className="id-textbox" name="id-usuario" />
-    <input type='password' className="confirm-password" name="confirm-password" />
+    <div> <input required type='password' className="new-password-textbox" name="new-password"/> </div>
+    <input readonly required type= 'text' className="id-textbox" name="id-usuario" value={id_usuario}/>
+    <input required type='password' className="confirm-password" name="confirm-password" />
 
     <button type="submit" className="boton-oscuro" style={{
           left: "110px",
