@@ -1,13 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-function BotonGuardar() {
+function BotonGuardar({ texto, className }) {
   return (
-    <button className="boton-azul" type='submit'>
-      <div className="texto-boton self-center">
-        <div className="acceder">Buscar</div>
-      </div>
+    <button type="submit" className={` m-0 ${className}`}>
+      {texto}
     </button>
-  )
+  );
 }
 
-export default BotonGuardar
+export default BotonGuardar;
