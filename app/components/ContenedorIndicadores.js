@@ -16,7 +16,9 @@ function ContenedorIndicadores() {
         aprobadas
       </div>
       <div className="div" />
-      <div className="creditos-aprobados-2" />
+      <div className="creditos-aprobados-2">
+      </div>
+
       <div className="trimestres-aprobadas" />
     </div>
   )

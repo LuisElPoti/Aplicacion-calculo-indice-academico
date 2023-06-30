@@ -1,5 +1,6 @@
 import React from 'react'
 import Chart from './Chart'
+import BotonGuardar from './BotonGuardar'
 
 function CalcularIndiceForm() {
     return (
@@ -26,6 +27,10 @@ function CalcularIndiceForm() {
                 <div className='w-1/2 p-5 m-5'>
 
                     <Chart />
+                    <div className='p-10 m-10'>
+                    <BotonGuardar texto = "Calcular Indice" className={"amarillo"}/>
+
+                    </div>
 
                 </div>
 

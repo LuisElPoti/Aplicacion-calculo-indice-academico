@@ -1,12 +1,11 @@
 import React from 'react'
-
+import Chart from './Chart'
 function ContenedorIndiceGeneral() {
   return (
     
      
         <div className="indicador">
-          <div className="text-wrapper">Índice General de 4</div>
-          <div className="indice-general-frame" />
+          <Chart/>
         </div>
       
    
