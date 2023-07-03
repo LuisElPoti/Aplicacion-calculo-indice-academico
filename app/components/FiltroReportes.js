@@ -8,21 +8,14 @@ import Select from '@mui/material/Select';
 
 
 
-export default function FiltroReportes({ items = [], label }) {
-  const [selectedItem, setSelectedItem] = React.useState('');
-
-  const handleChange = (event) => {
-    setSelectedItem(event.target.value);
-    console.log(event.target.value);
-  };
-
+export default function FiltroReportes({ items = [], label, onChange, selectedItem}) {
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel>{label}</InputLabel>
         <Select
           value={selectedItem}
-          onChange={handleChange}
+          onChange={onChange}
           displayEmpty
           inputProps={{ 'aria-label': 'FiltroBusqueda', 'name':'FiltroBusqueda' }}
         >

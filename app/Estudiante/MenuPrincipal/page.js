@@ -1,25 +1,35 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import ContenedorIndicadores from '../../components/ContenedorIndicadores'
 import ContenedorIndiceGeneral from '../../components/ContenedorIndiceGeneral'
 import ContenedorInformacion from '../../components/ContenedorInformacion'
 import TablaBasica from '../../components/TablaBasica'
-import { getCookie } from "cookies-next";
+import Cookies from "js-cookie";
 
 
-export default async function MenuPrincipalEstudiante() {
-
-
+export default function MenuPrincipalEstudiante() {
     const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
+    const [data, setData] = useState([]);
+    const [id_usuario, setID] = useState("0");
+    
+    useEffect(() => {
+      
+      async function fetchData() {
+        const resultado = await Cookies.get('ID');
+        setID(resultado);
+        console.log(resultado);
+        const newData = await getSeleccion(resultado, 2023, 1);
+        setData(newData);
+      }
 
-    const id_usuario = getCookie("ID");
-
-    var data = await getSeleccion(id_usuario, 2023, 1);
-
+      fetchData();
+    }, [id_usuario, data]);
+    
     return (
        
         <div className= 'grid grid-cols-3 gap-3'>
             
-            <ContenedorIndicadores />
+            <ContenedorIndicadores id_usuario={id_usuario} />
             <ContenedorIndiceGeneral />
             <div className='row-span-2 ml-2'><ContenedorInformacion /></div>
             <TablaBasica headers={headers} data={data}/>
@@ -36,7 +46,7 @@ async function getSeleccion(id_usuario, año, trimestre){
       trimestre: trimestre,
     };
     
-    const response = await fetch('http://localhost:3000/api/', {
+    const response = await fetch('http://localhost:3000/api/ReporteSeleccion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

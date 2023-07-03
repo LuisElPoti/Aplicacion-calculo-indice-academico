@@ -75,7 +75,8 @@ CREATE TABLE IF NOT EXISTS `Estudiantes` (
     `activo` boolean,
     `asignaturas_aprobadas` int,
     `creditos_aprobados` int,
-    `indice_trimestral` int
+    `indice_trimestral` int,
+    `trimestres_aprobados` int,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`id_carrera`) REFERENCES `Carreras`(`id`),
     FOREIGN KEY (`id_tipo_documento`) REFERENCES `Tipo_Documento`(`id`)

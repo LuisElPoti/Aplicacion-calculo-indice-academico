@@ -81,9 +81,9 @@ VALUES
 INSERT INTO Administradores(nombre, apellido, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
 VALUES ('Gustavo', 'Mejia', '0000000000', 'Calle Gustavo Mejia Ricart', 'Pepito1234', 'Gustavo.Mejia@institucion.edu.do', 1, '123456789', '3000001',  true);
 
-INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo, indice_trimestral, asignaturas_aprobadas, creditos_aprobados)
+INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo, indice_trimestral, asignaturas_aprobadas, creditos_aprobados, trimestres_aprobados)
 VALUES 
-    ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@institucion.edu.do', 2, '40112345672', '1101001', true, 0, 0, 0);
+    ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@institucion.edu.do', 2, '40112345672', '1101001', true, 0, 0, 0, 0);
 
 INSERT INTO Profesores (nombre, apellido, id_area_academica, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
 VALUES

@@ -51,6 +51,8 @@ model carreras {
   nombre            String?           @db.VarChar(80)
   descripcion       String?           @db.VarChar(200)
   id_area_academica Int?
+  total_creditos    Int?
+  total_asignaturas Int?
   areas_academicas  areas_academicas? @relation(fields: [id_area_academica], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "carreras_ibfk_1")
   estudiantes       estudiantes[]
 
@@ -70,22 +72,26 @@ model estados_periodo {
 }
 
 model estudiantes {
-  id                  Int                   @id @default(autoincrement())
-  nombre              String?               @db.VarChar(50)
-  apellido            String?               @db.VarChar(50)
-  indice_general      Decimal?              @db.Decimal(3, 2)
-  id_carrera          Int?
-  telefono            String?               @db.VarChar(13)
-  direccion           String?               @db.VarChar(300)
-  contrase_a          String?               @map("contraseña") @db.VarChar(30)
-  correo              String?               @db.VarChar(70)
-  id_tipo_documento   Int?
-  documento           String?               @db.VarChar(15)
-  matricula           String?               @unique(map: "matricula") @db.VarChar(7)
-  activo              Boolean?
-  carreras            carreras?             @relation(fields: [id_carrera], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "estudiantes_ibfk_1")
-  tipo_documento      tipo_documento?       @relation(fields: [id_tipo_documento], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "estudiantes_ibfk_2")
-  historico_academico historico_academico[]
+  id                    Int                   @id @default(autoincrement())
+  nombre                String?               @db.VarChar(50)
+  apellido              String?               @db.VarChar(50)
+  indice_general        Decimal?              @db.Decimal(3, 2)
+  id_carrera            Int?
+  telefono              String?               @db.VarChar(13)
+  direccion             String?               @db.VarChar(300)
+  contrase_a            String?               @map("contraseña") @db.VarChar(30)
+  correo                String?               @db.VarChar(70)
+  id_tipo_documento     Int?
+  documento             String?               @db.VarChar(15)
+  matricula             String?               @unique(map: "matricula") @db.VarChar(7)
+  activo                Boolean?
+  asignaturas_aprobadas Int?
+  creditos_aprobados    Int?
+  indice_trimestral     Int?
+  trimestres_aprobados  Int?
+  carreras              carreras?             @relation(fields: [id_carrera], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "estudiantes_ibfk_1")
+  tipo_documento        tipo_documento?       @relation(fields: [id_tipo_documento], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "estudiantes_ibfk_2")
+  historico_academico   historico_academico[]
 
   @@index([id_carrera], map: "id_carrera")
   @@index([id_tipo_documento], map: "id_tipo_documento")
@@ -111,7 +117,7 @@ model historico_academico {
 model horario_secciones {
   id          Int        @id @default(autoincrement())
   id_seccion  Int?
-  dia         String?    @db.VarChar(8)
+  dia         String?    @db.VarChar(20)
   hora_inicio Int?
   hora_fin    Int?
   aula        String?    @db.VarChar(6)

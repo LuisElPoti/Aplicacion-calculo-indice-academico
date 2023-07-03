@@ -1,99 +1,103 @@
 'use client'
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import FiltroReporteSeleccion from '@/app/components/FiltroReportes'
 import TablaBasica from '@/app/components/TablaBasica'
 import BotonGuardar from '@/app/components/BotonGuardar'
 import Cookies from 'js-cookie';
 
-async function ReporteSeleccion() {
-const menuItemsYear = [
-  { value: 2020, label: '2020' },
-  { value: 2021, label: '2021' },
-  { value: 2022, label: '2022' },
-  { value: 2023, label: '2023' },
-];
+function ReporteSeleccion() {
+  const [data, setData] = useState([]);
+  const [id_usuario, setID] = useState("0");
+  const [año, setAño] = useState(2023);
+  const [trimestre, setTrimestre] = useState(1);
 
-const menuItemsTrimestre = [
-  { value: 1, label: 'Feb-Abr' },
-  { value: 2, label: "May-Jul" },
-  { value: 3, label: "Ago-Oct" },
-  { value: 4, label: "Nov-Ene" },
-];
+  useEffect(() => {
 
-const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
+    async function fetchData() {
+      const resultado = await Cookies.get('ID');
+      setID(resultado);
+      console.log(resultado);
+    }
+
+    fetchData();
+  }, [id_usuario]);
+
+  const menuItemsYear = [
+    { value: 2020, label: '2020' },
+    { value: 2021, label: '2021' },
+    { value: 2022, label: '2022' },
+    { value: 2023, label: '2023' },
+  ];
+
+  const menuItemsTrimestre = [
+    { value: 1, label: 'Feb-Abr' },
+    { value: 2, label: "May-Jul" },
+    { value: 3, label: "Ago-Oct" },
+    { value: 4, label: "Nov-Ene" },
+  ];
+
+  const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
 
 
-const id_usuario = Cookies.get("ID") || 1;
+  async function handleClick() {
+    const newData = await getSeleccion(id_usuario, año, trimestre);
+    setData(newData);
+  }
 
-const [año, setAño] = useState('');
-const [trimestre, setTrimestre] = useState('');
+  const handleOnChangeTrim = async (event) => {
+    setTrimestre(event.target.value)
+  };
 
-var data = await getSeleccion(id_usuario, 2023, 1);
 
-async function handleClick() {
-  console.log('1')
-  //const newData = await getSeleccion(id_usuario, año, trimestre);
-  //setData(newData)
+  const handleOnChangeAño = (event) => {
+    setAño(event.target.value)
+  };
+
+
+  return (
+
+    <>
+      <div className='flex'>
+        <FiltroReporteSeleccion items={menuItemsYear} label="Año" onChange={handleOnChangeAño} selectedItem={año} />
+        <FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre" onChange={handleOnChangeTrim} selectedItem={trimestre} />
+        <BotonGuardar texto="Generar reporte" className="azul" onClick={handleClick} />
+
+      </div>
+      <TablaBasica headers={headers} data={data} />
+    </>
+  )
 }
 
-const handleOnChangeTrim = (event) => {
-  console.log('1')
-  //setTrimestre(event.target.value)
-  //console.log(event.target.value)
-};
-
-
-const handleOnChangeAño = (event) => {
-  console.log('2')
-  //setAño(event.target.value)
-  //console.log(event.target.value)
-};
-
-
-return (
-
-<>
-<div className='flex'>
-<FiltroReporteSeleccion items={menuItemsYear} label="Año" onChange={handleOnChangeAño}/> 
-<FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre" onChange={handleOnChangeTrim} /> 
-<BotonGuardar texto="Generar reporte" className="azul" onClick={handleClick}/>
-
-</div>
-  <TablaBasica headers={headers} data={data}/>
-</>
-)
-}
-
-async function getSeleccion(id_usuario, año, trimestre){
+async function getSeleccion(id_usuario, año, trimestre) {
   const requestData = {
     id: id_usuario,
     a_o: año,
     trimestre: trimestre,
   };
-  
+
   const response = await fetch('http://localhost:3000/api/ReporteSeleccion', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestData),
-    });
-  
-    const historico_academico = await response.json();
-  
-    const data = historico_academico.map((historico) => {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
+  });
+
+  const historico_academico = await response.json();
+
+  const data = historico_academico.map((historico) => {
     const asignatura = historico.secciones?.asignaturas?.nombre || 'Prueba';
     const seccion = historico.secciones?.numero || 'Prueba';
     var aula = ''
-    var horario = ''; 
-  
+    var horario = '';
+
     for (let i = 0; i < historico.secciones.horario_secciones.length; i++) {
       aula += historico.secciones.horario_secciones[i].aula + '  ';
       horario += historico.secciones.horario_secciones[i].hora_inicio + '/' + historico.secciones.horario_secciones[i].hora_fin + '  ';
     }
-    
+
     const profesor = historico.secciones?.profesores?.nombre + " " + historico.secciones?.profesores?.apellido || 'Prueba';
-  
+
     return {
       Asignatura: asignatura,
       Seccion: seccion,
@@ -103,7 +107,7 @@ async function getSeleccion(id_usuario, año, trimestre){
     };
   });
   return data;
-  
+
 }
 
 export default ReporteSeleccion

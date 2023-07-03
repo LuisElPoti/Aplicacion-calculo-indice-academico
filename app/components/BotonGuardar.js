@@ -1,8 +1,8 @@
 import React from 'react';
 
-function BotonGuardar({ texto, className }) {
+function BotonGuardar({ texto, className, onClick}) {
   return (
-    <button type="submit" className={` m-0 ${className}`}>
+    <button type="submit" onClick={onClick} className={` m-0 ${className}`}>
       {texto}
     </button>
   );
