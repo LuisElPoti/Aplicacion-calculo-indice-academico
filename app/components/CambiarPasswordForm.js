@@ -25,11 +25,11 @@ function CambiarPasswordForm() {
     });
 
     if(response.status == 200){
-      console.log("Contraseña cambiada");
+      alert("Contraseña cambiada");
       document.getElementById("SubmitForm").reset();
     }
     else{
-      console.log("Contraseña no cambiada");
+      alert("Hubo problemas al cambiar la contraseña, intentelo de nuevo");
     }
   }
 

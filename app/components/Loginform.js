@@ -2,16 +2,12 @@
 import React from 'react';
 import { Logo } from "./Logo";
 import { useRouter } from 'next/navigation';
-//import { toast } from 'react-toastify';
-
 
 export const LoginForm = ({ style }) => {
   const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //toast.info("Usuario o contraseña incorrectos");
-    console.log("Login no exitoso");
     const requestData = {
       id_usuario: event.target.id_usuario.value,
       password_usuario: event.target.password_usuario.value
@@ -32,8 +28,8 @@ export const LoginForm = ({ style }) => {
       router.push(`/${rol}/MenuPrincipal`);
     }
     else {
-      //toast.info("Usuario o contraseña incorrectos");
-      console.log("Login no exitoso");
+      const json = await response.json();
+      alert(json.message);
     }
   }
 

@@ -48,7 +48,7 @@ export async function POST(req) {
         });
 
         if (administrador == null) {
-          return NextResponse.json({ rol: 'Usuario o contraseña no encontrados' }, { status: 500 })
+          return NextResponse.json({ message: 'Usuario o contraseña no encontrados' }, { status: 404 })
         }
         else {
           console.log("Bienvenido Administrador")
