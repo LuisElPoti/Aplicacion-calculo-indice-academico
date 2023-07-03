@@ -61,29 +61,29 @@ VALUES
 ('ING231', 3, 'EXPERIMENTACION EN INGENIERIA', 1, true);
 
 
-INSERT INTO Carreras (nombre,descripcion,id_area_academica)
+INSERT INTO Carreras (nombre,descripcion,id_area_academica, total_creditos, total_asignaturas)
 VALUES 
-('Ingenieria de Software', 'IDS',1),
-('Ingenieria en Ciberseguridad', 'ICS',1),
-('Ingenieria Civil', 'CIV',1),
-('Ingenieria Mecánica', 'IM',1),
-('Ingenieria Mecatrónica', 'IMC',1),
-('Licenciatura en matemática orientada a la Educación Secundaria', 'LME',3),
-('Ingenieria Industrial', 'INI',1),
-('Medicina', 'MED',5),
-('Licenciatura en Psicología', 'PSI',4),
-('Licenciatura en Cine y Comunicación Audiovisual', 'LCC',4),
-('Economía', 'ECO',2),
-('Negocios Internacionales', 'LNI',2),
-('Ingenieria Biomédica', 'IBI',1)
+('Ingenieria de Software', 'IDS',1, 250, 112),
+('Ingenieria en Ciberseguridad', 'ICS',1, 260, 110),
+('Ingenieria Civil', 'CIV',1, 280, 100),
+('Ingenieria Mecánica', 'IM',1, 250, 112),
+('Ingenieria Mecatrónica', 'IMC',1, 280, 120),
+('Licenciatura en matemática orientada a la Educación Secundaria', 'LME', 3, 230, 116),
+('Ingenieria Industrial', 'INI', 1, 236, 115),
+('Medicina', 'MED',5, 300, 180),
+('Licenciatura en Psicología', 'PSI',4, 180, 98),
+('Licenciatura en Cine y Comunicación Audiovisual', 'LCC',4, 190, 90),
+('Economía', 'ECO',2, 210, 99),
+('Negocios Internacionales', 'LNI',2, 170, 89),
+('Ingenieria Biomédica', 'IBI',1, 280, 112)
 ;
 
 INSERT INTO Administradores(nombre, apellido, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
 VALUES ('Gustavo', 'Mejia', '0000000000', 'Calle Gustavo Mejia Ricart', 'Pepito1234', 'Gustavo.Mejia@institucion.edu.do', 1, '123456789', '3000001',  true);
 
-INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
+INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo, indice_trimestral, asignaturas_aprobadas, creditos_aprobados)
 VALUES 
-    ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@institucion.edu.do', 2, '40112345672', '1101001', true);
+    ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@institucion.edu.do', 2, '40112345672', '1101001', true, 0, 0, 0);
 
 INSERT INTO Profesores (nombre, apellido, id_area_academica, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
 VALUES

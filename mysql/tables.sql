@@ -52,6 +52,8 @@ CREATE TABLE IF NOT EXISTS `Carreras` (
     `nombre` varchar(80),
     `descripcion` varchar(200),
     `id_area_academica` int,
+    `total_creditos` int,
+    `total_asignaturas` int,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`id_area_academica`) REFERENCES `Areas_Academicas`(`id`)
 );
@@ -71,6 +73,9 @@ CREATE TABLE IF NOT EXISTS `Estudiantes` (
     `documento` varchar(15),
     `matricula` varchar(7) unique,
     `activo` boolean,
+    `asignaturas_aprobadas` int,
+    `creditos_aprobados` int,
+    `indice_trimestral` int
     PRIMARY KEY (`id`),
     FOREIGN KEY (`id_carrera`) REFERENCES `Carreras`(`id`),
     FOREIGN KEY (`id_tipo_documento`) REFERENCES `Tipo_Documento`(`id`)
