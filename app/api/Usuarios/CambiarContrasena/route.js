@@ -1,14 +1,24 @@
+'use server'
 
-import { redirect } from 'next/navigation'
+import { PrismaClient } from '@prisma/client';
 
-const {PrismaClient} =  require('@prisma/client')
-const prisma = new PrismaClient()
+import { NextResponse } from "next/server";
 
-export async function CambiarContraseña(data){
-    'use server'
-    const id_usuario = data.get('id-usuario');
-    const nueva_password = data.get('new-password');
-    const confirmar_password = data.get('confirm-password');
+const prisma = new PrismaClient();
+
+export async function POST(req) {
+
+  const body = await req.json();
+
+  const nueva_password = body.nueva_password;
+
+  const confirmar_password = body.confirmar_password;
+
+  const id_usuario = body.id_usuario;
+
+
+  if(!nueva_password || !id_usuario || !confirmar_password) return NextResponse.json({message: 'Uno o varios de los parametros estan vacios'}, {status: 500})
+  else{
     let tipoUsuario = null;
 
     const estudiante = await prisma.estudiantes.findFirst({ where: { matricula: id_usuario } });
@@ -51,7 +61,9 @@ export async function CambiarContraseña(data){
             }
             
             console.log("Contraseña modificada con éxito");
-            redirect("/"+tipoUsuario+"/MenuPrincipal");
+            return NextResponse.json({ message: 'Contraseña modificada con éxito' }, { status: 200 });
         }
     }
+  }
+  
 }

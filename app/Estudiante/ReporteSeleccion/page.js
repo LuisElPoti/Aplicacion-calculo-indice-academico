@@ -3,8 +3,7 @@ import React, {useState} from 'react';
 import FiltroReporteSeleccion from '@/app/components/FiltroReportes'
 import TablaBasica from '@/app/components/TablaBasica'
 import BotonGuardar from '@/app/components/BotonGuardar'
-import { getCookie } from "cookies-next";
-
+import Cookies from 'js-cookie';
 
 async function ReporteSeleccion() {
 const menuItemsYear = [
@@ -24,8 +23,8 @@ const menuItemsTrimestre = [
 const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
 
 
-const id_usuario = getCookie("ID");
-console.log(id_usuario)
+const id_usuario = Cookies.get("ID") || 1;
+
 const [año, setAño] = useState('');
 const [trimestre, setTrimestre] = useState('');
 
@@ -72,7 +71,7 @@ async function getSeleccion(id_usuario, año, trimestre){
     trimestre: trimestre,
   };
   
-  const response = await fetch('http://localhost:3000/api/', {
+  const response = await fetch('http://localhost:3000/api/ReporteSeleccion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,0 +1,1 @@
+create database `app-calculo-indice-academico`

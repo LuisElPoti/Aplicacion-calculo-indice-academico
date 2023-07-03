@@ -23,7 +23,7 @@ async function ReporteCalificaciones() {
 
   const headers = ['Asignatura', 'Seccion', 'Alpha', 'Calificacion', 'Puntos', 'Créditos'];
   
-  const id_usuario = Cookies.get('ID');
+  const id_usuario = Cookies.get('ID') || 1;
   console.log(id_usuario)
 
   const headerValuesRedCard = [
@@ -70,7 +70,7 @@ async function getCalificaciones(id_usuario, año, trimestre){
     trimestre: trimestre,
   };
   
-  const response = await fetch('http://localhost:3000/api1/', {
+  const response = await fetch('http://localhost:3000/api/ReporteCalificaciones', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
