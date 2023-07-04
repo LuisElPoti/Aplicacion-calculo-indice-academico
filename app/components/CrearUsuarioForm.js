@@ -108,11 +108,13 @@ function CrearUsuarioForm() {
         alert('Usuario creado con éxito');
         document.getElementById('SubmitForm').reset();
       } else {
+        console.log("Problema");
         alert(
           'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'
         );
       }
     } catch (error) {
+      
       console.error('Error:', error);
       alert(
         'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'

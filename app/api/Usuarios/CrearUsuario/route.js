@@ -8,13 +8,12 @@ const prisma = new PrismaClient();
 export async function GET(req){
     try {
         const carreras = await prisma.carreras.findMany();
-        const tipoDocumento = await prisma.tipo_documento.findMany();
+        
         const areasAcademicas = await prisma.areas_academicas.findMany();
 
         return {
           body: {
             carreras,
-            tipoDocumento,
             areasAcademicas
           }
         };
@@ -54,10 +53,10 @@ export async function POST(req){
                                 indice_general: indice,
                                 carrera,
                                 telefono,
-                                dirección,
-                                contraseña,
-                                correo,
-                                tipo_documento,
+                                direccion,
+                                contrase_a: contraseña,
+                                correo: correo,
+                                id_tipo_documento: tipo_documento,
                                 documento,
                                 matricula: nuevaMatricula,
                                 activo: true
@@ -87,10 +86,10 @@ export async function POST(req){
                                 apellido,
                                 area_academica,
                                 telefono,
-                                dirección,
-                                contraseña,
-                                correo,
-                                tipo_documento,
+                                direccion,
+                                contrase_a: contraseña,
+                                correo: correo,
+                                id_tipo_documento: tipo_documento,
                                 documento,
                                 matricula: nuevaMatricula,
                                 activo: true
@@ -116,10 +115,10 @@ export async function POST(req){
                             nombre,
                             apellido,
                             telefono,
-                            dirección,
-                            contraseña,
-                            correo,
-                            tipo_documento,
+                            direccion,
+                            contrase_a: contraseña,
+                            correo: correo,
+                            id_tipo_documento: tipo_documento,
                             documento,
                             matricula: nuevaMatricula,
                             activo: true
