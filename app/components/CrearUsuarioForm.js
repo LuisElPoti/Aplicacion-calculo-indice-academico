@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-
+import axios from 'axios';
 import BotonGuardar from './BotonGuardar';
 
 function CrearUsuarioForm({width, height}) {
@@ -21,34 +21,26 @@ function CrearUsuarioForm({width, height}) {
 
 
   useEffect(() => {
-  const fetchData = () => {
-    fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
-      method: 'GET',
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Error en la respuesta:', response.status);
-        }
-      })
-      .then((data) => {
-        console.log(data);
-
-        if (data && data.carreras && data.areasAcademicas) {
-          setCarreras(data.carreras);
-          setAreasAcademicas(data.areasAcademicas);
-        } else {
-          throw new Error('Respuesta de API inválida');
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
-
-  fetchData();
-}, []);
+    const fetchData = () => {
+      axios.get("../api/AreasAcademicas")
+        .then(response => {
+          setAreasAcademicas(response.data);
+        })
+        .catch(error => {
+          console.error("Error al obtener las áreas académicas:", error);
+        });
+  
+      axios.get("../api/Carreras")
+        .then(response => {
+          setCarreras(response.data);
+        })
+        .catch(error => {
+          console.error("Error al obtener las carreras:", error);
+        });
+    };
+  
+    fetchData();
+  }, []);
 
   
 
