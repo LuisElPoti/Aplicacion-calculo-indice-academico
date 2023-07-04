@@ -1,5 +1,5 @@
-import MenuPrincipal from '../components/MenuPrincipal'
-import EncabezadoAdmin from '../components/Encabezado'
+import MenuPrincipalAdmin from '../components/MenuPrincipalAdmin'
+import Encabezado from '../components/Encabezado'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
 
@@ -23,13 +23,14 @@ function RootLayout({ children }) {
                 <div class="grid grid-cols-12">
                     {/* <!-- Sidebar --> */}
         
-                    <div class="col-span-2"><MenuPrincipal /></div>
+                    <div class="col-span-2"><MenuPrincipalAdmin /></div>
 
                     {/* <!-- Header and container element --> */}
                     <div class="col-span-10 grid grid-rows-2 ml-12 pt-12">
                         {/* <!-- Header --> */}
                         <div class="row-span-2 pl-12 pt-5"> 
-                        <EncabezadoAdmin /> 
+                        <Encabezado userName={'Allen Silverio'}/> 
+
                         <div className='ContenidoDinamico'></div>
                         {children}
                         </div>

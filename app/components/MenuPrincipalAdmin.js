@@ -1,50 +1,82 @@
-import Image from "next/image"
-import {Logo} from "./Logo"
+"use client"
+import { useState } from "react";
+import Link from "next/link";
+import { AiFillHome, AiFillBook, AiFillStar, AiOutlineDown, AiOutlineUp, AiOutlineProject } from "react-icons/ai";
 
-function MenuPrincipalAdmin() {
+const Sidebar = () => {
+  const [showSubMenuAsignatura, setShowSubMenuAsignatura] = useState(false);
+  const [showSubMenuUsuario, setShowSubMenuUsuario] = useState(false);
+
+  const toggleSubMenuAsignatura = () => {
+    setShowSubMenuAsignatura(!showSubMenuAsignatura);
+  };
+
+  const toggleSubMenuUsuario = () => {
+    setShowSubMenuUsuario(!showSubMenuUsuario);
+  };
+
   return (
-    <div className="menu-principal">
-        <div className="frame">
-          <div className="menu-principal-menu">
-          
-          <img className="bar-chart" alt="Bar chart" src="/icons/bar-chart.svg"/>
-            
-            <div className="men-principal menu-item">Menú Principal</div>
-          </div>
-          <div className="asignatura-menu-item menu-item">
-
-          <img className="book" alt="Book" src="/icons/book.svg"/>
-        
-            <div className="asignaturas">Asignaturas</div>    
-            <img className="chevron-down" alt="Chevron down" src="/icons/chevron-down.svg"/>
-          </div>
-          <div className="calificaciones-menu menu-item">
-
-             <img className="icon-file-text" alt="Icon file text" src="/icons/file-text.svg"/>
-            
-            <div className="calificaciones">Secciones</div>
-          </div>
-
-          <div className="calificaciones-menu menu-item">
-
-             <img className="icon-file-text" alt="Icon file text" src="/icons/user.svg"/>
-            
-            <div className="calificaciones">Usuarios</div>
-          </div>
-
-        </div>
-        <div className="logout-menu-item">
-          <img className="log-in" alt="Log in" src="/icons/log-out.svg" />
-          <div className="cerrar-sesi-n">Cerrar sesión</div>
-        </div>
-        <Image src="/images/LogoAmarillo.svg" width={200} height={300} style={{left: "46px",
-            position: "absolute",
-            top: "65px",}}></Image>
-
-      
+    <div className=" pl-5 pt-20 text-white h-screen sidebar">
+      <div className="mb-10 pr-5">
+        <img src="/images/LogoAmarillo.svg" alt="Logo" className="w-50  mx-auto" /> {/* adjust this path to your logo */}
       </div>
-  )
-}
+      <ul className="pl-8">
+        <li className="mb-6 flex items-center gap-2 nav-link">
+          <AiOutlineProject />
+          <Link href="/Administrador">Menu Principal</Link>
+        </li>
 
-export default MenuPrincipalAdmin;
+        <li className="mb-6 nav-link">
+          <div className="flex items-center gap-2 cursor-pointer mb-3" onClick={toggleSubMenuAsignatura}>
+            <AiFillBook />
+            <p>Asignaturas</p>
+            {showSubMenuAsignatura ? <AiOutlineUp /> : <AiOutlineDown />}
+          </div>
+          {showSubMenuAsignatura && (
+            <ul className="ml-6 mb-2">
+              <li className="mb-3 nav-link">
+                <Link href="/Administrador/CrearAsignatura">Registrar Asingatura</Link>
+              </li>
+              <li className="mb-2 nav-link">
+                <Link href="/Administrador/ListadoAsignaturas">  Listado de Asignaturas</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+        <li className="mb-6 flex items-center gap-2 nav-link">
+          <AiFillStar />
+          <Link href="/Administrador/CrearSeccion">Secciones</Link>
+        </li>
+        
+        <li className="mb-6 nav-link">
+          <div className="flex items-center gap-2 cursor-pointer mb-3" onClick={toggleSubMenuUsuario}>
+            <AiFillBook />
+            <p>Usuarios</p>
+            {showSubMenuUsuario ? <AiOutlineUp /> : <AiOutlineDown />}
+          </div>
+          {showSubMenuUsuario && (
+            <ul className="ml-6 mb-2">
+              <li className="mb-3 nav-link">
+                <Link href="/Administrador/CrearUsuario">Crear Usuario</Link>
+              </li>
+              <li className="mb-2 nav-link">
+                <Link href="/Administrador/ListadoUsuarios">Listado de Usuarios</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
+        <li className="mb-6 flex items-center gap-2 nav-link">
+          <AiOutlineProject />
+          <Link href="/Administrador/CalcularIndice">Calcular Indice</Link>
+          
+        </li>
+
+
+      </ul>
+    </div>
+  );
+};
+
+export default Sidebar;
 
