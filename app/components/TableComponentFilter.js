@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import BotonGuardar from '@/app/components/BotonGuardar';
 
 
 const TableComponent = ({ headers, data }) => {
@@ -26,13 +27,13 @@ const TableComponent = ({ headers, data }) => {
 
   return (
     <div>
-      <div className="filters">
+      <div className="filters flex items-center mt-5">
         <TextField
           label="Search"
           placeholder="Search by Asignatura, Seccion, Aula"
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
-          sx={{width: '50%', borderRadius: '10%'}}
+          sx={{width: '50%', backgroundColor: '#fff',  outline:'none'}}
           className='mr-3'
         />
         <TextField
@@ -40,7 +41,7 @@ const TableComponent = ({ headers, data }) => {
           label="Tipo de Usuario"
           value={filterType}
           onChange={e => setFilterType(e.target.value)}
-          sx={{width: '20%', borderRadius: '40px'}}
+          sx={{width: '20%', borderRadius: '20px', backgroundColor: '#fff'}}
           
         >
           <MenuItem value="">Todos</MenuItem>
@@ -48,11 +49,14 @@ const TableComponent = ({ headers, data }) => {
           <MenuItem value="Administrador">Administrador</MenuItem>
           <MenuItem value="Profesor">Profesor</MenuItem>
         </TextField>
+
+      <BotonGuardar texto='Cargar Estudiante' className={'amarillo ml-10'} onClick={" "}/> 
+
       </div>
       <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '4%'}}>
         <Table sx={{ width: 700, height: 100 }} aria-label="simple table">
           <TableHead>
-            <TableRow>
+            <TableRow >
               {headers.map((header, index) => (
                 <TableCell align="center" key={index}>
                   {header}

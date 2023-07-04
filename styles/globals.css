@@ -1009,6 +1009,22 @@
 
 }
 
+.boton-amarillo {
+  align-items: center;
+  background-color: #0068ff;
+  border-radius: 25px;
+  box-shadow: 0px 4px 25px #0068ff63;
+  display: flex;
+  gap: 11px;
+  height: 44px;
+  justify-content: center;
+  padding: 15px 68px;
+  position: relative;
+  width: 141px;
+  color: black;
+
+}
+
 .boton-azul .texto-boton {
   align-items: center;
   background-color: #0068ff;
@@ -1045,7 +1061,7 @@
   background-color: white;
   border-radius: 31px;
   width: 95%;
-  height: 668px;
+  height: fit-content;
   
 }
 

@@ -36,7 +36,7 @@ const data = [
 
     <TableComponent headers={headers} data={data}/>
     <div className="mt-5">
-    <CrearUsuarioForm />   
+    <CrearUsuarioForm buttonText={'Actualizar Datos'}/>   
     </div>
     
     </>
