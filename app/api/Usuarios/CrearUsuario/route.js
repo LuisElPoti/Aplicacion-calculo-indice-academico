@@ -24,7 +24,7 @@ export async function GET(req){
 }
 
 export async function POST(req){
-    const { nombre, apellido, telefono, dirección, contraseña, tipo_documento, documento, carrera, area_academica, tipo_usuario } = req.body;
+    const { nombre, apellido, telefono, dirección, contraseña, tipo_documento, documento, carrera, area_academica, tipo_usuario } = await req.json();
 
     try {
         if (!nombre || !apellido || !telefono || !dirección || !contraseña || !tipo_documento || !documento || !tipo_usuario) {
