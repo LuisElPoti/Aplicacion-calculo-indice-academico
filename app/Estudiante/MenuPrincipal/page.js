@@ -17,21 +17,20 @@ export default function MenuPrincipalEstudiante() {
       async function fetchData() {
         const resultado = await Cookies.get('ID');
         setID(resultado);
-        console.log(resultado);
         const newData = await getSeleccion(resultado, 2023, 1);
         setData(newData);
       }
 
       fetchData();
-    }, [id_usuario, data]);
+    }, [id_usuario]);
     
     return (
        
         <div className= 'grid grid-cols-3 gap-3'>
             
             <ContenedorIndicadores id_usuario={id_usuario} />
-            <ContenedorIndiceGeneral />
-            <div className='row-span-2 ml-2'><ContenedorInformacion /></div>
+            <ContenedorIndiceGeneral  />
+            <div className='row-span-2 ml-2'><ContenedorInformacion id_usuario={id_usuario}/></div>
             <TablaBasica headers={headers} data={data}/>
             
         </div>
@@ -78,5 +77,4 @@ async function getSeleccion(id_usuario, año, trimestre){
       };
     });
     return data;
-    
   }

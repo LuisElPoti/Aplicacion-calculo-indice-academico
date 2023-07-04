@@ -12,41 +12,55 @@ export async function POST(req) {
 
   const id_usuario = await body.id_usuario;
 
-  if(!id_usuario) return NextResponse.json({message: 'ID vacío'}, {status: 500})
-  else{
-    
-    const estudiante = await prisma.estudiantes.findUnique({
-      where: {
-        matricula: id_usuario
-      }
-    });
+  const rol = await body.rol;
 
-    if(estudiante == null){
-      const profesor = await prisma.profesores.findUnique({
-        where: {
-          matricula: id_usuario
-        }
-      });
-      if(profesor == null){
-        const administrador = await prisma.administradores.findUnique({
+  if (!id_usuario || !rol) return NextResponse.json({ message: 'ID vacío' }, { status: 500 })
+  else {
+    let respuesta = {}
+    switch (rol) {
+      case 'Estudiante': {
+        respuesta = await prisma.estudiantes.findUnique({
+          where: {
+            matricula: id_usuario
+          },
+          select: {
+            matricula: true,
+            nombre: true,
+            indice_general: true,
+            indice_trimestral: true,
+            correo: true,
+            carreras: {
+              select:{
+                nombre: true,
+                descripcion: true
+              }
+            }
+          }
+        });
+        break;
+      }
+      case 'Profesor': {
+        respuesta = await prisma.profesores.findUnique({
           where: {
             matricula: id_usuario
           }
         });
-        if(administrador == null){
-          return NextResponse.json({ message: 'No se encuentra un usuario con ese ID' }, { status: 500 });
-        }
-        else{
-          return NextResponse.json({ administrador }, { status: 200 });
-        }
+        break;
       }
-      else{
-        return NextResponse.json({ profesor }, { status: 200 });
+      case 'Administrador': {
+        respuesta = await prisma.administradores.findUnique({
+          where: {
+            matricula: id_usuario
+          }
+        });
+        break;
       }
+      default: {
+        return NextResponse.json({ message: "Rol no valido" }, { status: 404 })
+      }
+
     }
-    else{
-      return NextResponse.json({ estudiante }, { status: 200 });
-    }
+    return NextResponse.json( respuesta, { status: 200 })
   }
-  
+
 }

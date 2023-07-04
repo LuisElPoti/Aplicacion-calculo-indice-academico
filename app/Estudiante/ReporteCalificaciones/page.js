@@ -11,13 +11,19 @@ function ReporteCalificaciones() {
   const [id_usuario, setID] = useState("0");
   const [año, setAño] = useState(2023);
   const [trimestre, setTrimestre] = useState(1);
+  const [nombre, setNombre] = useState("Paola");
+  const [carrera, setCarrera] = useState("Ingenieria de Software");
+  const [indice_trimestral, setIndiceTrimestral] = useState(0);
+  const [puntos_acumulados, setPuntos] = useState(0);
 
   useEffect(() => {
 
     async function fetchData() {
       const resultado = await Cookies.get('ID');
+      const newData = await getDatosSesion(resultado);
       setID(resultado);
-      console.log(resultado);
+      setNombre(newData?.nombre || "Paola");
+      setCarrera(newData?.carreras?.nombre || "Ingenieria de Software");
     }
 
     fetchData();
@@ -39,23 +45,21 @@ function ReporteCalificaciones() {
 
   const headers = ['Asignatura', 'Seccion', 'Alpha', 'Calificacion', 'Puntos', 'Créditos'];
 
-
-  const headerValuesRedCard = [
-    { headerName: 'ID', headerValue: id_usuario },
-    { headerName: 'Nombre', headerValue: 'RELLENAR BD' },
-    { headerName: 'Programa', headerValue: 'RELLENAR BD' },
-  ];
-
-  const headerValuesPurpleCard = [
-    { headerName: 'Acumulados del Trimestre' },
-    { headerName: 'Indice Trimestral', headerValue: 'RELLENAR BD' },
-    { headerName: 'Puntos Acumulados', headerValue: 'RELLENAR BD' },
-  ];
-
-
   async function handleClick() {
     const newData = await getCalificaciones(id_usuario, año, trimestre);
+    let sum_puntos = 0;
+    let sum_creditos = 0;
+    alert(JSON.stringify(newData))
+    for (let i = 0; i < newData.length; i++) {
+      const row = newData[i];
+      alert(JSON.stringify(row));
+      sum_puntos += row.secciones?.asignaturas?.puntos;
+      sum_creditos += row.secciones?.asignaturas?.creditos;
+    }
+    const indice = sum_puntos / sum_creditos;
     setData(newData);
+    setIndiceTrimestral(indice);
+    setPuntos(sum_puntos);
   }
 
   const handleOnChangeTrim = async (event) => {
@@ -67,8 +71,18 @@ function ReporteCalificaciones() {
     setAño(event.target.value)
   };
 
+  const headerValuesRedCard = [
+    { headerName: 'ID', headerValue: id_usuario },
+    { headerName: 'Nombre', headerValue: nombre },
+    { headerName: 'Programa', headerValue: carrera },
+  ];
 
-
+  const headerValuesPurpleCard = [
+    { headerName: 'Acumulados del Trimestre' },
+    { headerName: 'Indice Trimestral', headerValue: indice_trimestral },
+    { headerName: 'Puntos Acumulados', headerValue: puntos_acumulados },
+  ];
+  
   return (
     <>
 
@@ -92,6 +106,23 @@ function ReporteCalificaciones() {
   );
 }
 
+async function getDatosSesion(id_usuario) {
+  const requestData = {
+    id_usuario: id_usuario,
+    rol: "Estudiante"
+  };
+
+  const response = await fetch('http://localhost:3000/api/DatosSesion', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
+  });
+
+  const resultado = await response.json();
+  return resultado;
+}
 
 async function getCalificaciones(id_usuario, año, trimestre) {
   const requestData = {
