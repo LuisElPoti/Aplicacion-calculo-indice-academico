@@ -64,6 +64,20 @@ function Encabezado({ userName }) {
           role = 'Estudiante'
           break;
 
+
+   // Pantallas Profesor
+   case '/Profesor':
+    menuTitle = 'Root of Profesor ';
+    color = 'color-profesor'; // replace with actual color value
+    role = '  Profesor'
+    break;
+
+  case '/Profesor/ListadoEstudiantes':
+    menuTitle = 'Listado de Estudiantes';
+    color = 'color-profesor'; // replace with actual color value
+    role = 'Profesor'
+    break;
+
       
 
       // Pantallas Admin
