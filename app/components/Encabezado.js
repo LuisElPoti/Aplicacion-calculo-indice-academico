@@ -114,6 +114,8 @@ function Encabezado({ userName }) {
 
     setMenuTitle(menuTitle);
     setColor(color);
+    setRole(role);
+    
   }, [currentRoute]);
 
   const [menuTitle, setMenuTitle] = useState('');
