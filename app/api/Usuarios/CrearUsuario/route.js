@@ -12,21 +12,23 @@ export async function GET(req) {
           id: true,
           nombre: true
         }
+        
       });
-  
+      
       const areasAcademicas = await prisma.areas_academicas.findMany({
         select: {
           id: true,
           nombre: true
         }
       });
-  
+      
       return {
         body: {
           carreras,
           areasAcademicas
         }
       };
+      
     } catch (error) {
       console.error(error);
       return NextResponse.json(
@@ -34,7 +36,7 @@ export async function GET(req) {
         { status: 500 }
       );
     }
-}
+  }
   
 
 export async function POST(req){

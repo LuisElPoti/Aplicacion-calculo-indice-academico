@@ -21,29 +21,32 @@ function CrearUsuarioForm({width, height}) {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
-          method: 'GET',
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
+    const fetchData = () => {
+      fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
+        method: 'GET',
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Error en la respuesta:', response.status);
+          }
+        })
+        .then((data) => {
           console.log(data);
-          setCarreras(data.body.carreras);
-          console.log(data.body.carreras);
-          setAreasAcademicas(data.body.areasAcademicas);
-          console.log(data.body.areasAcademicas);
-        } else {
-          console.error('Error en la respuesta:', response.status);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
+          setCarreras(data.carreras);
+          console.log(data.carreras);
+          setAreasAcademicas(data.areasAcademicas);
+          console.log(data.areasAcademicas);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     };
   
-  fetchData();
+    fetchData();
   }, []);
+  
 
   const handleTipoUsuarioChange = (event) => {
     setTipoUsuario(event.target.value);
@@ -172,45 +175,47 @@ function CrearUsuarioForm({width, height}) {
               <option value="administrador">Administrador</option>
             </select>
           </div>
-          {tipoUsuario === 'estudiante' && (
+          {tipoUsuario !== '' && (
             <>
-              <div className="nombre">
-                <p className="nombre-header pt-20">Carrera</p>
-                <select
-                  className="nombre-select p-5"
-                  id="carrera"
-                  name='carrera'
-                  value={(carrera)}
-                  onChange={handleCarreraChange}
-                >
-                  <option value="">Seleccionar carrera</option>
-                  {carreras.length > 0 && carreras.map((carrera) => (
-                    <option key={carrera.id} value={parseInt(carrera.id)}>
-                      {carrera.nombre}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {tipoUsuario === 'estudiante' && (
+                <div className="nombre">
+                  <p className="nombre-header pt-20">Carrera</p>
+                  <select
+                    className="nombre-select p-5"
+                    id="carrera"
+                    name='carrera'
+                    value={(carrera)}
+                    onChange={handleCarreraChange}
+                  >
+                    <option value="">Seleccionar carrera</option>
+                    {carreras.length > 0 && carreras.map((carrera) => (
+                      <option key={carrera.id} value={carrera.id}>
+                        {carrera.nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+              {tipoUsuario === 'profesor' && (
+                <div className="nombre pl-5 l-20">
+                  <p className="nombre-header pt-20">Área Académica</p>
+                  <select
+                    className="nombre-select p-5"
+                    id="areaAcademica"
+                    name='areaAcademica'
+                    value={areaAcademica}
+                    onChange={handleAreaAcademicaChange}
+                  >
+                    <option value="">Seleccionar área académica</option>
+                    {areasAcademicas.length > 0 && areasAcademicas.map((areaAcademica) => (
+                      <option key={areaAcademica.id} value={areaAcademica.id}>
+                        {areaAcademica.nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </>
-          )}
-          {tipoUsuario === 'profesor' && (
-            <div className="nombre pl-5 l-20">
-              <p className="nombre-header pt-20">Área Académica</p>
-              <select
-                className="nombre-select p-5"
-                id="areaAcademica"
-                name='areaAcademica'
-                value={areaAcademica}
-                onChange={handleAreaAcademicaChange}
-              >
-                <option value="">Seleccionar área académica</option>
-                {areasAcademicas.length > 0 && areasAcademicas.map((area) => (
-                  <option key={area.id} value={area.id}>
-                    {area.nombre}
-                  </option>
-                ))}
-              </select>
-            </div>
           )}
         </div>
 
