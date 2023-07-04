@@ -13,8 +13,12 @@ function ReporteCalificaciones() {
   const [trimestre, setTrimestre] = useState(1);
   const [nombre, setNombre] = useState("Paola");
   const [carrera, setCarrera] = useState("Ingenieria de Software");
-  const [indice_trimestral, setIndiceTrimestral] = useState(0);
-  const [puntos_acumulados, setPuntos] = useState(0);
+  const [headerValuesPurpleCard, setHeaderValuesPurpleCard] = useState([
+    { headerName: 'Acumulados del Trimestre' },
+    { headerName: 'Indice Trimestral', headerValue: 0 },
+    { headerName: 'Puntos Acumulados', headerValue: 0 },
+  ]);
+
 
   useEffect(() => {
 
@@ -43,23 +47,36 @@ function ReporteCalificaciones() {
     { value: 4, label: "Nov-Ene" },
   ];
 
-  const headers = ['Asignatura', 'Seccion', 'Alpha', 'Calificacion', 'Puntos', 'Créditos'];
+  const headers = ['Asignatura', 'Seccion', 'Alpha', 'Calificacion', 'Puntos', 'Creditos'];
 
   async function handleClick() {
     const newData = await getCalificaciones(id_usuario, año, trimestre);
-    let sum_puntos = 0;
-    let sum_creditos = 0;
-    alert(JSON.stringify(newData))
-    for (let i = 0; i < newData.length; i++) {
-      const row = newData[i];
-      alert(JSON.stringify(row));
-      sum_puntos += row.secciones?.asignaturas?.puntos;
-      sum_creditos += row.secciones?.asignaturas?.creditos;
+    if (newData.length == 0) {
+      alert("No posee un reporte de calificaciones para el trimestre seleccionado");
+      setHeaderValuesPurpleCard([
+        { headerName: 'Acumulados del Trimestre' },
+        { headerName: 'Indice Trimestral', headerValue: 0 },
+        { headerName: 'Puntos Acumulados', headerValue: 0 },
+      ]);
     }
-    const indice = sum_puntos / sum_creditos;
-    setData(newData);
-    setIndiceTrimestral(indice);
-    setPuntos(sum_puntos);
+    else {
+      let sum_puntos = 0;
+      let sum_creditos = 0;
+      for (let i = 0; i < newData.length; i++) {
+        const row = newData[i];
+        sum_puntos += parseFloat(row.Puntos);
+        sum_creditos += parseFloat(row.Creditos);
+      }
+      if (sum_creditos == 0) sum_creditos = 1;
+      const indice = sum_puntos / sum_creditos;
+      setData(newData);
+      setHeaderValuesPurpleCard([
+        { headerName: 'Acumulados del Trimestre' },
+        { headerName: 'Indice Trimestral', headerValue: indice.toFixed(2) },
+        { headerName: 'Puntos Acumulados', headerValue: sum_puntos },
+      ]);
+    }
+
   }
 
   const handleOnChangeTrim = async (event) => {
@@ -77,12 +94,6 @@ function ReporteCalificaciones() {
     { headerName: 'Programa', headerValue: carrera },
   ];
 
-  const headerValuesPurpleCard = [
-    { headerName: 'Acumulados del Trimestre' },
-    { headerName: 'Indice Trimestral', headerValue: indice_trimestral },
-    { headerName: 'Puntos Acumulados', headerValue: puntos_acumulados },
-  ];
-  
   return (
     <>
 
@@ -140,7 +151,6 @@ async function getCalificaciones(id_usuario, año, trimestre) {
   });
 
   const historico_academico = await response.json();
-  const headers = ['Asignatura', 'Seccion', 'Alpha', 'Calificacion', 'Puntos', 'Créditos'];
 
   const data = historico_academico.map((historico) => {
     const asignatura = historico.secciones?.asignaturas?.nombre || 'Prueba';
@@ -158,7 +168,7 @@ async function getCalificaciones(id_usuario, año, trimestre) {
       Alpha: alpha,
       Calificacion: calificacion_numerica,
       Puntos: puntos,
-      Créditos: creditos,
+      Creditos: creditos,
     };
   });
   return data;
