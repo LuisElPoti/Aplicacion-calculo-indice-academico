@@ -21,31 +21,35 @@ function CrearUsuarioForm({width, height}) {
 
 
   useEffect(() => {
-    const fetchData = () => {
-      fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
-        method: 'GET',
+  const fetchData = () => {
+    fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
+      method: 'GET',
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error en la respuesta:', response.status);
+        }
       })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error('Error en la respuesta:', response.status);
-          }
-        })
-        .then((data) => {
-          console.log(data);
+      .then((data) => {
+        console.log(data);
+
+        if (data && data.carreras && data.areasAcademicas) {
           setCarreras(data.carreras);
-          console.log(data.carreras);
           setAreasAcademicas(data.areasAcademicas);
-          console.log(data.areasAcademicas);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    };
-  
-    fetchData();
-  }, []);
+        } else {
+          throw new Error('Respuesta de API inválida');
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
+  fetchData();
+}, []);
+
   
 
   const handleTipoUsuarioChange = (event) => {
