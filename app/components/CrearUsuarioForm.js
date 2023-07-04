@@ -94,8 +94,8 @@ function CrearUsuarioForm({width, height}) {
     const requestData = {
       nombre,
       apellido,
-      carrera: tipoUsuario === 'estudiante' ? carrera : null,
-      area_academica: tipoUsuario === 'profesor' ? areaAcademica : null,
+      carrera: tipoUsuario === 'estudiante' ? parseInt(carrera) : null,
+      area_academica: tipoUsuario === 'profesor' ? parseInt(areaAcademica) : null,
       telefono,
       dirección: direccion,
       contraseña: contrasena,
@@ -105,17 +105,16 @@ function CrearUsuarioForm({width, height}) {
     };
 
     try {
-      const response = await fetch(
-        'http://localhost:3000/api/Usuarios/CrearUsuario',
+      const response = await axios.post(
+        "../api/Usuarios/CrearUsuario",
+        requestData,
         {
-          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(requestData),
         }
       );
-
+    
       if (response.status === 200) {
         alert('Usuario creado con éxito');
         document.getElementById('SubmitForm').reset();
@@ -132,16 +131,11 @@ function CrearUsuarioForm({width, height}) {
         setDocumento('');
       } else {
         console.log("Problema");
-        alert(
-          'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'
-        );
+        alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
       }
     } catch (error) {
-      
       console.error('Error:', error);
-      alert(
-        'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'
-      );
+      alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
     }
     
   };
