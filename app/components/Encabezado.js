@@ -111,7 +111,11 @@ function Encabezado({ userName }) {
         role = 'Administrador'
         break;
 
-        
+        case '/Administrador/ListadoUsuarios':
+          menuTitle = 'Listado de Usuarios del Sistema';
+          color = 'color-admin'; // replace with actual color value
+          role = 'Administrador'
+          break;
 
       // add more cases as needed...
       default:
