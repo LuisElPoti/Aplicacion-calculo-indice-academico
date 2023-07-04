@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BotonGuardar from './BotonGuardar';
 
-function CrearUsuarioForm({width, height}) {
+function CrearUsuarioForm({width, height, buttonText}) {
   const [tipoUsuario, setTipoUsuario] = useState('');
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -150,7 +150,7 @@ function CrearUsuarioForm({width, height}) {
       onSubmit={handleSubmit}
     >
       <div className="flex">
-        <div className="w-1/3 px-5">
+        <div className="w-1/3 px-10">
           <div className="mb-5">
             <p className="nombre-header pt-20">Tipo de usuario</p>
             <select
@@ -298,13 +298,13 @@ function CrearUsuarioForm({width, height}) {
             </div>
           </div>
           <div className="boton pl-15  pt-20">
-            <BotonGuardar texto="Crear usuario" className="amarillo" />
+            <BotonGuardar texto={buttonText} className="amarillo" />
           </div>
 
         </div>
       </div>
 
-      <BotonGuardar />
+      
     </form>
   );
 }

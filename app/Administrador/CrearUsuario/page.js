@@ -4,7 +4,7 @@ import CrearUsuarioForm from '@/app/components/CrearUsuarioForm'
 function CrearUsuario() {
   return (
     <>
-    <CrearUsuarioForm/>
+    <CrearUsuarioForm buttonText={'Crear Usuario'}/>
     </>
   )
 }
