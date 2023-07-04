@@ -1,15 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { PrismaClient } from '@prisma/client';
+
 import BotonGuardar from './BotonGuardar';
-
-
 
 function CrearUsuarioForm() {
   const [tipoUsuario, setTipoUsuario] = useState('');
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
-  const [carrera, setCarrera] = useState([]);
+  const [carrera, setCarrera] = useState('');
   const [areaAcademica, setAreaAcademica] = useState('');
   const [telefono, setTelefono] = useState('');
   const [direccion, setDireccion] = useState('');
@@ -17,6 +15,22 @@ function CrearUsuarioForm() {
   const [tipoDocumento, setTipoDocumento] = useState('');
   const [documento, setDocumento] = useState('');
   const [activo, setActivo] = useState(false);
+  const [carreras, setCarreras] = useState([]);
+  const [areasAcademicas, setAreasAcademicas] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCarreras(data.carreras);
+        setAreasAcademicas(data.areasAcademicas);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
 
   const handleTipoUsuarioChange = (event) => {
     setTipoUsuario(event.target.value);
@@ -33,7 +47,6 @@ function CrearUsuarioForm() {
   const handleCarreraChange = (event) => {
     setCarrera(event.target.value);
   };
-
 
   const handleAreaAcademicaChange = (event) => {
     setAreaAcademica(event.target.value);
@@ -66,88 +79,63 @@ function CrearUsuarioForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-  
-    try {
-      let nuevoUsuario;
-      
-      const prisma = new PrismaClient();
+    const requestData = {
+      nombre,
+      apellido,
+      carrera: tipoUsuario === 'estudiante' ? carrera : null,
+      area_academica: tipoUsuario === 'profesor' ? areaAcademica : null,
+      telefono,
+      dirección: direccion,
+      contraseña: contrasena,
+      tipo_documento: tipoDocumento,
+      documento,
+      tipo_usuario: tipoUsuario,
+    };
 
-      if (tipoUsuario === 'estudiante') {
-        nuevoUsuario = await prisma.estudiantes.create({
-          data: {
-            nombre,
-            apellido,
-            carrera,
-            telefono,
-            direccion,
-            contraseña: contrasena,
-            tipo_documento: tipoDocumento,
-            documento,
-            activo,
+    try {
+      const response = await fetch(
+        'http://localhost:3000/api/Usuarios/CrearUsuario',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        });
-      } else if (tipoUsuario === 'profesor') {
-        nuevoUsuario = await prisma.profesores.create({
-          data: {
-            nombre,
-            apellido,
-            area_academica: areaAcademica,
-            telefono,
-            direccion,
-            contraseña: contrasena,
-            tipo_documento: tipoDocumento,
-            documento,
-            activo,
-          },
-        });
-      } else if (tipoUsuario === 'administrador') {
-        nuevoUsuario = await prisma.administradores.create({
-          data: {
-            nombre,
-            apellido,
-            telefono,
-            direccion,
-            contraseña: contrasena,
-            tipo_documento: tipoDocumento,
-            documento,
-            activo,
-          },
-        });
+          body: JSON.stringify(requestData),
+        }
+      );
+
+      if (response.status === 200) {
+        alert('Usuario creado con éxito');
+        document.getElementById('SubmitForm').reset();
+      } else {
+        alert(
+          'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'
+        );
       }
-
-      console.log('Usuario creado:', nuevoUsuario);
     } catch (error) {
-      console.error('Error al crear el usuario:', error);
+      console.error('Error:', error);
+      alert(
+        'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'
+      );
     }
   };
-
-  
- 
-  
-  const obtenerCarreras = async () => {
-    try {
-      const prisma = new PrismaClient();
-      const carrerasDB = await prisma.carreras.findMany();
-      console.log(carrerasDB);
-      setCarrera(carrerasDB || []);
-    } catch (error) {
-      console.error('Error al obtener las carreras:', error);
-    }
-  };
-  useEffect(() => {
-    obtenerCarreras();
-  }, []);
 
   return (
-    <form className="crear-usuario-form m-10" width={1300} height={500} onSubmit={handleSubmit}>
+    <form
+      className="crear-usuario-form m-10"
+      id="SubmitForm"
+      method="POST"
+      width={1300}
+      height={500}
+      onSubmit={handleSubmit}
+    >
       <div className="flex">
-
-        
         <div className="w-1/3 px-5">
           <div className="mb-5">
             <p className="nombre-header pt-20">Tipo de usuario</p>
             <select
               className="nombre-select p-5"
+              id="tipoUsuario"
               value={tipoUsuario}
               onChange={handleTipoUsuarioChange}
             >
@@ -163,13 +151,14 @@ function CrearUsuarioForm() {
                 <p className="nombre-header pt-20">Carrera</p>
                 <select
                   className="nombre-select p-5"
+                  id="carrera"
                   value={carrera}
                   onChange={handleCarreraChange}
                 >
                   <option value="">Seleccionar carrera</option>
-                  {carrera && carrera.map((carreras) => (
-                    <option key={carreras.id} value={carreras.id}>
-                    {carreras.nombre}
+                  {carreras.map((carrera) => (
+                    <option key={carrera.id} value={carrera.id}>
+                      {carrera.nombre}
                     </option>
                   ))}
                 </select>
@@ -181,11 +170,16 @@ function CrearUsuarioForm() {
               <p className="nombre-header pt-20">Área Académica</p>
               <select
                 className="nombre-select p-5"
+                id="areaAcademica"
                 value={areaAcademica}
                 onChange={handleAreaAcademicaChange}
               >
                 <option value="">Seleccionar área académica</option>
-                {/* Opciones de áreas académicas */}
+                {areasAcademicas.map((area) => (
+                  <option key={area.id} value={area.id}>
+                    {area.nombre}
+                  </option>
+                ))}
               </select>
             </div>
           )}
@@ -193,39 +187,48 @@ function CrearUsuarioForm() {
 
         <div className="w-1/3 px-5">
           <div className="mb-5">
-            <p className="nombre-header pt-20">Nombre</p>
-            <input
-              className="nombre-textbox p-5"
-              type="text"
-              value={nombre}
-              onChange={handleNombreChange}
-            />
-          <div className="nombre pl-5 l-20">
-            <p className="nombre-header pt-20">Apellido</p>
-            <input
-              className="nombre-textbox p-5"
-              type="text"
-              value={apellido}
-              onChange={handleApellidoChange}
-            />
-          </div>
-          <div className="nombre pl-5 l-20">
-            <p className="nombre-header pt-20">Teléfono</p>
-            <input
-              className="nombre-textbox p-5"
-              type="text"
-              value={telefono}
-              onChange={handleTelefonoChange}
-            />
-          </div>
-
+            <div className="nombre pl-5 l-20">
+              <p className="nombre-header pt-20">Nombre</p>
+              <input
+                className="nombre-textbox p-5"
+                required
+                type="text"
+                id="nombre"
+                value={nombre}
+                onChange={handleNombreChange}
+              />
+            </div>
+            <div className="nombre pl-5 l-20">
+              <p className="nombre-header pt-20">Apellido</p>
+              <input
+                className="nombre-textbox p-5"
+                required
+                type="text"
+                id="apellido"
+                value={apellido}
+                onChange={handleApellidoChange}
+              />
+            </div>
+            <div className="nombre pl-5 l-20">
+              <p className="nombre-header pt-20">Teléfono</p>
+              <input
+                className="nombre-textbox p-5"
+                required
+                type="text"
+                id="telefono"
+                value={telefono}
+                onChange={handleTelefonoChange}
+              />
+            </div>
           </div>
 
           <div className="nombre pl-5 l-20">
             <p className="nombre-header pt-20">Dirección</p>
             <input
               className="nombre-textbox p-5"
+              required
               type="text"
+              id="direccion"
               value={direccion}
               onChange={handleDireccionChange}
             />
@@ -234,43 +237,50 @@ function CrearUsuarioForm() {
 
         <div className="w-1/3 px-5">
           <div className="mb-5">
-          <div className="nombre pl-5 l-20">
-            <p className="nombre-header pt-20">Contraseña</p>
-            <input
-              className="nombre-textbox p-5"
-              type="password"
-              value={contrasena}
-              onChange={handleContrasenaChange}
-            />
+            <div className="nombre pl-5 l-20">
+              <p className="nombre-header pt-20">Contraseña</p>
+              <input
+                className="nombre-textbox p-5"
+                required
+                type="password"
+                id="contrasena"
+                value={contrasena}
+                onChange={handleContrasenaChange}
+              />
+            </div>
+            <div className="nombre pl-5 l-20">
+              <p className="nombre-header pt-20">Tipo de Documento</p>
+              <select
+                className="nombre-select p-5"
+                id="tipoDocumento"
+                value={tipoDocumento}
+                onChange={handleTipoDocumentoChange}
+              >
+                <option value="">Seleccionar tipo de documento</option>
+                <option value="1">Cedula</option>
+                <option value="2">Pasaporte</option>
+              </select>
+            </div>
+            <div className="nombre pl-5 l-20">
+              <p className="nombre-header pt-20">Documento</p>
+              <input
+                className="nombre-textbox p-5"
+                required
+                type="text"
+                id="documento"
+                value={documento}
+                onChange={handleDocumentoChange}
+              />
+            </div>
           </div>
-          <div className="nombre pl-5 l-20">
-            <p className="nombre-header pt-20">Tipo de documento</p>
-            <select
-              className="nombre-select p-5"
-              value={tipoDocumento}
-              onChange={handleTipoDocumentoChange}
-            >
-              <option value="">Seleccionar tipo de documento</option>
-              {/* Opciones de tipos de documento */}
-            </select>
-          </div>
-          <div className="nombre pl-5 l-20">
-            <p className="nombre-header pt-20">Documento</p>
-            <input
-              className="nombre-textbox p-5"
-              type="text"
-              value={documento}
-              onChange={handleDocumentoChange}
-            />
-          </div>
- 
           <div className="boton pl-15  pt-20">
             <BotonGuardar texto="Crear usuario" className="amarillo" />
           </div>
-          </div>
-        </div>
 
+        </div>
       </div>
+
+      <BotonGuardar />
     </form>
   );
 }
