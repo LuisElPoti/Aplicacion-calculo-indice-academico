@@ -58,6 +58,14 @@ function Encabezado({ userName }) {
         role = 'Estudiante'
         break;
 
+        case '/Estudiante/cambiarPassword':
+          menuTitle = 'Cambiar Contraseña';
+          color = 'color-estudiante'; // replace with actual color value
+          role = 'Estudiante'
+          break;
+
+      
+
       // Pantallas Admin
       case '/Administrador':
         menuTitle = 'Root of administrador';
