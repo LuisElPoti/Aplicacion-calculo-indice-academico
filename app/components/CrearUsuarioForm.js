@@ -17,19 +17,32 @@ function CrearUsuarioForm() {
   const [activo, setActivo] = useState(false);
   const [carreras, setCarreras] = useState([]);
   const [areasAcademicas, setAreasAcademicas] = useState([]);
+  const [formularioEnviado, setFormularioEnviado] = useState(false);
+
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
-      method: 'GET',
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setCarreras(data.carreras);
-        setAreasAcademicas(data.areasAcademicas);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
+          method: 'GET',
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setCarreras(data.body.carreras);
+          console.log(data.body.carreras);
+          setAreasAcademicas(data.body.areasAcademicas);
+          console.log(data.body.areasAcademicas);
+        } else {
+          console.error('Error en la respuesta:', response.status);
+        }
+      } catch (error) {
         console.error('Error:', error);
-      });
+      }
+    };
+  
+  fetchData();
   }, []);
 
   const handleTipoUsuarioChange = (event) => {
@@ -87,7 +100,7 @@ function CrearUsuarioForm() {
       telefono,
       dirección: direccion,
       contraseña: contrasena,
-      tipo_documento: tipoDocumento,
+      tipo_documento: parseInt(tipoDocumento),
       documento,
       tipo_usuario: tipoUsuario,
     };
@@ -107,6 +120,17 @@ function CrearUsuarioForm() {
       if (response.status === 200) {
         alert('Usuario creado con éxito');
         document.getElementById('SubmitForm').reset();
+        setFormularioEnviado(true);
+        setTipoUsuario('');
+        setApellido('');
+        setNombre('');
+        setCarrera('');
+        setAreaAcademica('');
+        setTelefono('');
+        setDireccion('');
+        setContrasena('');
+        setTipoDocumento('');
+        setDocumento('');
       } else {
         console.log("Problema");
         alert(
@@ -120,6 +144,7 @@ function CrearUsuarioForm() {
         'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'
       );
     }
+    
   };
 
   return (
@@ -154,12 +179,13 @@ function CrearUsuarioForm() {
                 <select
                   className="nombre-select p-5"
                   id="carrera"
-                  value={carrera}
+                  name='carrera'
+                  value={(carrera)}
                   onChange={handleCarreraChange}
                 >
                   <option value="">Seleccionar carrera</option>
-                  {carreras.map((carrera) => (
-                    <option key={carrera.id} value={carrera.id}>
+                  {carreras.length > 0 && carreras.map((carrera) => (
+                    <option key={carrera.id} value={parseInt(carrera.id)}>
                       {carrera.nombre}
                     </option>
                   ))}
@@ -173,11 +199,12 @@ function CrearUsuarioForm() {
               <select
                 className="nombre-select p-5"
                 id="areaAcademica"
+                name='areaAcademica'
                 value={areaAcademica}
                 onChange={handleAreaAcademicaChange}
               >
                 <option value="">Seleccionar área académica</option>
-                {areasAcademicas.map((area) => (
+                {areasAcademicas.length > 0 && areasAcademicas.map((area) => (
                   <option key={area.id} value={area.id}>
                     {area.nombre}
                   </option>

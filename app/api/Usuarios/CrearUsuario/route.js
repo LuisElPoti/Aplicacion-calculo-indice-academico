@@ -5,25 +5,40 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(req){
+export async function GET(req) {
     try {
-        const carreras = await prisma.carreras.findMany();
-        
-        const areasAcademicas = await prisma.areas_academicas.findMany();
-
-        return {
-          body: {
-            carreras,
-            areasAcademicas
-          }
-        };
+      const carreras = await prisma.carreras.findMany({
+        select: {
+          id: true,
+          nombre: true
+        }
+      });
+  
+      const areasAcademicas = await prisma.areas_academicas.findMany({
+        select: {
+          id: true,
+          nombre: true
+        }
+      });
+  
+      return {
+        body: {
+          carreras,
+          areasAcademicas
+        }
+      };
     } catch (error) {
-        console.error(error);
-        return NextResponse.json({ message: 'Error al obtener las carreras y áreas académicas' }, { status: 500 });
+      console.error(error);
+      return NextResponse.json(
+        { message: 'Error al obtener las carreras y áreas académicas' },
+        { status: 500 }
+      );
     }
 }
+  
 
 export async function POST(req){
+    
     const { nombre, apellido, telefono, dirección, contraseña, tipo_documento, documento, carrera, area_academica, tipo_usuario } = await req.json();
 
     try {
@@ -53,7 +68,7 @@ export async function POST(req){
                                 indice_general: indice,
                                 carrera,
                                 telefono,
-                                direccion,
+                                direccion: dirección,
                                 contrase_a: contraseña,
                                 correo: correo,
                                 id_tipo_documento: tipo_documento,
@@ -86,7 +101,7 @@ export async function POST(req){
                                 apellido,
                                 area_academica,
                                 telefono,
-                                direccion,
+                                direccion: dirección,
                                 contrase_a: contraseña,
                                 correo: correo,
                                 id_tipo_documento: tipo_documento,
@@ -114,14 +129,14 @@ export async function POST(req){
                         data: {
                             nombre,
                             apellido,
+                            direccion: dirección,
                             telefono,
-                            direccion,
-                            contrase_a: contraseña,
-                            correo: correo,
-                            id_tipo_documento: tipo_documento,
+                            correo,
                             documento,
+                            contrase_a: contraseña,
+                            activo: true,
                             matricula: nuevaMatricula,
-                            activo: true
+                            id_tipo_documento: tipo_documento
                         }
                     });
 
