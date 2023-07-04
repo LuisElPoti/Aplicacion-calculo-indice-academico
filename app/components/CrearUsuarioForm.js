@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-
+import axios from 'axios';
 import BotonGuardar from './BotonGuardar';
 
 function CrearUsuarioForm({width, height}) {
@@ -21,34 +21,26 @@ function CrearUsuarioForm({width, height}) {
 
 
   useEffect(() => {
-  const fetchData = () => {
-    fetch('http://localhost:3000/api/Usuarios/CrearUsuario', {
-      method: 'GET',
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Error en la respuesta:', response.status);
-        }
-      })
-      .then((data) => {
-        console.log(data);
-
-        if (data && data.carreras && data.areasAcademicas) {
-          setCarreras(data.carreras);
-          setAreasAcademicas(data.areasAcademicas);
-        } else {
-          throw new Error('Respuesta de API inválida');
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
-
-  fetchData();
-}, []);
+    const fetchData = () => {
+      axios.get("../api/AreasAcademicas")
+        .then(response => {
+          setAreasAcademicas(response.data);
+        })
+        .catch(error => {
+          console.error("Error al obtener las áreas académicas:", error);
+        });
+  
+      axios.get("../api/Carreras")
+        .then(response => {
+          setCarreras(response.data);
+        })
+        .catch(error => {
+          console.error("Error al obtener las carreras:", error);
+        });
+    };
+  
+    fetchData();
+  }, []);
 
   
 
@@ -102,8 +94,8 @@ function CrearUsuarioForm({width, height}) {
     const requestData = {
       nombre,
       apellido,
-      carrera: tipoUsuario === 'estudiante' ? carrera : null,
-      area_academica: tipoUsuario === 'profesor' ? areaAcademica : null,
+      carrera: tipoUsuario === 'estudiante' ? parseInt(carrera) : null,
+      area_academica: tipoUsuario === 'profesor' ? parseInt(areaAcademica) : null,
       telefono,
       dirección: direccion,
       contraseña: contrasena,
@@ -113,17 +105,16 @@ function CrearUsuarioForm({width, height}) {
     };
 
     try {
-      const response = await fetch(
-        'http://localhost:3000/api/Usuarios/CrearUsuario',
+      const response = await axios.post(
+        "../api/Usuarios/CrearUsuario",
+        requestData,
         {
-          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(requestData),
         }
       );
-
+    
       if (response.status === 200) {
         alert('Usuario creado con éxito');
         document.getElementById('SubmitForm').reset();
@@ -140,16 +131,11 @@ function CrearUsuarioForm({width, height}) {
         setDocumento('');
       } else {
         console.log("Problema");
-        alert(
-          'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'
-        );
+        alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
       }
     } catch (error) {
-      
       console.error('Error:', error);
-      alert(
-        'Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo'
-      );
+      alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
     }
     
   };

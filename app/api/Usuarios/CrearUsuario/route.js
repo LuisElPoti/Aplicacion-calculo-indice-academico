@@ -34,7 +34,7 @@ export async function POST(req){
                                 nombre,
                                 apellido,
                                 indice_general: indice,
-                                carrera,
+                                id_carrera: carrera,
                                 telefono,
                                 direccion: dirección,
                                 contrase_a: contraseña,
@@ -67,7 +67,7 @@ export async function POST(req){
                             data: {
                                 nombre,
                                 apellido,
-                                area_academica,
+                                id_area_academica: area_academica,
                                 telefono,
                                 direccion: dirección,
                                 contrase_a: contraseña,
