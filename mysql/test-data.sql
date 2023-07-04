@@ -30,7 +30,7 @@ VALUES
 INSERT INTO Periodos (id_trimestre, id_estado_periodo, año) 
 VALUES 
 (1,3,2023),
-(2,2,2023),
+(2,3,2023),
 (3,1,2023),
 (4,1,2023);
 
