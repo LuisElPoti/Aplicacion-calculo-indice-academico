@@ -1044,9 +1044,9 @@
 
   background-color: white;
   border-radius: 31px;
-  width: 909px;
+  width: 95%;
   height: 668px;
-  left: 300x;
+  
 }
 
 .crear-usuario-form .nombre-textbox {
@@ -1177,9 +1177,25 @@
   cursor: pointer;
 }
 
+.morado {
+  background-color: #D176FF;
+  box-shadow: 10px 10px 30px 0.05px #D176FF;
+  font-family: "Poppins-Medium", Helvetica;
+  width: fit-content;
+  height: fit-content;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
 .azul {
   background-color: #0068FF;
-  box-shadow: 10px 10px 30px 0.05px #0068FF;
+  box-shadow: 5px 5px 10px 0.2px #0068FF;
   font-family: "Poppins-Medium", Helvetica;
   width: fit-content;
   height: fit-content;

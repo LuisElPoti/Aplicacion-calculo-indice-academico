@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import BotonGuardar from './BotonGuardar';
 
-function CrearUsuarioForm() {
+function CrearUsuarioForm({width, height}) {
   const [tipoUsuario, setTipoUsuario] = useState('');
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -149,7 +149,7 @@ function CrearUsuarioForm() {
 
   return (
     <form
-      className="crear-usuario-form m-10"
+      className="crear-usuario-form"
       id="SubmitForm"
       method="POST"
       width={1300}
@@ -174,7 +174,7 @@ function CrearUsuarioForm() {
           </div>
           {tipoUsuario === 'estudiante' && (
             <>
-              <div className="nombre pl-5 l-20">
+              <div className="nombre">
                 <p className="nombre-header pt-20">Carrera</p>
                 <select
                   className="nombre-select p-5"
