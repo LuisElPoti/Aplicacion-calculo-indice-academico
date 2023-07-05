@@ -47,7 +47,7 @@ export async function POST(req){
                         });
 
                         console.log("Estudiante registrado con éxito");
-                        return NextResponse.json({ message: 'Estudiante registrado con éxito' }, { status: 200 });
+                        return NextResponse.json({ message: 'Estudiante registrado con éxito su matrícula y correo son: ', matricula: estudiante.matricula, correo: estudiante.correo}, { status: 200 });
                     }
 
                 case 'profesor':
@@ -80,7 +80,7 @@ export async function POST(req){
                         });
 
                         console.log("Profesor registrado con éxito");
-                        return NextResponse.json({ message: 'Profesor registrado con éxito' }, { status: 200 });
+                        return NextResponse.json({ message: 'Profesor registrado con éxito, su matrícula y correo son: ', matricula: profesor.matricula, correo: profesor.correo}, { status: 200 });
                     }
 
                 case 'administrador':
@@ -109,7 +109,7 @@ export async function POST(req){
                     });
 
                     console.log("Administrador registrado con éxito");
-                    return NextResponse.json({ message: 'Administrador registrado con éxito' }, { status: 200 });
+                    return NextResponse.json({ message: 'Administrador registrado con éxito, su matrícula y correo son: ', matricula: administrador.matricula, correo: administrador.correo}, { status: 200 });
 
                 default:
                     return NextResponse.json({ message: 'Tipo de usuario no válido' }, { status: 500 });

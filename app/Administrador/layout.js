@@ -40,8 +40,8 @@ function RootLayout({ children }) {
 
                 <div class="grid grid-cols-12">
                     {/* <!-- Sidebar --> */}
-
-                    <div class="col-span-2"><MenuPrincipalAdmin /></div>
+        
+                    <div class="col-span-2 row-span-full h-auto"><MenuPrincipalAdmin /></div>
 
                     {/* <!-- Header and container element --> */}
                     <div class="col-span-10 grid grid-rows-2 ml-12 pt-12">

@@ -104,6 +104,7 @@ function CrearUsuarioForm({width, height, buttonText}) {
       tipo_usuario: tipoUsuario,
     };
 
+    
     try {
       const response = await axios.post(
         "../api/Usuarios/CrearUsuario",
@@ -116,7 +117,8 @@ function CrearUsuarioForm({width, height, buttonText}) {
       );
     
       if (response.status === 200) {
-        alert('Usuario creado con éxito');
+        const { matricula, correo } = response.data;
+        alert(`Usuario creado con éxito, esta es su matrícula: ${matricula} y correo: ${correo}`);
         document.getElementById('SubmitForm').reset();
         setFormularioEnviado(true);
         setTipoUsuario('');

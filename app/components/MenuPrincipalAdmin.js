@@ -16,7 +16,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className=" pl-5 pt-20 text-white h-screen sidebar">
+    <div className=" pl-5 pt-20 text-white sidebar">
       <div className="mb-10 pr-5">
         <img src="/images/LogoAmarillo.svg" alt="Logo" className="w-50  mx-auto" /> {/* adjust this path to your logo */}
       </div>
