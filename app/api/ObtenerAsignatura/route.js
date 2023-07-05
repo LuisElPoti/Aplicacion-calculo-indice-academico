@@ -11,16 +11,18 @@ export async function GET(req){
         const body = await req.json();
         const profesor = body.profesor;
 
-        const asignatura = await prisma.asignaturas.findMany({
+        const asignatura = await prisma.secciones.findMany({
             select: {
-                id,
-                nombre,
+                asignaturas: {
+                    select: {
+                        id,
+                        nombre
+                    }
+                }
             },
             where: {
-                secciones: {
-                    select: {
-                        profesor: profesor
-                    }
+                profesores: {
+                    id: profesor
                 }
             }
         });
