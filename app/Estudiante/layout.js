@@ -27,7 +27,7 @@ function RootLayout({ children, title }) {
                 <div class="grid grid-cols-12 gap-0">
                     {/* <!-- Sidebar --> */}
         
-                    <div class="col-span-2"><MenuPrincipal /></div>
+                    <div class="col-span-2 h-full"><MenuPrincipal /></div>
 
                     {/* <!-- Header and container element --> */}
                     <div class="col-span-10 grid grid-rows-2 ml-12 pt-12">
