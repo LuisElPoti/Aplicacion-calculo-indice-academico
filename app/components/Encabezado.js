@@ -67,7 +67,7 @@ function Encabezado({ userName }) {
 
    // Pantallas Profesor
    case '/Profesor':
-    menuTitle = 'Root of Profesor ';
+    menuTitle = 'Menu Principal Profesor ';
     color = 'color-profesor'; // replace with actual color value
     role = '  Profesor'
     break;
@@ -77,6 +77,12 @@ function Encabezado({ userName }) {
     color = 'color-profesor'; // replace with actual color value
     role = 'Profesor'
     break;
+
+    case '/Profesor/CalificarSeccion':
+      menuTitle = 'Calificar Estudiantes';
+      color = 'color-profesor'; // replace with actual color value
+      role = 'Profesor'
+      break;
 
       
 
@@ -104,6 +110,12 @@ function Encabezado({ userName }) {
         color = 'color-admin'; // replace with actual color value
         role = 'Administrador'
         break;
+
+        case '/Administrador/ListadoUsuarios':
+          menuTitle = 'Listado de Usuarios del Sistema';
+          color = 'color-admin'; // replace with actual color value
+          role = 'Administrador'
+          break;
 
       // add more cases as needed...
       default:

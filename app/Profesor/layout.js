@@ -1,4 +1,4 @@
-import MenuPrincipal from '../components/MenuPrincipal'
+import MenuPrincipalProfesor from '../components/MenuPrincipalProfesor'
 import Encabezado from '../components/Encabezado'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
@@ -18,18 +18,18 @@ function RootLayout({ children }) {
 
             <body className={inter.className} style={{backgroundColor:"#F9EDFF"}} >
 
-            <Image src="/images/profesor-bgImage.svg" style={{position:"absolute", zIndex:"-1", bottom: "0", right:"0"}} width={400} height={400}/>
+            <Image src="/images/profesor-bgImage.svg" style={{position:"absolute", zIndex:"-1", bottom: "0", right:"0"}} width={300} height={300}/>
 
                 <div class="grid grid-cols-12">
                     {/* <!-- Sidebar --> */}
         
-                    <div class="col-span-2"><MenuPrincipal /></div>
+                    <div class="col-span-2"><MenuPrincipalProfesor /></div>
 
                     {/* <!-- Header and container element --> */}
                     <div class="col-span-10 grid grid-rows-2 ml-12 pt-12">
                         {/* <!-- Header --> */}
                         <div class="row-span-2 pl-12 pt-5"> 
-                        <Encabezado/> 
+                        <Encabezado userName={'Angel Moreno'}/> 
                         <div className='ContenidoDinamico'></div>
                         {children}
                         </div>
