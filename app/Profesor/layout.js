@@ -23,7 +23,7 @@ function RootLayout({ children }) {
                 <div class="grid grid-cols-12">
                     {/* <!-- Sidebar --> */}
         
-                    <div class="col-span-2"><MenuPrincipalProfesor /></div>
+                    <div class="col-span-2 h-full"><MenuPrincipalProfesor /></div>
 
                     {/* <!-- Header and container element --> */}
                     <div class="col-span-10 grid grid-rows-2 ml-12 pt-12">

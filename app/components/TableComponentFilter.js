@@ -68,7 +68,7 @@ const TableComponent = ({ headers, data }) => {
             {filteredData.map((row, rowIndex) => (
               <TableRow key={rowIndex} style={{display:'flex', justifyContent:'space-between'}} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 {Object.values(row).map((value, columnIndex) => (
-                  <TableCell align="center" key={columnIndex}>
+                  <TableCell align="left" key={columnIndex}>
                     {value}
                   </TableCell>
                 ))}
