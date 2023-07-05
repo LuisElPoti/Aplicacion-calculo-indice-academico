@@ -5,7 +5,7 @@ import TablaBasica from '@/app/components/TablaBasica'
 import BotonGuardar from '@/app/components/BotonGuardar'
 import Cookies from 'js-cookie';
 
-function ReporteSeleccion() {
+function ListadoEstudiante() {
   const [data, setData] = useState([]);
   const [id_usuario, setID] = useState("0");
   const [año, setAño] = useState(2023);
@@ -110,4 +110,4 @@ async function getSeleccion(id_usuario, año, trimestre) {
 
 }
 
-export default ReporteSeleccion
+export default ListadoEstudiante
