@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(req){
+export async function POST(req){
     try {
         const body = await req.json();
         const asignatura = body.asignatura;

@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(req){
+export async function POST(req){
     try {
         const body = await req.json();
         const profesor = body.profesor;
@@ -26,6 +26,7 @@ export async function GET(req){
                 }
             }
         });
+        console.log(asignatura)
         return NextResponse.json( asignatura , { status: 200 }); // 200 OK
 
     } catch (error) {

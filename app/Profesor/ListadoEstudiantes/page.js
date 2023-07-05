@@ -4,53 +4,52 @@ import FiltroReporteSeleccion from '@/app/components/FiltroReportes'
 import TablaBasica from '@/app/components/TablaBasica'
 import BotonGuardar from '@/app/components/BotonGuardar'
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 function ListadoEstudiante() {
   const [data, setData] = useState([]);
-  const [id_usuario, setID] = useState("0");
-  const [año, setAño] = useState(2023);
-  const [trimestre, setTrimestre] = useState(1);
+  const [id_usuario, setID] = useState(0);
+  const [asignatura, setAsignatura] = useState(0);
+  const [asignaturas, setAsignaturas] = useState([]);
+  const [seccion, setSeccion] = useState(0);
+  const [secciones, setSecciones] = useState([]);
+  const [nombre, setNombre] = useState("Paola");
+  const [carrera, setCarrera] = useState("Ingenieria de Software");
 
   useEffect(() => {
 
     async function fetchData() {
-      const resultado = await Cookies.get('ID');
+      const resultado =  Cookies.get('ID');
+      const newData = await getDatosSesion(resultado);
       setID(resultado);
-      console.log(resultado);
+      setNombre(newData?.nombre || "Paola");
+      setCarrera(newData?.carreras?.nombre || "Ingenieria de Software");
+      const asignaturasData = await getAsignaturas(resultado);
+      setAsignaturas(asignaturasData);
     }
 
     fetchData();
   }, [id_usuario]);
 
-  const menuItemsYear = [
-    { value: 2020, label: '2020' },
-    { value: 2021, label: '2021' },
-    { value: 2022, label: '2022' },
-    { value: 2023, label: '2023' },
-  ];
 
-  const menuItemsTrimestre = [
-    { value: 1, label: 'Feb-Abr' },
-    { value: 2, label: "May-Jul" },
-    { value: 3, label: "Ago-Oct" },
-    { value: 4, label: "Nov-Ene" },
-  ];
-
-  const headers = ['Asignatura', 'Seccion', 'Aula', 'Horario', 'Profesor'];
+  const headers = ['ID', 'Nombre', 'Carrera'];
 
 
   async function handleClick() {
-    const newData = await getSeleccion(id_usuario, año, trimestre);
+    const newData = await getEstudiantes(asignatura, seccion);
     setData(newData);
   }
 
-  const handleOnChangeTrim = async (event) => {
-    setTrimestre(event.target.value)
+  const handleOnChangeSeccion = (event) => {
+    setSeccion(event.target.value)
   };
 
 
-  const handleOnChangeAño = (event) => {
-    setAño(event.target.value)
+  const handleOnChangeAsignatura = async (event) => {
+    const selectedAsignatura = event.target.value;
+    setAsignatura(selectedAsignatura);
+    const seccionesData = await getSecciones(selectedAsignatura);
+    setSecciones(seccionesData);
   };
 
 
@@ -58,8 +57,8 @@ function ListadoEstudiante() {
 
     <>
       <div className='flex'>
-        <FiltroReporteSeleccion items={menuItemsYear} label="Año" onChange={handleOnChangeAño} selectedItem={año} />
-        <FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre" onChange={handleOnChangeTrim} selectedItem={trimestre} />
+        <FiltroReporteSeleccion items={asignaturas} label="Asignaturas" onChange={handleOnChangeAsignatura} selectedItem={asignatura} />
+        <FiltroReporteSeleccion items={secciones} label="Trimestre" onChange={handleOnChangeSeccion} selectedItem={seccion} />
         <BotonGuardar texto="Cargar listado" className="morado" onClick={handleClick} />
 
       </div>
@@ -68,46 +67,64 @@ function ListadoEstudiante() {
   )
 }
 
-async function getSeleccion(id_usuario, año, trimestre) {
+async function getDatosSesion(id_usuario) {
   const requestData = {
-    id: id_usuario,
-    a_o: año,
-    trimestre: trimestre,
+    id_usuario: id_usuario,
+    rol: "Profesor"
   };
 
-  const response = await fetch('http://localhost:3000/api/ReporteSeleccion', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestData),
+  const response = await axios.post('../api/DatosSesion', requestData);
+
+  const resultado = response.data;
+  return resultado;
+}
+
+async function getAsignaturas(id_usuario) {
+  const requestData = {
+    profesor: parseInt(id_usuario),
+  };
+
+  const response = await axios.post('../api/ObtenerAsignatura', requestData);
+
+  const asignaturas = response.data;
+  return asignaturas;
+}
+
+async function getSecciones(asignaturaId) {
+  const requestData = {
+    asignatura: parseInt(asignaturaId),
+  };
+
+  const response = await axios.post('../api/ObtenerSecciones', requestData);
+
+  const secciones = response.data;
+  return secciones;
+}
+
+async function getEstudiantes(asignatura, seccion) {
+  const requestData = {
+    asignatura: parseInt(asignatura),
+    seccion: parseInt(seccion),
+  };
+
+  const response = await axios.get('../api/ListadoEstudiantes', {
+    params: requestData,
   });
 
-  const historico_academico = await response.json();
+  const historico_academico = response.data;
 
   const data = historico_academico.map((historico) => {
-    const asignatura = historico.secciones?.asignaturas?.nombre || 'Prueba';
-    const seccion = historico.secciones?.numero || 'Prueba';
-    var aula = ''
-    var horario = '';
-
-    for (let i = 0; i < historico.secciones.horario_secciones.length; i++) {
-      aula += historico.secciones.horario_secciones[i].aula + '  ';
-      horario += historico.secciones.horario_secciones[i].hora_inicio + '/' + historico.secciones.horario_secciones[i].hora_fin + '  ';
-    }
-
-    const profesor = historico.secciones?.profesores?.nombre + " " + historico.secciones?.profesores?.apellido || 'Prueba';
+    const id = historico.estudiantes?.id || 'Prueba';
+    const estudiante = historico.estudiantes?.nombre || 'Prueba';
+    const carrera = historico.estudiantes?.carreras?.nombre || 'Prueba'
 
     return {
-      Asignatura: asignatura,
-      Seccion: seccion,
-      Aula: aula,
-      Horario: horario,
-      Profesor: profesor,
+      ID: id,
+      Nombre: estudiante,
+      Carrera: carrera,
     };
   });
   return data;
-
 }
 
 export default ListadoEstudiante
