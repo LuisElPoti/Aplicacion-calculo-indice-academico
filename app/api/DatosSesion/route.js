@@ -26,6 +26,7 @@ export async function POST(req) {
           select: {
             matricula: true,
             nombre: true,
+            apellido: true,
             indice_general: true,
             indice_trimestral: true,
             correo: true,
@@ -43,6 +44,16 @@ export async function POST(req) {
         respuesta = await prisma.profesores.findUnique({
           where: {
             matricula: id_usuario
+          },
+          select: {
+            matricula: true,
+            nombre: true,
+            apellido: true,
+            areas_academicas: {
+              select: {
+                nombre: true,
+              }
+            }
           }
         });
         break;

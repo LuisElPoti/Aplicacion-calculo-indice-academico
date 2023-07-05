@@ -1,5 +1,5 @@
 DELIMITER // 
-CREATE PROCEDURE CalcularIndiceEstudiante (IN matricula varchar(7)) BEGIN
+CREATE PROCEDURE CalcularIndiceEstudiante (IN Matricula_Estudiante varchar(7)) BEGIN
 DECLARE Puntos_Generales DECIMAL(6, 2);
 DECLARE Puntos_Trimestre DECIMAL(6, 2);
 DECLARE Creditos_Generales DECIMAL(6, 2);
@@ -7,6 +7,7 @@ DECLARE Creditos_Trimestre DECIMAL(6, 2);
 DECLARE Indice_General DECIMAL(6, 2);
 DECLARE Indice_Trimestral DECIMAL(6, 2);
 DECLARE Trimestres_Aprobados INT;
+
 SET Trimestres_Aprobados = (
         SELECT COUNT(distinct SI.id_periodo)
         FROM Historico_Academico as HI
@@ -16,7 +17,7 @@ SET Trimestres_Aprobados = (
             AND HI.id_estudiante = (
                 SELECT id
                 FROM Estudiantes
-                WHERE matricula = matricula
+                WHERE matricula = Matricula_Estudiante
             )
     );
 SET Puntos_Generales = (
@@ -25,7 +26,7 @@ SET Puntos_Generales = (
         WHERE id_estudiante = (
                 SELECT id
                 FROM Estudiantes
-                WHERE matricula = matricula
+                WHERE matricula = Matricula_Estudiante
             )
             AND id_estado_historico IN (1, 2)
     );
@@ -36,7 +37,7 @@ SET Puntos_Trimestre = (
         WHERE H.id_estudiante = (
                 SELECT id
                 FROM Estudiantes
-                WHERE matricula = matricula
+                WHERE matricula = Matricula_Estudiante
             )
             AND H.id_estado_historico IN (1, 2)
             AND S.id_periodo = (
@@ -48,7 +49,7 @@ SET Puntos_Trimestre = (
                     AND HI.id_estudiante = (
                         SELECT id
                         FROM Estudiantes
-                        WHERE matricula = matricula
+                        WHERE matricula = Matricula_Estudiante
                     )
             )
     );
@@ -60,7 +61,7 @@ SET Creditos_Generales = (
         WHERE H.id_estudiante = (
                 SELECT id
                 FROM Estudiantes
-                WHERE matricula = matricula
+                WHERE matricula = Matricula_Estudiante
             )
             AND H.id_estado_historico IN (1, 2)
     );
@@ -72,7 +73,7 @@ SET Creditos_Trimestre = (
         WHERE H.id_estudiante = (
                 SELECT id
                 FROM Estudiantes
-                WHERE matricula = matricula
+                WHERE matricula = Matricula_Estudiante
             )
             AND H.id_estado_historico IN (1, 2)
             AND S.id_periodo = (
@@ -84,7 +85,7 @@ SET Creditos_Trimestre = (
                     AND HI.id_estudiante = (
                         SELECT id
                         FROM Estudiantes
-                        WHERE matricula = matricula
+                        WHERE matricula = Matricula_Estudiante
                     )
             )
     );
@@ -105,11 +106,10 @@ SET indice_general = Indice_General,
     indice_trimestral = Indice_Trimestral,
     trimestres_aprobados = Trimestres_Aprobados,
     creditos_aprobados = Creditos_Generales
-WHERE matricula = matricula;
+WHERE matricula = Matricula_Estudiante;
 END; 
 
 //
-
 
 -- CALL CalcularIndiceEstudiante('1101001')
 -- DROP PROCEDURE CalcularIndiceEstudiante

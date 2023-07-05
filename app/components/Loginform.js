@@ -25,7 +25,11 @@ export const LoginForm = ({ style }) => {
       console.log("LogIn exitoso");
       let response_json = await response.json();
       const rol = response_json.rol;
-      router.push(`/${rol}/MenuPrincipal`);
+      let ruta = `/${rol}`;
+      if(rol=="Estudiante"){
+        ruta += "/MenuPrincipal";
+      }
+      router.push(ruta);
     }
     else {
       const json = await response.json();
