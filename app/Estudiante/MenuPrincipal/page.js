@@ -17,7 +17,7 @@ export default function MenuPrincipalEstudiante() {
       async function fetchData() {
         const resultado = await Cookies.get('ID');
         setID(resultado);
-        const newData = await getSeleccion(resultado, 2023, 1);
+        const newData = await getSeleccion(resultado, process.env.YEAR_ACTUAL, process.env.TRIMESTRE_ACTUAL);
         setData(newData);
       }
 
