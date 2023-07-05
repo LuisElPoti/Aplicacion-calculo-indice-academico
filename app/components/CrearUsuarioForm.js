@@ -298,11 +298,12 @@ function CrearUsuarioForm({width, height, buttonText}) {
                 onChange={handleDocumentoChange}
               />
             </div>
-          </div>
-          <div className="boton pl-15  pt-20">
+            <div className="boton  pl-5 l-20 mt-10">
             <BotonGuardar texto={buttonText} className="amarillo" />
           </div>
 
+          </div>
+          
         </div>
       </div>
 
