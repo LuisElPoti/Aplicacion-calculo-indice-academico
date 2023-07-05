@@ -5,10 +5,11 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function POST(req){
+export async function GET(req){
     try {
         const body = await req.json();
-        const asignatura = body.asignatura;
+        const asignatura = body.asignatura
+       // const asignatura = body.asignatura;
 
         const seccion = await prisma.secciones.findMany({
             select: {
@@ -16,7 +17,7 @@ export async function POST(req){
                 numero,
             },
             where: {
-                id_asignatura: asignatura
+                id_asignatura: parseInt(asignatura) 
             }
         });
         return NextResponse.json( seccion , { status: 200 }); // 200 OK

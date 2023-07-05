@@ -1,28 +1,34 @@
 'use server'
 
-import { asignaturas } from '@/prisma/client';
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function POST(req){
+export async function GET(req){
     try {
-        const body = await req.json();
-        const profesor = body.profesor;
+        
+        let body;
+        if (req.hasBody) {
+        body = await req.json();
+        }
 
+        const profesor = body?.profesor;
+
+        console.log(profesor)
         const asignatura = await prisma.secciones.findMany({
             select: {
                 asignaturas: {
                     select: {
-                        id,
-                        nombre
+                        id: true,
+                        nombre: true
                     }
                 }
             },
             where: {
                 profesores: {
-                    id: profesor
+                    
+                    is: { matricula: profesor }
                 }
             }
         });

@@ -8,27 +8,33 @@ import axios from 'axios';
 
 function ListadoEstudiante() {
   const [data, setData] = useState([]);
-  const [id_usuario, setID] = useState(0);
-  const [asignatura, setAsignatura] = useState(0);
+  const [id_usuario, setID] = useState('');
+  const [asignatura, setAsignatura] = useState('');
   const [asignaturas, setAsignaturas] = useState([]);
-  const [seccion, setSeccion] = useState(0);
+  const [seccion, setSeccion] = useState('');
   const [secciones, setSecciones] = useState([]);
   const [nombre, setNombre] = useState("Paola");
   const [carrera, setCarrera] = useState("Ingenieria de Software");
 
   useEffect(() => {
-
     async function fetchData() {
-      const resultado =  Cookies.get('ID');
-      const newData = await getDatosSesion(resultado);
+      const resultado = Cookies.get('ID');
       setID(resultado);
+      const newData = await getDatosSesion(resultado);
       setNombre(newData?.nombre || "Paola");
       setCarrera(newData?.carreras?.nombre || "Ingenieria de Software");
-      const asignaturasData = await getAsignaturas(resultado);
-      setAsignaturas(asignaturasData);
     }
-
+  
     fetchData();
+  
+    if (id_usuario) {
+      getAsignaturas(id_usuario)
+        .then(response => setAsignaturas(response.data))
+        .catch(error => {
+          // Manejar errores
+          console.error(error);
+        });
+    }
   }, [id_usuario]);
 
 
@@ -57,8 +63,8 @@ function ListadoEstudiante() {
 
     <>
       <div className='flex'>
-        <FiltroReporteSeleccion items={asignaturas} label="Asignaturas" onChange={handleOnChangeAsignatura} selectedItem={asignatura} />
-        <FiltroReporteSeleccion items={secciones} label="Trimestre" onChange={handleOnChangeSeccion} selectedItem={seccion} />
+        <FiltroReporteSeleccion items={asignaturas} label="asignatura"  selectedItem={asignatura.id} onChange={handleOnChangeAsignatura}  />
+        <FiltroReporteSeleccion items={secciones} label="seccion" onChange={handleOnChangeSeccion} selectedItem={seccion.id} />
         <BotonGuardar texto="Cargar listado" className="morado" onClick={handleClick} />
 
       </div>
@@ -80,14 +86,22 @@ async function getDatosSesion(id_usuario) {
 }
 
 async function getAsignaturas(id_usuario) {
-  const requestData = {
-    profesor: parseInt(id_usuario),
-  };
+  
+  try {
+    const requestData = {
+      profesor: id_usuario,
+    };
+    console.log(requestData);
+    const response = await axios.get('../api/ObtenerAsignatura', { params: requestData });
+    console.log(response.data);
 
-  const response = await axios.post('../api/ObtenerAsignatura', requestData);
+    const asignaturas = response.data;
+    return asignaturas;
+  } catch (error) {
+    console.error('Error al obtener las asignaturas:', error);
+    throw error; // Propaga el error para que se pueda capturar en el bloque catch de arriba
+  }
 
-  const asignaturas = response.data;
-  return asignaturas;
 }
 
 async function getSecciones(asignaturaId) {
@@ -95,7 +109,8 @@ async function getSecciones(asignaturaId) {
     asignatura: parseInt(asignaturaId),
   };
 
-  const response = await axios.post('../api/ObtenerSecciones', requestData);
+  const response = await axios.get('../api/ObtenerSecciones', {
+    params: requestData,});
 
   const secciones = response.data;
   return secciones;
