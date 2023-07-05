@@ -118,7 +118,7 @@ function Encabezado({ userName }) {
           break;
 
           case '/Administrador/CrearSeccion':
-          menuTitle = 'Listado de Usuarios del Sistema';
+          menuTitle = 'Crear nueva seccion';
           color = 'color-admin'; // replace with actual color value
           role = 'Administrador'
           break;
