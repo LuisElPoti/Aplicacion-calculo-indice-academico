@@ -2,7 +2,7 @@
 import { useState } from "react";
 import DynamicSelect from "./DynamicSelect"
 
-export default function CardHorario() {
+export default function CardHorario({dia}) {
 
     const [aulaSeleccionada, setAulaSeleccionada] = useState('');
     const handleAulaSelectChange = (event) => {
@@ -17,8 +17,8 @@ export default function CardHorario() {
 
     return (
 
-        <div className="card-horarios-crearSeccion">
-            <p className="mb-4"><strong>Día</strong></p>
+        <div className="card-horarios-crearSeccion mt-5">
+            <p className="mb-4"><strong>{dia}</strong></p>
 
             <div className="card-allFields-crearSeccion flex">
 
