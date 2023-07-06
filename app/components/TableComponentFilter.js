@@ -18,9 +18,9 @@ const TableComponent = ({ headers, data }) => {
 
   const filteredData = data.filter(item => {
     const searchTextMatch =
-      item.Id.toLowerCase().includes(searchText.toLowerCase()) ||
-      item.Nombre.toString().includes(searchText) ||
-      item.Documento.includes(searchText);
+      item?.Id?.toLowerCase().includes(searchText.toLowerCase()) ||
+      item?.Nombre?.toString().includes(searchText) ||
+      item?.Documento?.includes(searchText);
     const filterTypeMatch = filterType === '' || item.Tipo === filterType;
     return searchTextMatch && filterTypeMatch;
   });

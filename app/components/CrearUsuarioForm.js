@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BotonGuardar from './BotonGuardar';
 
-function CrearUsuarioForm({width, height, buttonText}) {
+function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuario = null, tipo = null }) {
   const [tipoUsuario, setTipoUsuario] = useState('');
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -14,7 +14,6 @@ function CrearUsuarioForm({width, height, buttonText}) {
   const [contrasena, setContrasena] = useState('');
   const [tipoDocumento, setTipoDocumento] = useState('');
   const [documento, setDocumento] = useState('');
-  const [activo, setActivo] = useState(false);
   const [carreras, setCarreras] = useState([]);
   const [areasAcademicas, setAreasAcademicas] = useState([]);
   const [formularioEnviado, setFormularioEnviado] = useState(false);
@@ -29,7 +28,7 @@ function CrearUsuarioForm({width, height, buttonText}) {
         .catch(error => {
           console.error("Error al obtener las áreas académicas:", error);
         });
-  
+
       axios.get("../api/Carreras")
         .then(response => {
           setCarreras(response.data);
@@ -37,12 +36,41 @@ function CrearUsuarioForm({width, height, buttonText}) {
         .catch(error => {
           console.error("Error al obtener las carreras:", error);
         });
-    };
-  
-    fetchData();
-  }, []);
+      if (modo == 'editar' && id_usuario != null && tipo != null) {
+        axios.post("../api/DatosSesion", {
+          id_usuario: id_usuario,
+          rol: tipo
+        })
+          .then(response => {
+            setTipoUsuario(tipo.toLowerCase());
+            setApellido(response.data.apellido);
+            setNombre(response.data.nombre);
+            
+            if (tipo == 'Estudiante') {
+              setCarrera(response.data.carreras.id);
+            }
+            
+            if (tipo == 'Profesor') {
+              setAreaAcademica(response.data.areas_academicas.id);
+            }
 
-  
+            setTelefono(response.data.telefono);
+            setDireccion(response.data.direccion);
+            setContrasena(response.data.contrase_a);
+            setTipoDocumento(response.data.tipo_documento.id);
+            setDocumento(response.data.documento);
+          })
+          .catch(error => {
+            console.error("Error al obtener los datos del usuario", error);
+          });
+      }
+
+    };
+
+    fetchData();
+  }, [id_usuario, tipo]);
+
+
 
   const handleTipoUsuarioChange = (event) => {
     setTipoUsuario(event.target.value);
@@ -84,62 +112,100 @@ function CrearUsuarioForm({width, height, buttonText}) {
     setDocumento(event.target.value);
   };
 
-  const handleActivoChange = (event) => {
-    setActivo(event.target.checked);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const requestData = {
-      nombre,
-      apellido,
-      carrera: tipoUsuario === 'estudiante' ? parseInt(carrera) : null,
-      area_academica: tipoUsuario === 'profesor' ? parseInt(areaAcademica) : null,
-      telefono,
-      dirección: direccion,
-      contraseña: contrasena,
-      tipo_documento: parseInt(tipoDocumento),
-      documento,
-      tipo_usuario: tipoUsuario,
-    };
-
-    
     try {
-      const response = await axios.post(
-        "../api/Usuarios/CrearUsuario",
-        requestData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      if (modo == 'crear') {
+        const requestData = {
+          nombre,
+          apellido,
+          carrera: tipoUsuario === 'estudiante' ? parseInt(carrera) : null,
+          area_academica: tipoUsuario === 'profesor' ? parseInt(areaAcademica) : null,
+          telefono,
+          dirección: direccion,
+          contraseña: contrasena,
+          tipo_documento: parseInt(tipoDocumento),
+          documento,
+          tipo_usuario: tipoUsuario,
+        };
+        const response = await axios.post(
+          "../api/Usuarios/CrearUsuario",
+          requestData,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const { matricula, correo } = response.data;
+          alert(`Usuario creado con éxito, esta es su matrícula: ${matricula} y correo: ${correo}`);
+          document.getElementById('SubmitForm').reset();
+          setFormularioEnviado(true);
+          setTipoUsuario('');
+          setApellido('');
+          setNombre('');
+          setCarrera('');
+          setAreaAcademica('');
+          setTelefono('');
+          setDireccion('');
+          setContrasena('');
+          setTipoDocumento('');
+          setDocumento('');
+        } else {
+          console.log("Problema");
+          alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
         }
-      );
-    
-      if (response.status === 200) {
-        const { matricula, correo } = response.data;
-        alert(`Usuario creado con éxito, esta es su matrícula: ${matricula} y correo: ${correo}`);
-        document.getElementById('SubmitForm').reset();
-        setFormularioEnviado(true);
-        setTipoUsuario('');
-        setApellido('');
-        setNombre('');
-        setCarrera('');
-        setAreaAcademica('');
-        setTelefono('');
-        setDireccion('');
-        setContrasena('');
-        setTipoDocumento('');
-        setDocumento('');
-      } else {
-        console.log("Problema");
-        alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
+      } else { //Flujo de edicion
+        const requestData = {
+          nombre,
+          apellido,
+          carrera: tipoUsuario === 'estudiante' ? parseInt(carrera) : null,
+          area_academica: tipoUsuario === 'profesor' ? parseInt(areaAcademica) : null,
+          telefono,
+          dirección: direccion,
+          contraseña: contrasena,
+          tipo_documento: parseInt(tipoDocumento),
+          documento,
+          tipo_usuario: tipoUsuario,
+        };
+        const response = await axios.post(
+          "../api/Usuarios/CrearUsuario",
+          requestData,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const { matricula, correo } = response.data;
+          alert(`Usuario creado con éxito, esta es su matrícula: ${matricula} y correo: ${correo}`);
+          document.getElementById('SubmitForm').reset();
+          setFormularioEnviado(true);
+          setTipoUsuario('');
+          setApellido('');
+          setNombre('');
+          setCarrera('');
+          setAreaAcademica('');
+          setTelefono('');
+          setDireccion('');
+          setContrasena('');
+          setTipoDocumento('');
+          setDocumento('');
+        } else {
+          console.log("Problema");
+          alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
+        }
       }
+
     } catch (error) {
       console.error('Error:', error);
       alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
     }
-    
+
   };
 
   return (
@@ -159,6 +225,7 @@ function CrearUsuarioForm({width, height, buttonText}) {
               className="nombre-select p-5"
               id="tipoUsuario"
               value={tipoUsuario}
+              required
               onChange={handleTipoUsuarioChange}
             >
               <option value="">Seleccionar tipo de usuario</option>
@@ -177,6 +244,7 @@ function CrearUsuarioForm({width, height, buttonText}) {
                     id="carrera"
                     name='carrera'
                     value={(carrera)}
+                    required
                     onChange={handleCarreraChange}
                   >
                     <option value="">Seleccionar carrera</option>
@@ -196,6 +264,7 @@ function CrearUsuarioForm({width, height, buttonText}) {
                     id="areaAcademica"
                     name='areaAcademica'
                     value={areaAcademica}
+                    required
                     onChange={handleAreaAcademicaChange}
                   >
                     <option value="">Seleccionar área académica</option>
@@ -306,7 +375,7 @@ function CrearUsuarioForm({width, height, buttonText}) {
         </div>
       </div>
 
-      
+
     </form>
   );
 }

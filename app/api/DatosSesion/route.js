@@ -30,8 +30,19 @@ export async function POST(req) {
             indice_general: true,
             indice_trimestral: true,
             correo: true,
+            telefono: true,
+            direccion: true,
+            contrase_a: true,
+            documento: true,
+            tipo_documento:{
+              select:{
+                id: true,
+                nombre: true
+              }
+            },
             carreras: {
               select:{
+                id: true,
                 nombre: true,
                 descripcion: true
               }
@@ -51,7 +62,19 @@ export async function POST(req) {
             apellido: true,
             areas_academicas: {
               select: {
+                id: true,
                 nombre: true,
+              }
+            },
+            correo: true,
+            telefono: true,
+            direccion: true,
+            contrase_a: true,
+            documento: true,
+            tipo_documento:{
+              select:{
+                id: true,
+                nombre: true
               }
             }
           }
@@ -62,6 +85,22 @@ export async function POST(req) {
         respuesta = await prisma.administradores.findUnique({
           where: {
             matricula: id_usuario
+          },
+          select: {
+            matricula: true,
+            nombre: true,
+            apellido: true,
+            correo: true,
+            telefono: true,
+            direccion: true,
+            contrase_a: true,
+            documento: true,
+            tipo_documento:{
+              select:{
+                id: true,
+                nombre: true
+              }
+            }
           }
         });
         break;
