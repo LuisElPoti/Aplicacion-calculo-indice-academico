@@ -181,9 +181,9 @@ function CrearUsuarioForm({width, height, buttonText}) {
                   >
                     <option value="">Seleccionar carrera</option>
                     {carreras.length > 0 && carreras.map((carrera) => (
-                      <option key={carrera.id} value={carrera.id}>
-                        {carrera.nombre}
-                      </option>
+                        <option key={carrera.id} value={carrera.id}>
+                          {carrera.nombre}
+                        </option>
                     ))}
                   </select>
                 </div>
