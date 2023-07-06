@@ -7,14 +7,13 @@ const prisma = new PrismaClient();
 
 export async function GET(req){
     try {
-        const body = await req.json();
-        const asignatura = body.asignatura
-       // const asignatura = body.asignatura;
+        const asignatura = req.nextUrl.searchParams.get("asignatura")
+        console.log(req.nextUrl.searchParams.get("asignatura"));
 
         const seccion = await prisma.secciones.findMany({
             select: {
-                id,
-                numero,
+                id: true,
+                numero: true,
             },
             where: {
                 id_asignatura: parseInt(asignatura) 
