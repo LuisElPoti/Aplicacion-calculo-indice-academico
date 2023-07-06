@@ -7,19 +7,19 @@ const prisma = new PrismaClient();
 
 export async function GET(req){
     try {
-        const body = await req.json();
-        const asignatura = body.asignatura;
-        const seccion = body.seccion;
+        const asignatura = req.nextUrl.searchParams.get("asignatura")
+        const seccion = req.nextUrl.searchParams.get("seccion")
+
 
         const estudiante = await prisma.historico_academico.findMany({
             select: {
                 estudiantes: {
                     select: {
-                        id,
-                        nombre,
+                        matricula: true,
+                        nombre: true,
                         carreras:{
                             select: {
-                                nombre
+                                nombre: true
                             }
                         }
                     }
@@ -27,9 +27,9 @@ export async function GET(req){
             },
             where: {
                 secciones: {
-                    id: seccion,
+                    id: parseInt(seccion),
                     asignaturas: {
-                        id: asignatura
+                        id: parseInt(asignatura)
                     }
                 }
             }

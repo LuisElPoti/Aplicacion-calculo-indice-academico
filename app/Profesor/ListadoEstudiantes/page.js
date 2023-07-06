@@ -29,9 +29,12 @@ function ListadoEstudiante() {
   
     if (id_usuario) {
       getAsignaturas(id_usuario)
-        .then(response => setAsignaturas(response.data))
-        .catch(error => {
+        .then((asignaturasData) => {
+          setAsignaturas(asignaturasData);
+        })
+        .catch((error) => {
           // Manejar errores
+          console.error("Error al obtener las áreas asignaturas:", error);
           console.error(error);
         });
     }
@@ -55,16 +58,20 @@ function ListadoEstudiante() {
     const selectedAsignatura = event.target.value;
     setAsignatura(selectedAsignatura);
     const seccionesData = await getSecciones(selectedAsignatura);
-    setSecciones(seccionesData);
+    const seccionesFormatted = seccionesData.map((seccion) => ({
+      value: seccion.id,
+      label: seccion.numero,
+    }));
+    setSecciones(seccionesFormatted);
   };
-
+ 
 
   return (
 
     <>
       <div className='flex'>
-        <FiltroReporteSeleccion items={asignaturas} label="asignatura"  selectedItem={asignatura.id} onChange={handleOnChangeAsignatura}  />
-        <FiltroReporteSeleccion items={secciones} label="seccion" onChange={handleOnChangeSeccion} selectedItem={seccion.id} />
+        <FiltroReporteSeleccion items={asignaturas} label="Asignatura" onChange={handleOnChangeAsignatura} selectedItem={asignatura} />
+        <FiltroReporteSeleccion items={secciones} label="Seccion" onChange={handleOnChangeSeccion} selectedItem={seccion} />
         <BotonGuardar texto="Cargar listado" className="morado" onClick={handleClick} />
 
       </div>
@@ -86,23 +93,29 @@ async function getDatosSesion(id_usuario) {
 }
 
 async function getAsignaturas(id_usuario) {
-  
   try {
     const requestData = {
       profesor: id_usuario,
     };
-    
-    const response = await axios.get('../api/ObtenerAsignatura', { params: requestData });
-    console.log(response.data);
 
-    const asignaturas = response.data;
-    return asignaturas;
+    const response = await axios.get('../api/ObtenerAsignatura', { params: requestData });
+
+    if (Array.isArray(response.data)) {
+      const asignaturas = response.data.map((asignatura) => ({
+        value: asignatura.id,
+        label: asignatura.nombre,
+      }));
+      return asignaturas;
+    } else {
+      console.error('La respuesta no es un array:', response.data);
+      return [];
+    }
   } catch (error) {
     console.error('Error al obtener las asignaturas:', error);
-    throw error; // Propaga el error para que se pueda capturar en el bloque catch de arriba
+    throw error;
   }
-
 }
+
 
 async function getSecciones(asignaturaId) {
   const requestData = {
@@ -129,16 +142,17 @@ async function getEstudiantes(asignatura, seccion) {
   const historico_academico = response.data;
 
   const data = historico_academico.map((historico) => {
-    const id = historico.estudiantes?.id || 'Prueba';
+    const matricula = historico.estudiantes?.matricula || 'Prueba';
     const estudiante = historico.estudiantes?.nombre || 'Prueba';
     const carrera = historico.estudiantes?.carreras?.nombre || 'Prueba'
 
     return {
-      ID: id,
+      ID: matricula,
       Nombre: estudiante,
       Carrera: carrera,
     };
   });
+  console.log(data)
   return data;
 }
 
