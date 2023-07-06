@@ -91,7 +91,7 @@ async function getAsignaturas(id_usuario) {
     const requestData = {
       profesor: id_usuario,
     };
-    console.log(requestData);
+    
     const response = await axios.get('../api/ObtenerAsignatura', { params: requestData });
     console.log(response.data);
 

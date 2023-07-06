@@ -3,32 +3,28 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from "next/server";
 
+
 const prisma = new PrismaClient();
 
 export async function GET(req){
     try {
-        
-        let body;
-        if (req.hasBody) {
-        body = await req.json();
-        }
+        const profesor = req.nextUrl.searchParams.get("profesor")
+        console.log(req.nextUrl.searchParams.get("profesor"));
 
-        const profesor = body?.profesor;
-
-        console.log(profesor)
-        const asignatura = await prisma.secciones.findMany({
+        const asignatura = await prisma.asignaturas.findMany({
             select: {
-                asignaturas: {
-                    select: {
-                        id: true,
-                        nombre: true
-                    }
-                }
+                id: true,
+                nombre: true
             },
             where: {
-                profesores: {
-                    
-                    is: { matricula: profesor }
+                secciones: {
+                  some: {
+                    profesores: {
+                      is: {
+                        matricula: profesor
+                      }
+                    }
+                  }
                 }
             }
         });
