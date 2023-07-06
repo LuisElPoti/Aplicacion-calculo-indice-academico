@@ -1346,3 +1346,12 @@
   width: 85%;
   display: flex;
 }
+
+.textboxCalificacion-calificarEstudiantes {
+  background-color: #F9EDFF;
+  width: 70px;
+  height: 30px;
+  border-radius: 12px;
+  padding: 5px;
+  text-align: center;
+}

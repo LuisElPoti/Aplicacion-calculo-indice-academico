@@ -18,9 +18,9 @@ const rows = [
 ];
 */
 
-const TablaBasica = ({ headers, data }) => {
+const TablaBasica = ({ headers, data}) => {
   return (
-    <TableContainer component={Paper} sx={{ width: 730, fontFamily: 'Poppins', height: 400 }}>
+    <TableContainer component={Paper} sx={{ width: 730, fontFamily: 'Poppins', height: 400}}>
       <Table sx={{ width: 700, height: 100 }} aria-label="simple table">
         <TableHead>
           <TableRow>

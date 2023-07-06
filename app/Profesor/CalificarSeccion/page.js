@@ -3,18 +3,48 @@ import TablaBasica from "@/app/components/TablaBasica";
 import DynamicSelect from "@/app/components/DynamicSelect";
 import BotonGuardar from "@/app/components/BotonGuardar";
 import { useState } from "react";
+import { alpha } from "@mui/material";
 
 
 
 function CalificarSeccion() {
 
+  //ASIGNAR LETRA A LA CALIFICACION
+  function calcularLetra(calificacion) {
+    if (calificacion >= 90) {
+      return 'A';
+    } else if (calificacion >= 85) {
+      return 'B+';
+    } else if (calificacion >= 80) {
+      return 'B';
+    } else if (calificacion >= 75) {
+      return 'C+';
+    } else if (calificacion >= 70) {
+      return 'C-';
+    } else if (calificacion >= 65) {
+      return 'D+';
+    } else if (calificacion >= 60) {
+      return 'D-';
+    } 
+    else {
+      return 'F';
+    }
+  }
+
+  const [calificacionEstudiante, setCalificacionEstudiante] = useState('');
+  const handleCalificacionChange = (event) => {
+    setCalificacionEstudiante(event.target.value);
+
+  }
+
   // TABLE DATA
-  const headers = ['Nombre', 'Id', 'Calificacion'];
+  const headers = ['Nombre', 'Id', 'Calificacion', 'Alpha'];
   const data = [
     {
       Nombre: 'Allen Silverio',
       Id: '1104220',
-      Calificacion: '98'
+      Calificacion: <input type='number' onChange={handleCalificacionChange} required className="textboxCalificacion-calificarEstudiantes"/>,
+      Alpha: calcularLetra(calificacionEstudiante),
     }
 
   ]
@@ -52,26 +82,31 @@ function CalificarSeccion() {
   return (
     <>
 
-      <div className="filterBar-calificarEstudiantes">
+      <div className="filterBar-calificarEstudiantes mb-8 mt-12">
 
-        <DynamicSelect
-          options={menuItemsCodigosAsignatura}
-          value={asignaturaSeleccionada}
-          onChange={handleAsignaturaSelectChange}
-          selectClassName={'select-asignatura-calificarEstudiantes'}
-          placeholder={'Asignatura'}
-        />
+        <div className="selectFilters-calificarEstudiantes flex mr-auto">
 
-        <DynamicSelect
-          options={menuItemsSeccionAsignatura}
-          value={SeccionAsignaturaSeleccionada}
-          onChange={handleSeccionAsignaturaSelectChange}
-          selectClassName={'select-seccion-calificarEstudiantes'}
-          placeholder={'Sección'}
-        />
+          <DynamicSelect
+            options={menuItemsCodigosAsignatura}
+            value={asignaturaSeleccionada}
+            onChange={handleAsignaturaSelectChange}
+            selectClassName={'select-asignatura-calificarEstudiantes mr-4'}
+            placeholder={'Asignatura'}
+          />
+
+          <DynamicSelect
+            options={menuItemsSeccionAsignatura}
+            value={SeccionAsignaturaSeleccionada}
+            onChange={handleSeccionAsignaturaSelectChange}
+            selectClassName={'select-seccion-calificarEstudiantes'}
+            placeholder={'Sección'}
+          />
+
+        </div>
+
 
         <BotonGuardar texto={'Cargar Listado'} className={"botonCargarListado-calificarEstudiantes"} onClick={""} />
-        <BotonGuardar texto={'Confirmar Calificaciones'} className={"botonConfirmarCalificaciones-calificarEstudiantes"} onClick={""} />
+        <BotonGuardar texto={'Confirmar Calificaciones'} className={"botonConfirmarCalificaciones-calificarEstudiantes ml-5"} onClick={""} />
       </div>
 
       <TablaBasica headers={headers} data={data} />
