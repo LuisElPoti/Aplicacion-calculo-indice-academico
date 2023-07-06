@@ -10,8 +10,6 @@ export async function GET(req){
         const asignatura = req.nextUrl.searchParams.get("asignatura")
         const seccion = req.nextUrl.searchParams.get("seccion")
 
-        console.log(req.nextUrl.searchParams.get("asignatura"));
-        console.log(req.nextUrl.searchParams.get("seccion"));
 
         const estudiante = await prisma.historico_academico.findMany({
             select: {

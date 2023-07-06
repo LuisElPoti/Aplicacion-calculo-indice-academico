@@ -30,7 +30,6 @@ function ListadoEstudiante() {
     if (id_usuario) {
       getAsignaturas(id_usuario)
         .then((asignaturasData) => {
-          console.log('Asignaturas:', asignaturasData);
           setAsignaturas(asignaturasData);
         })
         .catch((error) => {
@@ -57,14 +56,12 @@ function ListadoEstudiante() {
 
   const handleOnChangeAsignatura = async (event) => {
     const selectedAsignatura = event.target.value;
-    console.log('Asignatura seleccionada:', selectedAsignatura); // Agregar console.log
     setAsignatura(selectedAsignatura);
     const seccionesData = await getSecciones(selectedAsignatura);
     const seccionesFormatted = seccionesData.map((seccion) => ({
       value: seccion.id,
       label: seccion.numero,
     }));
-    console.log('Secciones:', seccionesFormatted);
     setSecciones(seccionesFormatted);
   };
  
@@ -102,14 +99,12 @@ async function getAsignaturas(id_usuario) {
     };
 
     const response = await axios.get('../api/ObtenerAsignatura', { params: requestData });
-    console.log(response.data);
 
     if (Array.isArray(response.data)) {
       const asignaturas = response.data.map((asignatura) => ({
         value: asignatura.id,
         label: asignatura.nombre,
       }));
-      console.log("Asignaturas: ", asignaturas);
       return asignaturas;
     } else {
       console.error('La respuesta no es un array:', response.data);

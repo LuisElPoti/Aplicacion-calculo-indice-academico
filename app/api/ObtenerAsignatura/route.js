@@ -9,7 +9,6 @@ const prisma = new PrismaClient();
 export async function GET(req){
     try {
         const profesor = req.nextUrl.searchParams.get("profesor")
-        console.log(req.nextUrl.searchParams.get("profesor"));
 
         const asignatura = await prisma.asignaturas.findMany({
             select: {
