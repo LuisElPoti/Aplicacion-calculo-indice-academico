@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-const DynamicSelect = ({ options, label, value, onChange, selectClassName }) => {
+const DynamicSelect = ({ options, label, value, onChange, selectClassName, placeholder }) => {
   return (
     <div className='flex flex-col'>
       <label>{label}</label>
-      <select value={value} onChange={onChange} className={selectClassName}>
+      <select placeholder={placeholder} value={value} onChange={onChange} className={selectClassName}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

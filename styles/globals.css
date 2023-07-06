@@ -1305,3 +1305,44 @@
   border-radius: 24px;
 
 }
+
+/* Calificar Seccion Estudiantes */
+
+.select-asignatura-calificarEstudiantes {
+  width: 125px;
+  padding: 15px;
+  border-radius: 25px;
+}
+
+.select-seccion-calificarEstudiantes {
+  width: 100px;
+  padding: 15px;
+  border-radius: 25px;
+
+}
+
+.botonCargarListado-calificarEstudiantes{
+  width: 200px;
+  background-color: #D176FF;
+  color: white;
+  border-radius: 25px;
+  height: 45px;
+  font-weight: 500;
+  font-size: 0.98rem;
+}
+
+.botonConfirmarCalificaciones-calificarEstudiantes {
+  width: 210px;
+  background-color: #ED6F71;
+  color: white;
+  border-radius: 25px;
+  height: 45px;
+  font-weight: 500;
+  font-size: 0.98rem;
+  
+}
+
+.filterBar-calificarEstudiantes {
+  width: 85%;
+  display: flex;
+}

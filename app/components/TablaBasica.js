@@ -35,7 +35,7 @@ const TablaBasica = ({ headers, data }) => {
           {data.map((row, rowIndex) => (
             <TableRow key={rowIndex} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               {Object.values(row).map((value, columnIndex) => (
-                <TableCell align="right" key={columnIndex}>
+                <TableCell align="center" key={columnIndex}>
                   {value}
                 </TableCell>
               ))}
