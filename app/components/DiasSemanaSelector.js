@@ -1,20 +1,6 @@
 import { useState } from 'react';
 
-const DiasSemanaSelector = () => {
-  const [diasSeleccionados, setDiasSeleccionados] = useState([]);
-
-  const handleDiaSeleccionado = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      // Agregar el día seleccionado a la lista de días seleccionados
-      setDiasSeleccionados([...diasSeleccionados, value]);
-    } else {
-      // Remover el día deseleccionado de la lista de días seleccionados
-      setDiasSeleccionados(diasSeleccionados.filter((dia) => dia !== value));
-    }
-  };
-
-  //NOTA: "diasSeleccionados" es el array que contiene los días selecionados de
+const DiasSemanaSelector = ({onChange}) => {
 
   return (
     <div>
@@ -35,7 +21,7 @@ const DiasSemanaSelector = () => {
             type="checkbox"
             name="Lunes"
             value="Lunes"
-            onChange={handleDiaSeleccionado}
+            onChange={onChange}
           />
 
 
@@ -43,7 +29,7 @@ const DiasSemanaSelector = () => {
             type="checkbox"
             name="Martes"
             value="Martes"
-            onChange={handleDiaSeleccionado}
+            onChange={onChange}
           />
 
 
@@ -51,7 +37,7 @@ const DiasSemanaSelector = () => {
             type="checkbox"
             name="Miercoles"
             value="Miercoles"
-            onChange={handleDiaSeleccionado}
+            onChange={onChange}
           />
 
 
@@ -59,7 +45,7 @@ const DiasSemanaSelector = () => {
             type="checkbox"
             name="Jueves"
             value="Jueves"
-            onChange={handleDiaSeleccionado}
+            onChange={onChange}
           />
 
 
@@ -67,7 +53,7 @@ const DiasSemanaSelector = () => {
             type="checkbox"
             name="Viernes"
             value="Viernes"
-            onChange={handleDiaSeleccionado}
+            onChange={onChange}
           />
 
 
@@ -75,7 +61,7 @@ const DiasSemanaSelector = () => {
             type="checkbox"
             name="Sabado"
             value="Sabado"
-            onChange={handleDiaSeleccionado}
+            onChange={onChange}
           />
         </div>
 
