@@ -118,8 +118,8 @@ export default function SeleccionAsignatura() {
         { parentIndex: 1, values: [<input type='radio' name="radio-group-1" value={'IDS342 - 01'} onChange={handleSeccionSeleccionadaChange} />, 'Aseguramiento de Calidad', 'IDS342', '40', '01', 'MA-JU 14/16', 'GC202', 'Paola Saldaña'] },
         { parentIndex: 1, values: [<input type='radio' name="radio-group-1" value={'IDS342 - 02'} onChange={handleSeccionSeleccionadaChange} />, 'Aseguramiento de Calidad', 'IDS342', '40', '02', 'MA-JU 16/18', 'GC202', 'Paola Saldaña'] },
         
-        { parentIndex: 2, values: [<input type='radio' name="radio-group-2" value={'IDS355 - 01'} onChange={handleSeccionSeleccionadaChange} />, 'Team Buildin', 'IDS355', '40', '01', 'MA-JU 14/16', 'GC202', 'Luis Adames'] },
-        { parentIndex: 2, values: [<input type='radio' name="radio-group-2" value={'IDS355 - 02'} onChange={handleSeccionSeleccionadaChange} />, 'Team Buildin', 'IDS355', '40', '02', 'LU-MI 14/16', 'GC401', 'Luis Adames'] },
+        { parentIndex: 2, values: [<input type='radio' name="radio-group-2" value={'IDS355 - 01'} onChange={handleSeccionSeleccionadaChange} />, 'Team Building', 'IDS355', '40', '01', 'MA-JU 14/16', 'GC202', 'Luis Adames'] },
+        { parentIndex: 2, values: [<input type='radio' name="radio-group-2" value={'IDS355 - 02'} onChange={handleSeccionSeleccionadaChange} />, 'Team Building', 'IDS355', '40', '02', 'LU-MI 14/16', 'GC401', 'Luis Adames'] },
       
         // Add more sub-data items as needed
       ];
