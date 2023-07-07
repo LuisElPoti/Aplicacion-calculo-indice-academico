@@ -95,7 +95,7 @@ function CalcularIndiceForm() {
 
                 <div className='w-1/2 flex items-center'>
 
-                    <ProgressChart value={indice} size={300} fontSize={70} color="primary" />
+                    <ProgressChart value={indice}/>
 
                 </div>
 

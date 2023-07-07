@@ -79,22 +79,22 @@ VALUES
 ;
 
 INSERT INTO Administradores(nombre, apellido, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
-VALUES ('Gustavo', 'Mejia', '0000000000', 'Calle Gustavo Mejia Ricart', 'Pepito1234', 'Gustavo.Mejia@institucion.edu.do', 1, '123456789', '3000001',  true);
+VALUES ('Gustavo', 'Mejia', '0000000000', 'Calle Gustavo Mejia Ricart', 'Pepito1234', 'Gustavo.Mejia@gradehub.edu.do', 1, '123456789', '3000001',  true);
 
 INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo, indice_trimestral, asignaturas_aprobadas, creditos_aprobados, trimestres_aprobados)
 VALUES 
-    ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@institucion.edu.do', 2, '40112345672', '1101001', true, 0, 0, 0, 0);
-    ('Paula', 'Mateo', 0.0, 1, '8099975490', 'Calle Segunda 456', 'secret123', '1101111@institucion.edu.do', 2, '40102645071', '1101111', true, 0, 0, 0, 0);
-    ('William', 'Lee', 0.0, 1, '8097889090', 'Calle Primada II', 'heyhey456', '1100000@institucion.edu.do', 2, '40102456070', '1100000', true, 0, 0, 0, 0);
+    ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@gradehub.edu.do', 2, '40112345672', '1101001', true, 0, 0, 0, 0),
+    ('Paula', 'Mateo', 0.0, 1, '8099975490', 'Calle Segunda 456', 'secret123', '1101111@gradehub.edu.do', 2, '40102645071', '1101111', true, 0, 0, 0, 0),
+    ('William', 'Lee', 0.0, 1, '8097889090', 'Calle Primada II', 'heyhey456', '1100000@gradehub.edu.do', 2, '40102456070', '1100000', true, 0, 0, 0, 0);
 
 
 INSERT INTO Profesores (nombre, apellido, id_area_academica, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
 VALUES
-    ('Jose', 'Adames', 1, '8494567890', 'Calle Principal 123', 'secreta123', 'josefa.adames@institucion.edu.do', 2, '40312345678', '2021001', true),
-    ('Huan', 'Perez', 2, '8496543210', 'Avenida Central 456', 'password456', 'cristina.bautista@institucion.edu.do', 1, '40198765432', '2021002', true),
-    ('Angel', 'Marte', 3, '8095483245', 'Calle Secundaria 789', 'pass789', 'nehomar.silverio@institucion.edu.do', 2, '40356543215', '2021003', true),
-    ('Jose', 'Maldonado', 4, '8299085748', 'Avenida Principal 987', 'pass987', 'jose.maldonado@institucion.edu.do', 1, '40387654321', '2021004', true);
-    ('Pamela', 'Orach', 5, '8090085788', 'Calle Curazao 987', 'hola123', 'Pamela.orach@institucion.edu.do', 1, '40107698321', '2000004', true);
+    ('Jose', 'Adames', 1, '8494567890', 'Calle Principal 123', 'secreta123', 'jose.adames@gradehub.edu.do', 2, '40312345678', '2021001', true),
+    ('Huan', 'Perez', 2, '8496543210', 'Avenida Central 456', 'password456', 'Huan.Perez@gradehub.edu.do', 1, '40198765432', '2021002', true),
+    ('Angel', 'Marte', 3, '8095483245', 'Calle Secundaria 789', 'pass789', 'Angel.Marte@gradehub.edu.do', 2, '40356543215', '2021003', true),
+    ('Jose', 'Maldonado', 4, '8299085748', 'Avenida Principal 987', 'pass987', 'jose.maldonado@gradehub.edu.do', 1, '40387654321', '2021004', true),
+    ('Pamela', 'Orach', 5, '8090085788', 'Calle Curazao 987', 'hola123', 'Pamela.orach@gradehub.edu.do', 1, '40107698321', '2000004', true);
 
 
 INSERT INTO `Secciones` (`numero`, `capacidad`, `id_asignatura`, `id_profesor`, `cupo`, `id_periodo`)
