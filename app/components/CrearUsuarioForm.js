@@ -17,6 +17,7 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
   const [carreras, setCarreras] = useState([]);
   const [areasAcademicas, setAreasAcademicas] = useState([]);
   const [formularioEnviado, setFormularioEnviado] = useState(false);
+  const [isReadOnly, setIsReadOnly] = useState(false);
 
 
   useEffect(() => {
@@ -43,6 +44,7 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
         })
           .then(response => {
             setTipoUsuario(tipo.toLowerCase());
+            setIsReadOnly(true);
             setApellido(response.data.apellido);
             setNombre(response.data.nombre);
             
@@ -63,6 +65,9 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
           .catch(error => {
             console.error("Error al obtener los datos del usuario", error);
           });
+      }
+      else{
+        setIsReadOnly(false);
       }
 
     };
@@ -169,9 +174,10 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
           tipo_documento: parseInt(tipoDocumento),
           documento,
           tipo_usuario: tipoUsuario,
+          id_usuario: id_usuario
         };
         const response = await axios.post(
-          "../api/Usuarios/CrearUsuario",
+          "../api/Usuarios/ModificarUsuario",
           requestData,
           {
             headers: {
@@ -181,8 +187,7 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
         );
 
         if (response.status === 200) {
-          const { matricula, correo } = response.data;
-          alert(`Usuario creado con éxito, esta es su matrícula: ${matricula} y correo: ${correo}`);
+          alert(response.data.message);
           document.getElementById('SubmitForm').reset();
           setFormularioEnviado(true);
           setTipoUsuario('');
@@ -197,13 +202,13 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
           setDocumento('');
         } else {
           console.log("Problema");
-          alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
+          alert(response.data.message);
         }
       }
 
     } catch (error) {
       console.error('Error:', error);
-      alert('Hubo problemas al registrar el nuevo usuario, inténtelo de nuevo');
+      alert('Hubo problemas, inténtelo de nuevo');
     }
 
   };
@@ -227,6 +232,7 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
               value={tipoUsuario}
               required
               onChange={handleTipoUsuarioChange}
+              disabled={isReadOnly}
             >
               <option value="">Seleccionar tipo de usuario</option>
               <option value="estudiante">Estudiante</option>
