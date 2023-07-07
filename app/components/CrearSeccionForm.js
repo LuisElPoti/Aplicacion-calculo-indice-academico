@@ -1,38 +1,65 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FiltroReportes from "./FiltroReportes"
 import DiasSemanaSelector from "./DiasSemanaSelector";
 import DynamicSelect from "./DynamicSelect";
 import CardHorario from "./CardHorario";
 import BotonGuardar from "./BotonGuardar";
+import axios from 'axios';
 
 function CrearSeccionForm() {
+    const [capacidad, setCapacidad] = useState('');
+    const [asignatura, setAsignatura] = useState('');
+    const [asignaturas, setAsignaturas] = useState([]);
+    const [profesor, setProfesor] = useState('');
+    const [profesores, setProfesores] = useState([]);
+    const [cupo, setCupo] = useState('');
+    const [diasSeleccionados, setDiasSeleccionados] = useState([]);
+    const [horaInicio, setHoraInicio] = useState('');
+    const [horaFin, setHoraFin] = useState('');
+    const [aulaSeleccionada, setAulaSeleccionada] = useState('');
 
-    const [asignaturaSeleccionada, setAsignaturaSeleccionada] = useState('');
-    const handleAsignaturaSelectChange = (event) => {
-        setAsignaturaSeleccionada(event.target.value);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseAsignatura = await axios.get("../api/Asignatura");
+                const asignaturasData = responseAsignatura.data;
+                const asignaturasOptions = asignaturasData.map(asignatura => ({
+                  value: asignatura.id,
+                  label: asignatura.nombre,
+                }));
+                setAsignaturas(asignaturasOptions);
+              } catch (error) {
+                console.error("Error al obtener las asignaturas:", error);
+              }
+        };
+      
+        fetchData();
+    }, []);
+
+    const handleAsignaturaChange = async (event) => {
+
+        const selectedAsignatura = event.target.value;
+        setAsignatura(selectedAsignatura);
+        const profesoresData = await getProfesores(selectedAsignatura);
+        const ProfesoresFormatted = profesoresData.map((profesor) => ({
+            value: profesor.id,
+            label: profesor.nombre,
+        }));
+        setProfesores(ProfesoresFormatted);
+    };
+      
+    const handleProfesorChange = (event) => {
+        setProfesor(event.target.value);
+    };
+    
+    const handleAulaSelectChange = (event) => {
+        setAulaSeleccionada(event.target.value);
     };
 
-    const [profesorSeleccionado, setProfesorSeleccionadp] = useState('');
-    const handleProfesorSelectChange = (event) => {
-        setProfesorSeleccionado(event.target.value);
+    const handleCupoChange = (event) => {
+        setCupo(event.target.value);
     };
-
-    //Valores del Select
-
-    const menuItemsAsignatura = [
-        { value: 'CBM207', label: 'Matematica Discreta' },
-        { value: 'CBM301', label: 'Física II' },
-        { value: 'IDS402', label: 'Aseguramiento de Calidad' },
-    ];
-
-    const menuItemsProfesor = [
-        { value: '1104225', label: 'Luis Adames' },
-        { value: '1104220', label: 'Allen Silverio' },
-    ];
-
-    //onChange del DiaSemanaSelector crear un array con los días seleccionados
-    const [diasSeleccionados, setDiasSeleccionados] = useState([]); // Este es al array que contiene los días selecionados
 
     const handleDiaSeleccionado = (event) => {
         const { value, checked } = event.target;
@@ -45,8 +72,54 @@ function CrearSeccionForm() {
         }
     };
 
+    const handleHoraInicioChange = (event) => {
+        setHoraInicio(event.target.value);
+    };
+
+    const handleHoraFinChange = (event) => {
+        setHoraFin(event.target.value);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        const data = {
+          capacidad: cupo,
+          asignatura: asignatura,
+          profesor: profesor,
+          cupo: cupo
+        };
+    
+        try {
+            // Crear la sección
+            const responseSeccion = await axios.post('../api/CrearSeccion', data);
+            console.log(responseSeccion.data);
+            const seccionId = responseSeccion.data.id;
+      
+            // Crear los horarios de sección
+            for (const dia of diasSeleccionados) {
+              const horarioData = {
+                dia: dia,
+                horaInicio: horaInicio,
+                horaFin: horaFin,
+                idSeccion: seccionId,
+                aula: aulaSeleccionada
+              };
+      
+              await axios.post('../api/CrearHorarioSeccion', horarioData);
+              console.log(await axios.post('../api/CrearHorarioSeccion', horarioData))
+            }
+      
+            console.log("Sección y horarios creados con éxito");
+            // Hacer algo con la respuesta, como redireccionar a otra página o mostrar un mensaje de éxito
+          } catch (error) {
+            console.error('Error al enviar la solicitud POST:', error);
+            // Mostrar un mensaje de error al usuario
+        }
+    };
+
     return (
-        <form action="" method="">
+        <form method="" onSubmit={handleSubmit}>
 
             <div className="form-crearSeccion flex">
 
@@ -55,30 +128,28 @@ function CrearSeccionForm() {
 
                     <div className="formElement-crearSeccion">
                         <DynamicSelect
-                            options={menuItemsAsignatura}
+                            options={asignaturas}
                             label="Asignatura"
-                            value={asignaturaSeleccionada}
-                            onChange={handleAsignaturaSelectChange}
+                            value={asignatura}
+                            onChange={handleAsignaturaChange}
                             selectClassName={'select-crearSeccion'}
                         />
                     </div>
 
                     <div className="formElement-crearSeccion">
                         <DynamicSelect
-                            options={menuItemsProfesor}
+                            options={profesores}
                             label="Profesor"
-                            value={profesorSeleccionado}
-                            onChange={handleProfesorSelectChange}
+                            value={profesor}
+                            onChange={handleProfesorChange}
                             selectClassName={'select-crearSeccion'}
                         />
                     </div>
 
                     <div className="formElement-crearSeccion">
-                        <label for='CantidadCupos'>Cantidad de Cupos</label>
-                        <input type="number" className="textbox-crearSeccion w-1/2 p-5" name="CantidadCupos" />
+                        <label htmlFor='CantidadCupos'>Cantidad de Cupos</label>
+                        <input type="number" className="textbox-crearSeccion w-1/2 p-5" name="CantidadCupos" onChange={handleCupoChange} />
                     </div>
-
-
 
                     <div className="formElement-crearSeccion">
                         <DiasSemanaSelector onChange={handleDiaSeleccionado} />
@@ -91,20 +162,30 @@ function CrearSeccionForm() {
                 <div className="horarios-crearSeccion ml-12">
                     <h6>Horarios</h6>
                     <div className="mt-5">
-                        {diasSeleccionados.map((dia) => (
-                            <CardHorario dia={dia}/>
+                        {diasSeleccionados.map((dia, index) => (
+                            <CardHorario key={index} dia={dia} horaInicio={horaInicio} horaFin={horaFin} 
+                                handleHoraInicioChange={handleHoraInicioChange} handleHoraFinChange={handleHoraFinChange} handleAulaSelectChange={handleAulaSelectChange}/>
                         ))}
                     </div>
 
                 </div>
 
-
-
             </div>
-
-
         </form>
     )
 }
 
-export default CrearSeccionForm
+async function getProfesores(asignaturaId){
+    const requestData = {
+        asignatura: parseInt(asignaturaId),
+    };
+    console.log(asignaturaId)
+    const response = await axios.get('../api/ObtenerProfesor', {
+        params: requestData,
+    });
+    
+    const profesores = response.data;
+    return profesores;
+}
+
+export default CrearSeccionForm;

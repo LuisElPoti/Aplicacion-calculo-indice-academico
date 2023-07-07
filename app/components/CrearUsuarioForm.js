@@ -25,7 +25,7 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
       axios.get("../api/AreasAcademicas")
         .then(response => {
           setAreasAcademicas(response.data);
-        })
+        })    
         .catch(error => {
           console.error("Error al obtener las áreas académicas:", error);
         });
