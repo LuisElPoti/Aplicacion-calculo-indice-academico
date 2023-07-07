@@ -2,9 +2,15 @@
 import { useState } from "react";
 import DynamicSelect from "./DynamicSelect";
 
-export default function CardHorario({ dia, handleHoraInicioChange, handleHoraFinChange, handleAulaSelectChange }) {
+export default function CardHorario({ dia, handleHoraInicioChange, handleHoraFinChange, handleAulaChange}) {
   const [aulaSeleccionada, setAulaSeleccionada] = useState('');
 
+  const handleAulaSelectChange = (event) => {
+    const selectedAula = event.target.value;
+    setAulaSeleccionada(selectedAula);
+    handleAulaChange(selectedAula);
+  };
+  
   
 
   const Aulas = [
@@ -12,6 +18,7 @@ export default function CardHorario({ dia, handleHoraInicioChange, handleHoraFin
     { value: 'GC308', label: 'GC308' },
     { value: 'GC306', label: 'GC306' },
   ];
+  console.log(aulaSeleccionada)
 
   return (
     <div className="card-horarios-crearSeccion mt-5">

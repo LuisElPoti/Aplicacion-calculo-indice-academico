@@ -53,9 +53,9 @@ function CrearSeccionForm() {
         setProfesor(event.target.value);
     };
     
-    const handleAulaSelectChange = (event) => {
-        setAulaSeleccionada(event.target.value);
-    };
+    const handleAulaChange = (selectedAula) => {
+        setAulaSeleccionada(selectedAula);
+    };      
 
     const handleCupoChange = (event) => {
         setCupo(event.target.value);
@@ -71,6 +71,9 @@ function CrearSeccionForm() {
             setDiasSeleccionados(diasSeleccionados.filter((dia) => dia !== value));
         }
     };
+
+    const [horarios, setHorarios] = useState({});
+    
 
     const handleHoraInicioChange = (event) => {
         setHoraInicio(event.target.value);
@@ -95,24 +98,30 @@ function CrearSeccionForm() {
             const responseSeccion = await axios.post('../api/CrearSeccion', data);
             console.log(responseSeccion.data);
             const seccionId = responseSeccion.data.id;
-      
             // Crear los horarios de sección
             for (const dia of diasSeleccionados) {
+
+              console.log(aulaSeleccionada)
               const horarioData = {
                 dia: dia,
-                horaInicio: horaInicio,
-                horaFin: horaFin,
+                horaInicio: parseInt(horaInicio) ,
+                horaFin: parseInt(horaFin),
                 idSeccion: seccionId,
                 aula: aulaSeleccionada
               };
+              console.log(horarioData)
       
-              await axios.post('../api/CrearHorarioSeccion', horarioData);
-              console.log(await axios.post('../api/CrearHorarioSeccion', horarioData))
+              const responseHorario = await axios.post('../api/CrearHorarioSeccion', horarioData);
+              console.log(responseHorario.data)
             }
+
+            
       
             console.log("Sección y horarios creados con éxito");
+            alert("Sección y horarios creados con éxito")
             // Hacer algo con la respuesta, como redireccionar a otra página o mostrar un mensaje de éxito
           } catch (error) {
+            alert("Error al enviar la solicitud POST")
             console.error('Error al enviar la solicitud POST:', error);
             // Mostrar un mensaje de error al usuario
         }
@@ -164,7 +173,7 @@ function CrearSeccionForm() {
                     <div className="mt-5">
                         {diasSeleccionados.map((dia, index) => (
                             <CardHorario key={index} dia={dia} horaInicio={horaInicio} horaFin={horaFin} 
-                                handleHoraInicioChange={handleHoraInicioChange} handleHoraFinChange={handleHoraFinChange} handleAulaSelectChange={handleAulaSelectChange}/>
+                                handleHoraInicioChange={handleHoraInicioChange} handleHoraFinChange={handleHoraFinChange} handleAulaChange={handleAulaChange}/>
                         ))}
                     </div>
 

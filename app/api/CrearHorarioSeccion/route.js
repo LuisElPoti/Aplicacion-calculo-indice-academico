@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export async function POST(req){
-    const{idseccion, dia, horaInicio, horaFin, aula} = await req.json();
+    const{idSeccion, dia, horaInicio, horaFin, aula} = await req.json();
 
     try{
         if( !dia || !horaInicio || !horaFin || !aula){
@@ -13,15 +13,15 @@ export async function POST(req){
         else{
             const horario = await prisma.horario_secciones.create({
                 data: {
-                    id_seccion: idseccion,
+                    id_seccion: parseInt(idSeccion),
                     dia,
-                    hora_inicio: horaInicio,
-                    hora_fin: horaFin,
+                    hora_inicio: parseInt(horaInicio),
+                    hora_fin: parseInt(horaFin),
                     aula
                 }
             })
             console.log("Horario registrado con éxito");
-            return NextResponse.json( seccion , { status: 200 }); // 200 OK
+            return NextResponse.json( horario , { status: 200 }); // 200 OK
         }
     }
     catch (error) {

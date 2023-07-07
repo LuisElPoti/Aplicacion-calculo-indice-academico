@@ -15,7 +15,7 @@ export async function POST(req) {
             const lastSeccion = await prisma.secciones.findFirst({
                 orderBy: {numero: 'desc'},
                 where: {
-                    id_asignatura: asignatura,
+                    id_asignatura: parseInt(asignatura),
                     id_periodo: 1
                 }
             })
@@ -26,10 +26,10 @@ export async function POST(req) {
             const seccion = await prisma.secciones.create({
                 data: {
                     numero: nuevoNumero,
-                    capacidad,
-                    id_asignatura: asignatura,
-                    id_profesor: profesor,
-                    cupo,
+                    capacidad: parseInt(capacidad),
+                    id_asignatura: parseInt(asignatura),
+                    id_profesor: parseInt(profesor),
+                    cupo: parseInt(cupo),
                     id_periodo: 1
                 }
             })
