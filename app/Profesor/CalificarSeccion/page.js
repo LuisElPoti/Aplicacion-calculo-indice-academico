@@ -2,12 +2,49 @@
 import TablaBasica from "@/app/components/TablaBasica";
 import DynamicSelect from "@/app/components/DynamicSelect";
 import BotonGuardar from "@/app/components/BotonGuardar";
-import { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { alpha } from "@mui/material";
-
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 
 function CalificarSeccion() {
+  const [datosEstudiantes, setData] = useState([]);
+  const [id_usuario, setID] = useState('0');
+  const [asignaturaSeleccionada, setAsignaturaSeleccionada] = useState('');
+  const [menuItemsCodigosAsignatura, setAsignaturas] = useState([]);
+  const [SeccionAsignaturaSeleccionada, setSeccionAsignaturaSeleccionada] = useState('');
+  const [menuItemsSeccionAsignatura, setSecciones] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const resultado = Cookies.get('ID');
+      setID(resultado);
+      if (resultado) {
+        getAsignaturas(resultado)
+          .then(async (asignaturasData) => {
+            setAsignaturas(asignaturasData);
+            setAsignaturaSeleccionada(asignaturasData[0]?.value);
+            const seccionesData = await getSecciones(asignaturasData[0]?.value, resultado);
+            const seccionesFormatted = seccionesData.map((seccion) => ({
+              value: seccion.id,
+              label: seccion.numero,
+            }));
+            setSecciones(seccionesFormatted);
+            setSeccionAsignaturaSeleccionada(seccionesFormatted[0]?.value);
+          })
+          .catch((error) => {
+            // Manejar errores
+            console.error("Error al obtener las áreas asignaturas:", error);
+            console.error(error);
+          });
+
+      }
+    }
+
+    fetchData();
+
+
+  }, [id_usuario]);
 
   //ASIGNAR LETRA A LA CALIFICACION
   function calcularLetra(calificacion) {
@@ -25,59 +62,55 @@ function CalificarSeccion() {
       return 'D+';
     } else if (calificacion >= 60) {
       return 'D-';
-    } 
+    }
     else {
       return 'F';
     }
   }
 
-  const [calificacionEstudiante, setCalificacionEstudiante] = useState('');
-  const handleCalificacionChange = (event) => {
-    setCalificacionEstudiante(event.target.value);
-
+  const handleCalificacionChange = (event, id) => {
+    if (datosEstudiantes.length > 0) {
+      
+      const index = datosEstudiantes.findIndex((estudiante) => estudiante.ID === id);
+      const newData = datosEstudiantes;
+      newData[index].Alpha = calcularLetra(event.target.value);
+      setData(newData);
+    }
   }
 
   // TABLE DATA
-  const headers = ['Nombre', 'Id', 'Calificacion', 'Alpha'];
-  const data = [
-    {
-      Nombre: 'Allen Silverio',
-      Id: '1104220',
-      Calificacion: <input type='number' onChange={handleCalificacionChange} required className="textboxCalificacion-calificarEstudiantes"/>,
-      Alpha: calcularLetra(calificacionEstudiante),
-    }
+  const headers = ['Id', 'Nombre', 'Calificacion', 'Alpha'];
 
-  ]
 
   // SELECT DATA
 
-  const menuItemsCodigosAsignatura = [
-    { value: 'CBM207', label: 'CBM207' },
-    { value: 'CBM301', label: 'CBM301' },
-    { value: 'IDS402', label: 'IDS402' },
-
-  ]
-
-  const [asignaturaSeleccionada, setAsignaturaSeleccionada] = useState('');
-  const handleAsignaturaSelectChange = (event) => {
-    setAsignaturaSeleccionada(event.target.value);
+  const handleAsignaturaSelectChange = async (event) => {
+    const selectedAsignatura = event.target.value;
+    setAsignaturaSeleccionada(selectedAsignatura);
+    const seccionesData = await getSecciones(selectedAsignatura);
+    const seccionesFormatted = seccionesData.map((seccion) => ({
+      value: seccion.id,
+      label: seccion.numero,
+    }));
+    setSecciones(seccionesFormatted);
   };
 
-
-
-  const menuItemsSeccionAsignatura = [
-    { value: '01', label: '01' },
-    { value: '02', label: '02' },
-    { value: '03', label: '03' },
-
-  ]
-
-  const [SeccionAsignaturaSeleccionada, setSeccionAsignaturaSeleccionada] = useState('');
   const handleSeccionAsignaturaSelectChange = (event) => {
     setSeccionAsignaturaSeleccionada(event.target.value);
   };
 
+  async function handleClick() {
+    const newData = await getEstudiantes(asignaturaSeleccionada, SeccionAsignaturaSeleccionada);
+    const resultado = newData.map((estudiante) => {
+      return {
+        ...estudiante,
+        Calificacion: <input type='number' onChange={(e) => handleCalificacionChange(e, estudiante.ID)} required className="textboxCalificacion-calificarEstudiantes" />,
+        Alpha: calcularLetra(0)
+      }
+    });
 
+    setData(resultado);
+  }
 
   return (
     <>
@@ -105,16 +138,79 @@ function CalificarSeccion() {
         </div>
 
 
-        <BotonGuardar texto={'Cargar Listado'} className={"botonCargarListado-calificarEstudiantes"} onClick={""} />
+        <BotonGuardar texto={'Cargar Listado'} className={"botonCargarListado-calificarEstudiantes"} onClick={handleClick} />
         <BotonGuardar texto={'Confirmar Calificaciones'} className={"botonConfirmarCalificaciones-calificarEstudiantes ml-5"} onClick={""} />
       </div>
 
-      <TablaBasica headers={headers} data={data} />
+      <TablaBasica headers={headers} data={datosEstudiantes} />
 
 
     </>
 
   )
+}
+
+async function getAsignaturas(id_usuario) {
+  try {
+    const requestData = {
+      profesor: id_usuario,
+    };
+
+    const response = await axios.get('../api/ObtenerAsignatura', { params: requestData });
+
+    if (Array.isArray(response.data)) {
+      const asignaturas = response.data.map((asignatura) => ({
+        value: asignatura.id,
+        label: asignatura.nombre,
+      }));
+      return asignaturas;
+    } else {
+      console.error('La respuesta no es un array:', response.data);
+      return [];
+    }
+  } catch (error) {
+    console.error('Error al obtener las asignaturas:', error);
+    throw error;
+  }
+}
+
+
+async function getSecciones(asignaturaId, profesor) {
+  const requestData = {
+    asignatura: parseInt(asignaturaId),
+    profesor: parseInt(profesor),
+  };
+
+  const response = await axios.get('../api/ObtenerSecciones', {
+    params: requestData,
+  });
+
+  const secciones = response.data;
+  return secciones;
+}
+
+async function getEstudiantes(asignatura, seccion) {
+  const requestData = {
+    asignatura: parseInt(asignatura),
+    seccion: parseInt(seccion),
+  };
+
+  const response = await axios.get('../api/ListadoEstudiantes', {
+    params: requestData,
+  });
+
+  const historico_academico = response.data;
+
+  const data = historico_academico.map((historico) => {
+    const matricula = historico.estudiantes?.matricula || 'Prueba';
+    const estudiante = historico.estudiantes?.nombre || 'Prueba';
+
+    return {
+      ID: matricula,
+      Nombre: estudiante
+    };
+  });
+  return data;
 }
 
 export default CalificarSeccion;

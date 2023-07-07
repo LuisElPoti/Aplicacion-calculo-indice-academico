@@ -1,8 +1,8 @@
 'use client'
 import React, { use, useState } from 'react'
-import Chart from './Chart'
 import BotonGuardar from './BotonGuardar'
 import axios from 'axios';
+import Pie from './Pie';
 
 
 function CalcularIndiceForm() {
@@ -85,7 +85,10 @@ function CalcularIndiceForm() {
 
                 <div className='w-1/2 p-5 m-5'>
 
-                    <Chart />
+                <div className='grafico'>
+
+                <Pie percentage={85} colour="blue" />
+                </div>
                     <div className='p-10 m-10'>
                         <BotonGuardar texto="Calcular Indice" className={"amarillo"} />
                     </div>

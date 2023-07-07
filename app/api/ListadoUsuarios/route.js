@@ -24,6 +24,9 @@ export async function GET(req) {
                     }
                 }
 
+            },
+            where: {
+                activo: true
             }
         });
 
@@ -51,6 +54,9 @@ export async function GET(req) {
                         nombre: true
                     }
                 }
+            },
+            where: {
+                activo: true
             }
         });
 
@@ -73,6 +79,9 @@ export async function GET(req) {
                 documento: true,
                 nombre: true,
                 apellido: true
+            },
+            where: {
+                activo: true
             }
         });
 

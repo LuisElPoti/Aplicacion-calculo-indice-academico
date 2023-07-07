@@ -18,9 +18,9 @@ const TableComponent = ({ headers, data }) => {
 
   const filteredData = data.filter(item => {
     const searchTextMatch =
-      item?.Id?.toLowerCase().includes(searchText.toLowerCase()) ||
-      item?.Nombre?.toString().includes(searchText) ||
-      item?.Documento?.includes(searchText);
+      item?.Id?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+      item?.Nombre?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+      item?.Documento?.toString().toLowerCase().includes(searchText.toString().toLowerCase());
     const filterTypeMatch = filterType === '' || item.Tipo === filterType;
     return searchTextMatch && filterTypeMatch;
   });
@@ -30,7 +30,7 @@ const TableComponent = ({ headers, data }) => {
       <div className="filters flex items-center mt-5">
         <TextField
           label="Search"
-          placeholder="Search by Asignatura, Seccion, Aula"
+          placeholder="Search by Nombre, Id, Documento"
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
           sx={{width: '50%', backgroundColor: '#fff',  outline:'none'}}
