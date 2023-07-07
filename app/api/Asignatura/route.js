@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 export async function GET(req){
     try { 
         const asignatura = await prisma.asignaturas.findMany();
-        console.log(asignatura)
+        
         return NextResponse.json( asignatura , { status: 200 }); // 200 OK
 
     } catch (error) {

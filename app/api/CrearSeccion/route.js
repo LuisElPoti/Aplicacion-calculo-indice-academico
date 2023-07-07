@@ -8,7 +8,7 @@ export async function POST(req) {
     const{capacidad, asignatura, profesor, cupo} = await req.json();
 
     try {
-        if(!capacidad || !asignatura || !profesor || !cupo){
+        if(!asignatura || !profesor || !cupo){
             return NextResponse.json({ message: 'Uno o varios de los parámetros están vacíos' }, { status: 500 });
         }
         else{
