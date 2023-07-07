@@ -15,6 +15,7 @@ function CalificarSeccion() {
   const [menuItemsCodigosAsignatura, setAsignaturas] = useState([]);
   const [SeccionAsignaturaSeleccionada, setSeccionAsignaturaSeleccionada] = useState('');
   const [menuItemsSeccionAsignatura, setSecciones] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
       const resultado = Cookies.get('ID');
@@ -69,13 +70,11 @@ function CalificarSeccion() {
   }
 
   const handleCalificacionChange = (event, id) => {
-    if (datosEstudiantes.length > 0) {
-      
-      const index = datosEstudiantes.findIndex((estudiante) => estudiante.ID === id);
-      const newData = datosEstudiantes;
-      newData[index].Alpha = calcularLetra(event.target.value);
-      setData(newData);
-    }
+    const newData = datosEstudiantes;
+    alert(JSON.stringify(newData))
+    const index = newData.findIndex((estudiante) => estudiante.ID === id);
+    newData[index].Alpha = calcularLetra(event.target.value);
+    setData(newData);
   }
 
   // TABLE DATA
@@ -100,16 +99,24 @@ function CalificarSeccion() {
   };
 
   async function handleClick() {
-    const newData = await getEstudiantes(asignaturaSeleccionada, SeccionAsignaturaSeleccionada);
-    const resultado = newData.map((estudiante) => {
-      return {
-        ...estudiante,
-        Calificacion: <input type='number' onChange={(e) => handleCalificacionChange(e, estudiante.ID)} required className="textboxCalificacion-calificarEstudiantes" />,
-        Alpha: calcularLetra(0)
-      }
-    });
+    const newData = await getEstudiantes(asignaturaSeleccionada, SeccionAsignaturaSeleccionada)
+      .then(async (estudiantes) => {
+        const resultado = estudiantes.map((estudiante) => {
+          return {
+            ...estudiante,
+            Calificacion: <input type='number' onChange={(e) => handleCalificacionChange(e, estudiante.ID)} required className="textboxCalificacion-calificarEstudiantes" />,
+            Alpha: calcularLetra(0)
+          }
+        });
+        return resultado;
+      })
+      .catch((error) => {
+        // Manejar errores
+        console.error("Error al obtener estudiantes", error);
+        console.error(error);
+      });
+    setData(newData);
 
-    setData(resultado);
   }
 
   return (

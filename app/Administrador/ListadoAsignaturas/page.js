@@ -3,15 +3,19 @@ import React, { useEffect, useState } from 'react';
 import TableComponent from "@/app/components/TableFilterAsignaturas"
 import { CiTrash, CiPen } from "react-icons/ci";
 import axios from 'axios';
+import CrearAsignaturaform from '@/app/components/CrearAsignaturaform'
+
 
 function ListadoAsignaturas() {
   const [data, setData] = useState([]);
+  const [clave, setClave] = useState('');
+
   const headers = ['Clave', 'Asignatura', 'Creditos', 'Area', 'Eliminar', 'Editar'];
+  const [showEditContainer, setShowEditContainer] = useState(false);
 
   const handleEditClick = (event, clave) => {
-    // setID(id_usuario);
-    // setRol(rol);
-    // setShowEditContainer(!showEditContainer);
+    setClave(clave);
+    setShowEditContainer(!showEditContainer);
   };
 
   const handleDeleteClick = async (event, clave) => {
@@ -67,6 +71,9 @@ function ListadoAsignaturas() {
     <>
       <div classname="flex items-center t-30">
         <TableComponent headers={headers} data={data} />
+      </div>
+      <div className="mt-5">
+        {showEditContainer && <CrearAsignaturaform buttonText={'Actualizar Datos'} modo='editar' clave={clave} />}
       </div>
     </>
 
