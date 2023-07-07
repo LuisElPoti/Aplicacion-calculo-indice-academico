@@ -57,7 +57,7 @@ function ListadoEstudiante() {
   const handleOnChangeAsignatura = async (event) => {
     const selectedAsignatura = event.target.value;
     setAsignatura(selectedAsignatura);
-    const seccionesData = await getSecciones(selectedAsignatura);
+    const seccionesData = await getSecciones(selectedAsignatura, id_usuario);
     const seccionesFormatted = seccionesData.map((seccion) => ({
       value: seccion.id,
       label: seccion.numero,
@@ -116,10 +116,10 @@ async function getAsignaturas(id_usuario) {
   }
 }
 
-
-async function getSecciones(asignaturaId) {
+async function getSecciones(asignaturaId, profesor) {
   const requestData = {
     asignatura: parseInt(asignaturaId),
+    profesor: parseInt(profesor),
   };
 
   const response = await axios.get('../api/ObtenerSecciones', {

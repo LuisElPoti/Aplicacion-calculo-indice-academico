@@ -9,6 +9,8 @@ const prisma = new PrismaClient();
 export async function GET(req){
     try {
         const profesor = req.nextUrl.searchParams.get("profesor")
+        const trimestre = parseInt(process.env.TRIMESTRE_ACTUAL)
+        const anio = parseInt(process.env.YEAR_ACTUAL)
 
         const asignatura = await prisma.asignaturas.findMany({
             select: {
@@ -17,10 +19,20 @@ export async function GET(req){
             },
             where: {
                 secciones: {
-                  some: {
+                  some:{
                     profesores: {
                       is: {
                         matricula: profesor
+                      }
+                    },
+                    periodos:{
+                      is:{
+                        id_trimestre:trimestre
+                      }
+                    },
+                    periodos:{
+                      is:{
+                        a_o:anio
                       }
                     }
                   }
