@@ -35,7 +35,7 @@ const Sidebar = () => {
           {showSubMenuAsignatura && (
             <ul className="ml-6 mb-2">
               <li className="mb-3 nav-link">
-                <Link href="/Administrador/CrearAsignatura">Registrar Asingatura</Link>
+                <Link href="/Administrador/CrearAsignatura">Registrar Asignatura</Link>
               </li>
               <li className="mb-2 nav-link">
                 <Link href="/Administrador/ListadoAsignaturas">  Listado de Asignaturas</Link>

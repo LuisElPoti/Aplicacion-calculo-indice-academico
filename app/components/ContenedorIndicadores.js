@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import CreditosChart from './CreditosChart';
+import MiniCharts from './MiniCharts';
 
 
 function ContenedorIndicadores({ id_usuario }) {
@@ -25,6 +27,7 @@ function ContenedorIndicadores({ id_usuario }) {
         de {indicadores?.carreras?.total_creditos || 1}
       </div>
       <div className="trimestres-cursados">
+
         Trimestres <br />
         cursados
       </div>
@@ -32,11 +35,19 @@ function ContenedorIndicadores({ id_usuario }) {
         Asignaturas <br />
         aprobadas de {indicadores?.carreras?.total_asignaturas || 1}
       </div>
-      <div className="div" />
-      <div className="creditos-aprobados-2">
+      <div className="div">      
+      <MiniCharts value = {8} maxValue={14}/>
       </div>
 
-      <div className="trimestres-aprobadas" />
+      <div className="creditos-aprobados-2">
+      <CreditosChart value = {144} maxValue={279}/>
+      </div>
+
+      <div className="trimestres-aprobadas">
+      <MiniCharts value = {62} maxValue={112}/>
+
+      </div>
+
     </div>
   )
 }

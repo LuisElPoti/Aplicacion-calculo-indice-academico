@@ -1,11 +1,11 @@
 import React from 'react'
-import Chart from './Chart'
+import ProgressChart from './ProgressChart';
 function ContenedorIndiceGeneral() {
   return (
     
      
         <div className="indicador">
-          <Chart/>
+          <ProgressChart value={3.25} />
         </div>
       
    

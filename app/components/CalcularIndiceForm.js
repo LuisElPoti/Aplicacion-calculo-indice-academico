@@ -2,7 +2,7 @@
 import React, { use, useState } from 'react'
 import BotonGuardar from './BotonGuardar'
 import axios from 'axios';
-import Pie from './Pie';
+import ProgressChart from './ProgressChart';
 
 
 function CalcularIndiceForm() {
@@ -65,7 +65,7 @@ function CalcularIndiceForm() {
     return (
         <form method="POST" className='calcular-indice-form m-10' width={900} height={500} onSubmit={handleSubmit} >
 
-            <div className='flex'>
+            <div className='flex gap-x-10 m-5 pl-10 pr-20'>
                 <div className='w-1/2 p-5 m-5'>
                     <div className='nombre pl-5 l-20'>
                         <p className='nombre-header pt-20'>ID</p>
@@ -81,17 +81,17 @@ function CalcularIndiceForm() {
                         <input className='nombre-textbox p-5' type='text' name="" readOnly value={carrera} />
                     </div>
 
-                </div>
-
-                <div className='w-1/2 p-5 m-5'>
-
-                <div className='grafico'>
-
-                <Pie percentage={85} colour="blue" />
-                </div>
-                    <div className='p-10 m-10'>
+                    <div className='m-10 pl-0 l-15'>
                         <BotonGuardar texto="Calcular Indice" className={"amarillo"} />
                     </div>
+
+                </div>
+
+
+
+                <div className='w-1/2 flex items-center'>
+
+                <ProgressChart value={3.4} size={300} fontSize={70} color="primary" />
 
                 </div>
 
