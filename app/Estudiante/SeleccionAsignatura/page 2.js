@@ -1,6 +1,6 @@
 'use client'
 import TextField from '@mui/material/TextField';
-import { useEffect, useState } from 'react';
+import { use, useState } from 'react';
 import BotonGuardar from '@/app/components/BotonGuardar';
 import TablaAgregarAsignatura from '@/app/components/TablaAgregarAsignatura';
 import Image from 'next/image';
@@ -9,7 +9,6 @@ import TablaSeleccion from '@/app/components/TablaSeleccion';
 
 
 export default function SeleccionAsignatura() {
-
     const [searchText, setSearchText] = useState('');
 
     // CAMPOS PARA LA TABLA DE AGREGAR ASIGNATURAS
@@ -19,41 +18,21 @@ export default function SeleccionAsignatura() {
         {
             Asignatura: 'Estructura de Datos',
             Clave: 'IDS305',
-            Creditos: '4',
-            Agregar: <button><Image src='/icons/plus-circle.svg' width={25} height={25} alt='Boton Agregar' onClick={""} /></button>, // BOTON PARA AGREGAR ASIGNATURA A LA SELECCION
-        },
-        {
-            Asignatura: 'Team Building',
-            Clave: 'IDS355',
-            Creditos: '4',
-            Agregar: <button><Image src='/icons/plus-circle.svg' width={25} height={25} alt='Boton Agregar' onClick={""} /></button>, // BOTON PARA AGREGAR ASIGNATURA A LA SELECCION
-        },
-        {
-            Asignatura: 'Aseguramiento de Calidad',
-            Clave: 'IDS342',
-            Creditos: '4',
+            Credito: '4',
             Agregar: <button><Image src='/icons/plus-circle.svg' width={25} height={25} alt='Boton Agregar' onClick={""} /></button>, // BOTON PARA AGREGAR ASIGNATURA A LA SELECCION
         },
     ]
 
-    // FILTER DATA AGREGAR ASIGNATURAS
+    //DESPLEGAR SECCIONES DISPONIBLES
+    // const [showAsignaturaSeccionDisponible, setShowAsignaturaSeccionDisponible] = useState(false);
 
-    const [filteredData, setFilteredData] = useState(data);
+    // const handleAsignaturaSeccionDisponible = () => {
+    //     setShowAsignaturaSeccionDisponible(!showAsignaturaSeccionDisponible);
 
-    useEffect(() => {
-        const filtered = data.filter((row) =>
-          Object.values(row).some((value) =>
-            value.toString().toLowerCase().includes(searchText.toLowerCase())
-          )
-        );
-        setFilteredData(filtered);
-      }, [searchText, data]);
-
+    // }
 
     
 
-
-    // TABLA SELECCION
 
     const [seccionSeleccionada, setSeccionSeleccionada] = useState([]);
 
@@ -70,10 +49,18 @@ export default function SeleccionAsignatura() {
         console.log(seccionSeleccionada);
     }
 
+    
+
+
+
+
+
+
+
+    // TABLA SELECCION
+
 
     const headersSeleccion = ["", 'Asignatura', 'Codigo', 'Cupos', 'Seccion', 'Horario', 'Aula', 'Profesor', ""];
-
-
     const dataSeleccion = [
         {
             DropdownAsignatura: <button><Image src='/icons/ArrowDown.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
@@ -84,23 +71,12 @@ export default function SeleccionAsignatura() {
             Horario: '',
             Aula: '',
             Profesor: '',
-            DeleteAsignatura: <button><Image src='/icons/IconX.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,   
-        },
-        {
-            DropdownAsignatura: <button><Image src='/icons/ArrowDown.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
-            Asignatura: 'Aseguramiento de Calidad',
-            Codigo: 'IDS342',
-            Cupos: '',
-            Seccion: '',
-            Horario: '',
-            Aula: '',
-            Profesor: '',
             DeleteAsignatura: <button><Image src='/icons/IconX.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
         },
         {
             DropdownAsignatura: <button><Image src='/icons/ArrowDown.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
-            Asignatura: 'Team Building',
-            Codigo: 'IDS355',
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
             Cupos: '',
             Seccion: '',
             Horario: '',
@@ -110,20 +86,43 @@ export default function SeleccionAsignatura() {
         },
     ];
 
-    const subDataSeleccion = [
-        { parentIndex: 0, values: [<input type='radio' name={"radio-group-0"} value={'IDS305 - 01'} onChange={handleSeccionSeleccionadaChange} />, 'Estructuras de Datos', 'IDS305', '40', '01', 'LU-MI 14/16', 'GC402', 'Allen Silverio'] },
-        { parentIndex: 0, values: [<input type='radio' name={"radio-group-0"} value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange} />, 'Estructuras de Datos', 'IDS305', '40', '02', 'LU-MI 16/18', 'GC402', 'Allen Silverio'] },
-        { parentIndex: 0, values: [<input type='radio' name={"radio-group-0"} value={'IDS305 - 03'} onChange={handleSeccionSeleccionadaChange} />, 'Estructuras de Datos', 'IDS305', '40', '03', 'LU-MI 18/20', 'GC402', 'Allen Silverio'] },
-        
-        { parentIndex: 1, values: [<input type='radio' name="radio-group-1" value={'IDS342 - 01'} onChange={handleSeccionSeleccionadaChange} />, 'Aseguramiento de Calidad', 'IDS342', '40', '01', 'MA-JU 14/16', 'GC202', 'Paola Saldaña'] },
-        { parentIndex: 1, values: [<input type='radio' name="radio-group-1" value={'IDS342 - 02'} onChange={handleSeccionSeleccionadaChange} />, 'Aseguramiento de Calidad', 'IDS342', '40', '02', 'MA-JU 16/18', 'GC202', 'Paola Saldaña'] },
-        
-        { parentIndex: 2, values: [<input type='radio' name="radio-group-2" value={'IDS355 - 01'} onChange={handleSeccionSeleccionadaChange} />, 'Team Buildin', 'IDS355', '40', '01', 'MA-JU 14/16', 'GC202', 'Luis Adames'] },
-        { parentIndex: 2, values: [<input type='radio' name="radio-group-2" value={'IDS355 - 02'} onChange={handleSeccionSeleccionadaChange} />, 'Team Buildin', 'IDS355', '40', '02', 'LU-MI 14/16', 'GC401', 'Luis Adames'] },
-      
-        // Add more sub-data items as needed
-      ];
 
+
+    const subDataSeleccion = [
+        {
+            RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange} />,
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
+            Cupos: '40',
+            Seccion: '02',
+            Horario: 'LU-MI 14/16',
+            Aula: 'GC402',
+            Profesor: 'Allen Silverio',
+        },
+
+        {
+            RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange} />,
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
+            Cupos: '40',
+            Seccion: '02',
+            Horario: 'LU-MI 14/16',
+            Aula: 'GC402',
+            Profesor: 'Allen Silverio',
+        },
+
+        {
+            RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange} />,
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
+            Cupos: '40',
+            Seccion: '02',
+            Horario: 'LU-MI 14/16',
+            Aula: 'GC402',
+            Profesor: 'Allen Silverio',
+        },
+
+    ];
 
     const [dropdownStates, setDropdownStates] = useState(Array(dataSeleccion.length).fill(false));
     const handleAsignaturaSeccionDisponible = (index) => {
@@ -133,9 +132,6 @@ export default function SeleccionAsignatura() {
             return newStates;
         });
     };
-
-
-   
 
 
 
@@ -151,7 +147,7 @@ export default function SeleccionAsignatura() {
                 </div>
 
                 <div className='tablaSeleccion'>
-                    <TablaSeleccion data={dataSeleccion} headers={headersSeleccion} subData={subDataSeleccion} isOpen={dropdownStates} handleDropdownClick={handleAsignaturaSeccionDisponible} />
+                    <TablaSeleccion data={dataSeleccion} subData={subDataSeleccion} headers={headersSeleccion} isOpen={dropdownStates} handleDropdownClick={handleAsignaturaSeccionDisponible} />
 
                 </div>
 
@@ -186,11 +182,15 @@ export default function SeleccionAsignatura() {
                 <div className='tablaAgregarAsignatura-seleccionAsignaturas'>
                     <TablaAgregarAsignatura
                         headers={headers}
-                        data={filteredData}
+                        data={data}
                     />
                 </div>
 
             </div>
+
+
+
+
 
         </>
 

@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
 
-const TablaSeleccion = ({ headers, data, subData, handleDropdownClick }) => {
+const TablaSeleccion = ({ headers, data, subData, isOpen, handleDropdownClick }) => {
   const [expandedRows, setExpandedRows] = useState([]);
 
   const handleExpandRow = (rowIndex) => {
@@ -22,7 +22,7 @@ const TablaSeleccion = ({ headers, data, subData, handleDropdownClick }) => {
   return (
     <TableContainer component={Paper} sx={{ width: 1050, fontFamily: 'Poppins', height: 500, borderRadius: '40px', boxShadow: 'none' }}>
       <Table sx={{ width: 1050, height: 100 }} aria-label="simple table">
-        <TableHead >
+        <TableHead>
           <TableRow>
             {headers.map((header, index) => (
               <TableCell align="center" key={index}>
@@ -34,7 +34,7 @@ const TablaSeleccion = ({ headers, data, subData, handleDropdownClick }) => {
         <TableBody>
           {data.map((row, rowIndex) => (
             <>
-              <TableRow key={rowIndex} sx={{ backgroundColor: expandedRows.includes(rowIndex) ? '#E5ECFF' : 'white' }}>
+              <TableRow key={rowIndex} sx={{ backgroundColor: expandedRows[rowIndex] ? '#F3F6FF' : 'white' }}>
                 {Object.entries(row).map(([key, value], columnIndex) => (
                   <TableCell align="center" key={columnIndex}>
                     {key === 'DropdownAsignatura' ? (
@@ -47,18 +47,15 @@ const TablaSeleccion = ({ headers, data, subData, handleDropdownClick }) => {
                   </TableCell>
                 ))}
               </TableRow>
-              {expandedRows.includes(rowIndex) &&
-                subData
-                  .filter((subItem) => subItem.parentIndex === rowIndex)
-                  .map((subItem, subIndex) => (
-                    <TableRow key={`subData-${rowIndex}-${subIndex}`}>
-                      {subItem.values.map((value, columnIndex) => (
-                        <TableCell align="center" key={columnIndex}>
-                          {value}
-                        </TableCell>
-                      ))}
-                    </TableRow>
+              {expandedRows.includes(rowIndex) && (
+                <TableRow key={`subData-${rowIndex}`}>
+                  {Object.values(subData[rowIndex]).map((value, columnIndex) => (
+                    <TableCell align="center" key={columnIndex}>
+                      {value}
+                    </TableCell>
                   ))}
+                </TableRow>
+              )}
             </>
           ))}
         </TableBody>
@@ -68,8 +65,3 @@ const TablaSeleccion = ({ headers, data, subData, handleDropdownClick }) => {
 };
 
 export default TablaSeleccion;
-
-
-
-
-
