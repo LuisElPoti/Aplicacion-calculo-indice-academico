@@ -58,7 +58,7 @@ const TableComponent = ({ headers, data }) => {
           <TableHead>
             <TableRow style={{marginBottom:'5px'}} >
               {headers.map((header, index) => (
-                <TableCell align="center"  key={index}>
+                <TableCell align="left"  key={index}>
                   {header}
                 </TableCell>
               ))}
@@ -68,7 +68,7 @@ const TableComponent = ({ headers, data }) => {
             {filteredData.map((row, rowIndex) => (
               <TableRow key={rowIndex} style={{display:'', justifyContent:''}} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 {Object.values(row).map((value, columnIndex) => (
-                  <TableCell align="center" key={columnIndex}>
+                  <TableCell align="left" key={columnIndex}>
                     {value}
                   </TableCell>
                 ))}
