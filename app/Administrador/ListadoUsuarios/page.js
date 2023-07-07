@@ -19,6 +19,37 @@ export default function ListadoUsuarios() {
     setShowEditContainer(!showEditContainer);
   };
 
+  const handleDeleteClick = async (event, id_usuario, rol) => {
+    setID(id_usuario);
+    setRol(rol);
+    const result = confirm(`¿Está seguro que desea inhabilitar al usuario ${id_usuario}?`, "Esta acción no se puede deshacer");
+    if (result) {
+      const requestData = {
+        id_usuario: id_usuario,
+        tipo_usuario: rol.toLowerCase(),
+      };
+      const response = await axios.post(
+        "../api/Usuarios/EliminarUsuario",
+        requestData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      if (response.status === 200) {
+        alert(`Usuario inhabilitado con éxito`);
+
+      } else {
+        console.log("Problema");
+        alert('Hubo problemas al inhabilitar el nuevo usuario, inténtelo de nuevo');
+      }
+    } else {
+      console.log("Cancelled.");
+    }
+
+
+  };
+
   const [id_usuario, setID] = useState(null);
   const [rol, setRol] = useState(null);
 
@@ -33,11 +64,10 @@ export default function ListadoUsuarios() {
           const newData = response.data.map(obj => {
             return {
               ...obj,
-              Opciones: <button onClick={""}><CiTrash style={{ width: "50px", height: "25px", color: '#DE5462' }} /></button>,
-              Editar: <button onClick={(e)=> handleEditClick(e, obj.Id, obj.Tipo)}><CiPen style={{ width: "50px", height: "25px", color: 'gray' }} /></button>
+              Opciones: <button onClick={(e) => handleDeleteClick(e, obj.Id, obj.Tipo)}><CiTrash style={{ width: "50px", height: "25px", color: '#DE5462' }} /></button>,
+              Editar: <button onClick={(e) => handleEditClick(e, obj.Id, obj.Tipo)}><CiPen style={{ width: "50px", height: "25px", color: 'gray' }} /></button>
             };
           });
-          console.log(newData);
           setData(newData);
 
         })
