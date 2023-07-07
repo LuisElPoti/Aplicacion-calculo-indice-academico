@@ -7,6 +7,20 @@ DECLARE Creditos_Trimestre DECIMAL(6, 2);
 DECLARE Indice_General DECIMAL(6, 2);
 DECLARE Indice_Trimestral DECIMAL(6, 2);
 DECLARE Trimestres_Aprobados INT;
+DECLARE Asignaturas_Aprobadas INT;
+
+SET Asignaturas_Aprobadas = (
+        SELECT COUNT(SI.id_periodo)
+        FROM Historico_Academico as HI
+            INNER JOIN Secciones as SI ON SI.id = HI.id_seccion
+            INNER JOIN Periodos as P ON P.id = SI.id_periodo
+        WHERE P.id_estado_periodo = 3
+            AND HI.id_estudiante = (
+                SELECT id
+                FROM Estudiantes
+                WHERE matricula = Matricula_Estudiante
+            )
+    );
 
 SET Trimestres_Aprobados = (
         SELECT COUNT(distinct SI.id_periodo)
@@ -105,7 +119,8 @@ UPDATE Estudiantes
 SET indice_general = Indice_General,
     indice_trimestral = Indice_Trimestral,
     trimestres_aprobados = Trimestres_Aprobados,
-    creditos_aprobados = Creditos_Generales
+    creditos_aprobados = Creditos_Generales,
+    asignaturas_aprobadas = Asignaturas_Aprobadas
 WHERE matricula = Matricula_Estudiante;
 END; 
 

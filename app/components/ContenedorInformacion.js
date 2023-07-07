@@ -40,7 +40,7 @@ function ContenedorInformacion({id_usuario}) {
       <div className="element-est-intec">{datosSesion?.correo || "1101101@institucion.edu.do"}</div>
     </div>
     <div className="informaci-n-general">Información General</div>
-    <img className="info-general-imagen" alt="Info general imagen" src="images/info-general-imagen.svg" />
+    <img className="info-general-imagen" alt="Info general imagen" src="/images/info-general-imagen.svg" />
   </div>
   )
 }

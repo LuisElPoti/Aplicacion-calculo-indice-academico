@@ -27,7 +27,6 @@ function ContenedorIndicadores({ id_usuario }) {
         de {indicadores?.carreras?.total_creditos || 1}
       </div>
       <div className="trimestres-cursados">
-
         Trimestres <br />
         cursados
       </div>
@@ -36,15 +35,15 @@ function ContenedorIndicadores({ id_usuario }) {
         aprobadas de {indicadores?.carreras?.total_asignaturas || 1}
       </div>
       <div className="div">      
-      <MiniCharts value = {8} maxValue={14}/>
+      <MiniCharts value = {indicadores?.trimestres_aprobados} maxValue={15}/>
       </div>
 
       <div className="creditos-aprobados-2">
-      <CreditosChart value = {144} maxValue={279}/>
+      <CreditosChart value = {indicadores?.creditos_aprobados} maxValue={indicadores?.carreras?.total_creditos || 1}/>
       </div>
 
       <div className="trimestres-aprobadas">
-      <MiniCharts value = {62} maxValue={112}/>
+      <MiniCharts value = {indicadores?.asignaturas_aprobadas}  maxValue={indicadores?.carreras?.total_asignaturas || 1}/>
 
       </div>
 

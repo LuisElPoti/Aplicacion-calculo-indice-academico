@@ -29,7 +29,7 @@ export default function MenuPrincipalEstudiante() {
         <div className= 'grid grid-cols-3 gap-3'>
             
             <ContenedorIndicadores id_usuario={id_usuario} />
-            <ContenedorIndiceGeneral  />
+            <ContenedorIndiceGeneral  id_usuario={id_usuario} />
             <div className='row-span-2 ml-2'><ContenedorInformacion id_usuario={id_usuario}/></div>
             <TablaBasica headers={headers} data={data}/>
             
