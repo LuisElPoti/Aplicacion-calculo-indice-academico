@@ -11,6 +11,7 @@ export async function GET(req) {
         const asignatura = await prisma.asignaturas.findMany(
             {
                 select: {
+                    id: true,
                     clave: true,
                     nombre: true,
                     creditos: true,
