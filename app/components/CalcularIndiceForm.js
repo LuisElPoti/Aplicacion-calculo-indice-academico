@@ -8,6 +8,8 @@ import ProgressChart from './ProgressChart';
 function CalcularIndiceForm() {
     const [nombre, setNombre] = useState('')
     const [carrera, setCarrera] = useState('')
+    const [indice, setIndice] = useState(1)
+
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -26,6 +28,7 @@ function CalcularIndiceForm() {
             );
 
             if (response.status === 200) {
+                setIndice(parseFloat(response?.data[0]?.f0 || 0));
                 alert('Indice actualizado con éxito, el indice general es: ' + response.data[0].f0);
             } else {
                 console.log("Problema");
@@ -49,6 +52,7 @@ function CalcularIndiceForm() {
                     if (data) {
                         setNombre(data.nombre);
                         setCarrera(data.carreras?.nombre);
+                        setIndice(parseFloat(data.indice_general));
                     }
                     else {
                         setNombre('');
@@ -91,7 +95,7 @@ function CalcularIndiceForm() {
 
                 <div className='w-1/2 flex items-center'>
 
-                <ProgressChart value={3.4} size={300} fontSize={70} color="primary" />
+                    <ProgressChart value={indice} size={300} fontSize={70} color="primary" />
 
                 </div>
 
