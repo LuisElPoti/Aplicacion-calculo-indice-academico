@@ -8,128 +8,124 @@ import BotonGuardar from "./BotonGuardar";
 import axios from 'axios';
 
 function CrearSeccionForm() {
-  const [capacidad, setCapacidad] = useState('');
-  const [asignatura, setAsignatura] = useState('');
-  const [asignaturas, setAsignaturas] = useState([]);
-  const [profesor, setProfesor] = useState('');
-  const [profesores, setProfesores] = useState([]);
-  const [cupo, setCupo] = useState('');
-  const [diasSeleccionados, setDiasSeleccionados] = useState([]);
-  const [aulaSeleccionada, setAulaSeleccionada] = useState('');
-  const [horarios, setHorarios] = useState({});
+    const [capacidad, setCapacidad] = useState('');
+    const [asignatura, setAsignatura] = useState('');
+    const [asignaturas, setAsignaturas] = useState([]);
+    const [profesor, setProfesor] = useState('');
+    const [profesores, setProfesores] = useState([]);
+    const [cupo, setCupo] = useState('');
+    const [diasSeleccionados, setDiasSeleccionados] = useState([]);
+    const [horaInicio, setHoraInicio] = useState('');
+    const [horaFin, setHoraFin] = useState('');
+    const [aulaSeleccionada, setAulaSeleccionada] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseAsignatura = await axios.get("../api/Asignatura");
-        const asignaturasData = responseAsignatura.data;
-        const asignaturasOptions = asignaturasData.map(asignatura => ({
-          value: asignatura.id,
-          label: asignatura.nombre,
-        }));
-        console.log(asignaturasOptions)
-        setAsignaturas(asignaturasOptions);
-      } catch (error) {
-        console.error("Error al obtener las asignaturas:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleAsignaturaChange = async (event) => {
-    const selectedAsignatura = event.target.value;
-    setAsignatura(selectedAsignatura);
-    const profesoresData = await getProfesores(selectedAsignatura);
-    const ProfesoresFormatted = profesoresData.map((profesor) => ({
-      value: profesor.id,
-      label: profesor.nombre,
-    }));
-    setProfesores(ProfesoresFormatted);
-  };
-
-  const handleProfesorChange = (event) => {
-    setProfesor(event.target.value);
-  };
-
-  const handleAulaChange = (selectedAula) => {
-    setAulaSeleccionada(selectedAula);
-  };
-
-  const handleCupoChange = (event) => {
-    setCupo(event.target.value);
-  };
-
-  const handleDiaSeleccionado = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      setDiasSeleccionados((prevDias) => [...prevDias, value]);
-      setHorarios((prevHorarios) => ({
-        ...prevHorarios,
-        [value]: { horaInicio: '', horaFin: '' }
-      }));
-    } else {
-      setDiasSeleccionados((prevDias) => prevDias.filter((dia) => dia !== value));
-      setHorarios((prevHorarios) => {
-        const { [value]: deletedHora, ...rest } = prevHorarios;
-        return rest;
-      });
-    }
-  };
-
-  const handleHoraInicioChange = (dia, value) => {
-    setHorarios((prevHorarios) => ({
-      ...prevHorarios,
-      [dia]: { ...prevHorarios[dia], horaInicio: value }
-    }));
-  };
-
-  const handleHoraFinChange = (dia, value) => {
-    setHorarios((prevHorarios) => ({
-      ...prevHorarios,
-      [dia]: { ...prevHorarios[dia], horaFin: value }
-    }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const data = {
-      capacidad: cupo,
-      asignatura: asignatura,
-      profesor: profesor,
-      cupo: cupo
-    };
-
-    try {
-      // Crear la sección
-      const responseSeccion = await axios.post('../api/CrearSeccion', data);
-      console.log(responseSeccion.data);
-      const seccionId = responseSeccion.data.id;
-
-      // Crear los horarios de sección
-      for (const dia of diasSeleccionados) {
-        const horario = horarios[dia];
-        const horarioData = {
-          dia: dia,
-          horaInicio: parseInt(horario.horaInicio),
-          horaFin: parseInt(horario.horaFin),
-          idSeccion: seccionId,
-          aula: aulaSeleccionada
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseAsignatura = await axios.get("../api/Asignatura");
+                const asignaturasData = responseAsignatura.data;
+                const asignaturasOptions = asignaturasData.map(asignatura => ({
+                  value: asignatura.id,
+                  label: asignatura.nombre,
+                }));
+                setAsignaturas(asignaturasOptions);
+              } catch (error) {
+                console.error("Error al obtener las asignaturas:", error);
+              }
         };
-        console.log(horarioData);
+      
+        fetchData();
+    }, []);
 
-        const responseHorario = await axios.post('../api/CrearHorarioSeccion', horarioData);
-        console.log(responseHorario.data);
-      }
+    const handleAsignaturaChange = async (event) => {
 
-      console.log("Sección y horarios creados con éxito");
-      alert("Sección y horarios creados con éxito");
-    } catch (error) {
-      alert("Error al enviar la solicitud POST");
-      console.error('Error al enviar la solicitud POST:', error);
-    }
-  };
+        const selectedAsignatura = event.target.value;
+        setAsignatura(selectedAsignatura);
+        const profesoresData = await getProfesores(selectedAsignatura);
+        const ProfesoresFormatted = profesoresData.map((profesor) => ({
+            value: profesor.id,
+            label: profesor.nombre,
+        }));
+        setProfesores(ProfesoresFormatted);
+    };
+      
+    const handleProfesorChange = (event) => {
+        setProfesor(event.target.value);
+    };
+    
+    const handleAulaChange = (selectedAula) => {
+        setAulaSeleccionada(selectedAula);
+    };      
+
+    const handleCupoChange = (event) => {
+        setCupo(event.target.value);
+    };
+
+    const handleDiaSeleccionado = (event) => {
+        const { value, checked } = event.target;
+        if (checked) {
+            // Agregar el día seleccionado a la lista de días seleccionados
+            setDiasSeleccionados([...diasSeleccionados, value]);
+        } else {
+            // Remover el día deseleccionado de la lista de días seleccionados
+            setDiasSeleccionados(diasSeleccionados.filter((dia) => dia !== value));
+        }
+    };
+
+    const [horarios, setHorarios] = useState({});
+    
+
+    const handleHoraInicioChange = (event) => {
+        setHoraInicio(event.target.value);
+    };
+
+    const handleHoraFinChange = (event) => {
+        setHoraFin(event.target.value);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        const data = {
+          capacidad: cupo,
+          asignatura: parseInt(asignatura),
+          profesor: parseInt(profesor),
+          cupo: cupo
+        };
+    
+        try {
+            // Crear la sección
+            const responseSeccion = await axios.post('../api/CrearSeccion', data);
+            console.log(responseSeccion.data);
+            const seccionId = responseSeccion.data.id;
+            // Crear los horarios de sección
+            for (const dia of diasSeleccionados) {
+
+              console.log(aulaSeleccionada)
+              const horarioData = {
+                dia: dia,
+                horaInicio: parseInt(horaInicio) ,
+                horaFin: parseInt(horaFin),
+                idSeccion: seccionId,
+                aula: aulaSeleccionada
+              };
+              console.log(horarioData)
+      
+              const responseHorario = await axios.post('../api/CrearHorarioSeccion', horarioData);
+              console.log(responseHorario.data)
+            }
+
+            
+      
+            console.log("Sección y horarios creados con éxito");
+            alert("Sección y horarios creados con éxito")
+            // Hacer algo con la respuesta, como redireccionar a otra página o mostrar un mensaje de éxito
+          } catch (error) {
+            alert("Error al enviar la solicitud POST")
+            console.error('Error al enviar la solicitud POST:', error);
+            // Mostrar un mensaje de error al usuario
+        }
+    };
 
     return (
         <form method="" onSubmit={handleSubmit}>

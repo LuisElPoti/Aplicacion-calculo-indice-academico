@@ -26,7 +26,6 @@ export async function GET(req) {
                 }
             }
         );
-        console.log(asignatura)
         return NextResponse.json(asignatura, { status: 200 }); // 200 OK
 
     } catch (error) {
