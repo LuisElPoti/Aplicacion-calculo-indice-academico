@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `Areas_Academicas` (
 
 CREATE TABLE IF NOT EXISTS `Asignaturas` (
     `id` int AUTO_INCREMENT,
-    `clave` varchar(7),
+    `clave` varchar(7) UNIQUE,
     `creditos` int,
     `nombre` varchar(80),
     `id_area_academica` int,

@@ -6,44 +6,39 @@ import axios from 'axios';
 
 function ListadoAsignaturas() {
   const [data, setData] = useState([]);
-  const headers = ['Clave', 'Asignatura', 'Creditos', 'Area'];
+  const headers = ['Clave', 'Asignatura', 'Creditos', 'Area', 'Eliminar', 'Editar'];
 
-  const handleEditClick = (event, id_usuario, rol) => {
+  const handleEditClick = (event, clave) => {
     // setID(id_usuario);
     // setRol(rol);
     // setShowEditContainer(!showEditContainer);
   };
 
-  const handleDeleteClick = async (event, id_usuario, rol) => {
-    // setID(id_usuario);
-    // setRol(rol);
-    // const result = confirm(`¿Está seguro que desea inhabilitar al usuario ${id_usuario}?`, "Esta acción no se puede deshacer");
-    // if (result) {
-    //   const requestData = {
-    //     id_usuario: id_usuario,
-    //     tipo_usuario: rol.toLowerCase(),
-    //   };
-    //   const response = await axios.post(
-    //     "../api/Usuarios/EliminarUsuario",
-    //     requestData,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //     });
-    //   if (response.status === 200) {
-    //     alert(`Usuario inhabilitado con éxito`);
-
-    //   } else {
-    //     console.log("Problema");
-    //     alert('Hubo problemas al inhabilitar el nuevo usuario, inténtelo de nuevo');
-    //   }
-    // } else {
-    //   console.log("Cancelled.");
-    // }
+  const handleDeleteClick = async (event, clave) => {
+    const result = confirm(`¿Está seguro que desea inhabilitar la asignatura de clave ${clave}?`, "Esta acción no se puede deshacer");
+    if (result) {
+      const requestData = {
+        clave: clave,
+      };
+      const response = await axios.post(
+        "../api/EliminarAsignatura",
+        requestData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      if (response.status === 200) {
+        alert(`Asignatura inhabilitada con éxito`);
+    } else {
+        console.log("Problema");
+        alert('Hubo problemas al inhabilitar la asignatura, inténtelo de nuevo');
+      }
+    } else {
+      console.log("Cancelled.");
+    }
 
   };
-
 
   useEffect(() => {
     const fetchData = () => {
@@ -55,8 +50,8 @@ function ListadoAsignaturas() {
               Asignatura: obj.nombre,
               Creditos: obj.creditos,
               Area: obj.areas_academicas.nombre,
-              Opciones: <button onClick={(e) => handleDeleteClick(e, obj.Id, obj.Tipo)}><CiTrash style={{ width: "50px", height: "25px", color: '#DE5462' }} /></button>,
-              Editar: <button onClick={(e) => handleEditClick(e, obj.Id, obj.Tipo)}><CiPen style={{ width: "50px", height: "25px", color: 'gray' }} /></button>
+              Opciones: <button onClick={(e) => handleDeleteClick(e, obj.clave)}><CiTrash style={{ width: "50px", height: "25px", color: '#DE5462' }} /></button>,
+              Editar: <button onClick={(e) => handleEditClick(e, obj.clave)}><CiPen style={{ width: "50px", height: "25px", color: 'gray' }} /></button>
             };
           });
           setData(newData);

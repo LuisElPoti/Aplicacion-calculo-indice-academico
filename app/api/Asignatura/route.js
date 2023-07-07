@@ -19,6 +19,9 @@ export async function GET(req) {
                             nombre: true
                         }
                     }
+                },
+                where: {
+                    activo: true
                 }
             }
         );
