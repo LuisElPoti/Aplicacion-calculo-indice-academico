@@ -117,6 +117,12 @@ function Encabezado({ userName }) {
           role = 'Administrador'
           break;
 
+          case '/Administrador/ListadoAsignaturas':
+            menuTitle = 'Listado de Asignaturas del Sistema';
+            color = 'color-admin'; // replace with actual color value
+            role = 'Administrador'
+            break;
+
           case '/Administrador/CrearSeccion':
           menuTitle = 'Crear nueva seccion';
           color = 'color-admin'; // replace with actual color value
