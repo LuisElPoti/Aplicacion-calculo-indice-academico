@@ -4,7 +4,7 @@ import axios from 'axios';
 import BotonGuardar from '@/app/components/BotonGuardar'
 import CrearUsuarioForm from './CrearUsuarioForm';
 
-function CrearAsignaturaform() {
+function CrearAsignaturaform({buttonText = "Crear Asignatura", modo = 'crear', id_usuario = null, tipo = null}) {
 
   const [clave, setClave] = useState('');
   const [nombre, setNombre] = useState('');
@@ -130,7 +130,7 @@ return (
 
    
         <div className='boton pl-6 l-10 pt-20'>
-          <BotonGuardar texto="Crear Asignatura" className="amarillo" />
+          <BotonGuardar texto={buttonText} className="amarillo" />
         </div>
 
 

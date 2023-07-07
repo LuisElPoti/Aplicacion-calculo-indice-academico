@@ -35,7 +35,7 @@ model areas_academicas {
 
 model asignaturas {
   id                Int               @id @default(autoincrement())
-  clave             String?           @db.VarChar(7)
+  clave             String?           @unique(map: "clave") @db.VarChar(7)
   creditos          Int?
   nombre            String?           @db.VarChar(80)
   id_area_academica Int?

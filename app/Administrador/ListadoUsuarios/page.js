@@ -1,6 +1,5 @@
 "use client"
 import TableComponent from "@/app/components/TableComponentFilter"
-import TablaBasica from "@/app/components/TablaBasica"
 import CrearUsuarioForm from "@/app/components/CrearUsuarioForm";
 import { CiTrash, CiPen } from "react-icons/ci";
 import React, { useEffect, useState } from 'react';
@@ -81,7 +80,7 @@ export default function ListadoUsuarios() {
   return (
     <>
 
-      <TableComponent headers={headers} data={data} modo="editar" id_usuario={id_usuario} />
+      <TableComponent headers={headers} data={data} />
       <div className="mt-5">
         {showEditContainer && <CrearUsuarioForm buttonText={'Actualizar Datos'} modo='editar' id_usuario={id_usuario} tipo={rol} />}
       </div>
