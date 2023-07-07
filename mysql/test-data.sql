@@ -85,6 +85,7 @@ INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, 
 VALUES 
     ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@institucion.edu.do', 2, '40112345672', '1101001', true, 0, 0, 0, 0);
     ('Paula', 'Mateo', 0.0, 1, '8099975490', 'Calle Segunda 456', 'secret123', '1101111@institucion.edu.do', 2, '40102645071', '1101111', true, 0, 0, 0, 0);
+    ('William', 'Lee', 0.0, 1, '8097889090', 'Calle Primada II', 'heyhey456', '1100000@institucion.edu.do', 2, '40102456070', '1100000', true, 0, 0, 0, 0);
 
 
 INSERT INTO Profesores (nombre, apellido, id_area_academica, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
