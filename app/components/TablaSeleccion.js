@@ -1,4 +1,3 @@
-"use client"
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,16 +7,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
-import { ClassNames } from '@emotion/react';
 
+const TablaSeleccion = ({ headers, data, subData, handleDropdownClick }) => {
+  const [expandedRows, setExpandedRows] = useState([]);
 
-const TablaSeleccion = ({ headers, data, subData, isOpen}) => {
-
-    
+  const handleExpandRow = (rowIndex) => {
+    if (expandedRows.includes(rowIndex)) {
+      setExpandedRows(expandedRows.filter((row) => row !== rowIndex));
+    } else {
+      setExpandedRows([...expandedRows, rowIndex]);
+    }
+  };
 
   return (
-    
-    <TableContainer component={Paper} sx={{ width: 1050, fontFamily: 'Poppins', height: 500, borderRadius:'40px', boxShadow:'none'}}>
+    <TableContainer component={Paper} sx={{ width: 1050, fontFamily: 'Poppins', height: 500, borderRadius: '40px', boxShadow: 'none' }}>
       <Table sx={{ width: 1050, height: 100 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -30,31 +33,31 @@ const TablaSeleccion = ({ headers, data, subData, isOpen}) => {
         </TableHead>
         <TableBody>
           {data.map((row, rowIndex) => (
-            <TableRow key={rowIndex} sx={{ '&:last-child td, &:last-child th': { border: 0 }, backgroundColor: isOpen ? '#F3F6FF' : 'white'}}>
-              {Object.values(row).map((value, columnIndex) => (
-                <TableCell align="center" key={columnIndex}>
-                  {value}
-                </TableCell>
-              ))}
-
-            </TableRow>
-            
+            <>
+              <TableRow key={rowIndex} sx={{ backgroundColor: expandedRows.includes(rowIndex) ? '#F3F6FF' : 'white' }}>
+                {Object.entries(row).map(([key, value], columnIndex) => (
+                  <TableCell align="center" key={columnIndex}>
+                    {key === 'DropdownAsignatura' ? (
+                      <button onClick={() => handleExpandRow(rowIndex)}>
+                        {value}
+                      </button>
+                    ) : (
+                      value
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+              {expandedRows.includes(rowIndex) && (
+                <TableRow key={`subData-${rowIndex}`}>
+                  {Object.values(subData[rowIndex]).map((value, columnIndex) => (
+                    <TableCell align="center" key={columnIndex}>
+                      {value}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              )}
+            </>
           ))}
-
-          {isOpen && subData.map((row, rowIndex) => (
-        
-        <TableRow key={rowIndex} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-          {Object.values(row).map((value, columnIndex) => (
-            <TableCell align="center" key={columnIndex}>
-              {value}
-            </TableCell>
-          ))}
-
-        </TableRow>
-      ))}
-
-         
-
         </TableBody>
       </Table>
     </TableContainer>
@@ -62,3 +65,5 @@ const TablaSeleccion = ({ headers, data, subData, isOpen}) => {
 };
 
 export default TablaSeleccion;
+
+

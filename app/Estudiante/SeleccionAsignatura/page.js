@@ -24,17 +24,20 @@ export default function SeleccionAsignatura() {
     ]
 
     //DESPLEGAR SECCIONES DISPONIBLES
-    const [showAsignaturaSeccionDisponible, setShowAsignaturaSeccionDisponible] = useState(false);
+    // const [showAsignaturaSeccionDisponible, setShowAsignaturaSeccionDisponible] = useState(false);
 
-    const handleAsignaturaSeccionDisponible = () => {
-        setShowAsignaturaSeccionDisponible(!showAsignaturaSeccionDisponible);
-        
-    }
+    // const handleAsignaturaSeccionDisponible = () => {
+    //     setShowAsignaturaSeccionDisponible(!showAsignaturaSeccionDisponible);
+
+    // }
+
+    
+
 
     const [seccionSeleccionada, setSeccionSeleccionada] = useState([]);
 
     const handleSeccionSeleccionadaChange = (e) => {
-        
+
         const { value, checked } = e.target;
         if (checked) {
             // Agregar la seccion seleccionada a la lista de secciones seleccionadas
@@ -46,78 +49,91 @@ export default function SeleccionAsignatura() {
         console.log(seccionSeleccionada);
     }
 
-
-
     
-   
+
+
+
+
+
+
 
     // TABLA SELECCION
 
 
-    const headersSeleccion = ["", 'Asignatura','Codigo', 'Cupos', 'Seccion', 'Horario', 'Aula', 'Profesor', ""];
+    const headersSeleccion = ["", 'Asignatura', 'Codigo', 'Cupos', 'Seccion', 'Horario', 'Aula', 'Profesor', ""];
     const dataSeleccion = [
-        { DropdownAsignatura: <button><Image src='/icons/ArrowDown.svg' width={10} height={10} alt='Arrown Down' onClick={handleAsignaturaSeccionDisponible} /></button>,
-        Asignatura: 'Estructuras de Datos',
-        Codigo: 'IDS305', 
-        Cupos: '', 
-        Seccion: '', 
-        Horario: '', 
-        Aula: '', 
-        Profesor: '',
-        DeleteAsignatura: <button><Image src='/icons/IconX.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
-     },
-        { DropdownAsignatura: <button><Image src='/icons/ArrowDown.svg' width={10} height={10} alt='Arrown Down' onClick={handleAsignaturaSeccionDisponible} /></button>,
-        Asignatura: 'Estructuras de Datos',
-        Codigo: 'IDS305', 
-        Cupos: '', 
-        Seccion: '', 
-        Horario: '', 
-        Aula: '', 
-        Profesor: '',
-        DeleteAsignatura: <button><Image src='/icons/IconX.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
-     },
+        {
+            DropdownAsignatura: <button><Image src='/icons/ArrowDown.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
+            Cupos: '',
+            Seccion: '',
+            Horario: '',
+            Aula: '',
+            Profesor: '',
+            DeleteAsignatura: <button><Image src='/icons/IconX.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
+        },
+        {
+            DropdownAsignatura: <button><Image src='/icons/ArrowDown.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
+            Cupos: '',
+            Seccion: '',
+            Horario: '',
+            Aula: '',
+            Profesor: '',
+            DeleteAsignatura: <button><Image src='/icons/IconX.svg' width={10} height={10} alt='Arrown Down' onClick={""} /></button>,
+        },
     ];
 
-    
+
 
     const subDataSeleccion = [
-        { RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange}/>,
-        Asignatura: 'Estructuras de Datos',
-        Codigo: 'IDS305', 
-        Cupos: '40', 
-        Seccion: '02', 
-        Horario: 'LU-MI 14/16', 
-        Aula: 'GC402', 
-        Profesor: 'Allen Silverio',
-     },
-      
-        { RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange}/>,
-        Asignatura: 'Estructuras de Datos',
-        Codigo: 'IDS305', 
-        Cupos: '40', 
-        Seccion: '02', 
-        Horario: 'LU-MI 14/16', 
-        Aula: 'GC402', 
-        Profesor: 'Allen Silverio',
-     },
-      
-        { RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange}/>,
-        Asignatura: 'Estructuras de Datos',
-        Codigo: 'IDS305', 
-        Cupos: '40', 
-        Seccion: '02', 
-        Horario: 'LU-MI 14/16', 
-        Aula: 'GC402', 
-        Profesor: 'Allen Silverio',
-     },
-      
+        {
+            RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange} />,
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
+            Cupos: '40',
+            Seccion: '02',
+            Horario: 'LU-MI 14/16',
+            Aula: 'GC402',
+            Profesor: 'Allen Silverio',
+        },
+
+        {
+            RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange} />,
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
+            Cupos: '40',
+            Seccion: '02',
+            Horario: 'LU-MI 14/16',
+            Aula: 'GC402',
+            Profesor: 'Allen Silverio',
+        },
+
+        {
+            RadioButton: <input type='radio' name="radio-group" value={'IDS305 - 02'} onChange={handleSeccionSeleccionadaChange} />,
+            Asignatura: 'Estructuras de Datos',
+            Codigo: 'IDS305',
+            Cupos: '40',
+            Seccion: '02',
+            Horario: 'LU-MI 14/16',
+            Aula: 'GC402',
+            Profesor: 'Allen Silverio',
+        },
+
     ];
 
-    
+    const [dropdownStates, setDropdownStates] = useState(Array(dataSeleccion.length).fill(false));
+    const handleAsignaturaSeccionDisponible = (index) => {
+        setDropdownStates((prevStates) => {
+            const newStates = [...prevStates];
+            newStates[index] = !newStates[index];
+            return newStates;
+        });
+    };
 
-    
 
-    
 
     return (
         <>
@@ -131,7 +147,7 @@ export default function SeleccionAsignatura() {
                 </div>
 
                 <div className='tablaSeleccion'>
-                <TablaSeleccion data={dataSeleccion} subData={subDataSeleccion} headers={headersSeleccion} isOpen={showAsignaturaSeccionDisponible}/>
+                    <TablaSeleccion data={dataSeleccion} subData={subDataSeleccion} headers={headersSeleccion} isOpen={dropdownStates} handleDropdownClick={handleAsignaturaSeccionDisponible} />
 
                 </div>
 
