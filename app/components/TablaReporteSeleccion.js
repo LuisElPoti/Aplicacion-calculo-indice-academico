@@ -8,20 +8,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-/*
-function createData(Asignatura, Seccion, Aula, Horario, Profesor) {
-  return { Asignatura, Seccion, Aula, Horario, Profesor };
-}
-const rows = [
-  createData('Estructuras de Datos - IDS305', 1, 'GC-303', 'LU-MI 14/16', 'Allen Silverio'),
-  createData('Estructuras de Datos - IDS305', 2, 'GC-303', 'LU-MI 16/18', 'Allen Silverio'),
-];
-*/
 
-const TablaBasica = ({ headers, data}) => {
+const TablaReporteSeleccion = ({ headers, data}) => {
   return (
-    <TableContainer component={Paper} sx={{ width: 730, fontFamily: 'Poppins', height: 400}}>
-      <Table sx={{ width: 700, height: 100 }} aria-label="simple table">
+    <TableContainer component={Paper} sx={{ width: 1050, fontFamily: 'Poppins', height: 400, borderRadius:'35px'}}>
+      <Table sx={{ width: 1050, height: 100 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             {headers.map((header, index) => (
@@ -47,4 +38,4 @@ const TablaBasica = ({ headers, data}) => {
   );
 };
 
-export default TablaBasica;
+export default TablaReporteSeleccion;

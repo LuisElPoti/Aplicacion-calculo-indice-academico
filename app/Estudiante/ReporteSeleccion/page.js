@@ -4,6 +4,7 @@ import FiltroReporteSeleccion from '@/app/components/FiltroReportes'
 import TablaBasica from '@/app/components/TablaBasica'
 import BotonGuardar from '@/app/components/BotonGuardar'
 import Cookies from 'js-cookie';
+import TablaReporteSeleccion from '@/app/components/TablaReporteSeleccion';
 
 function ReporteSeleccion() {
   const [data, setData] = useState([]);
@@ -57,13 +58,14 @@ function ReporteSeleccion() {
   return (
 
     <>
-      <div className='flex'>
+      <div className='flex items-center mb-5'>
         <FiltroReporteSeleccion items={menuItemsYear} label="Año" onChange={handleOnChangeAño} selectedItem={año} />
         <FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre" onChange={handleOnChangeTrim} selectedItem={trimestre} />
         <BotonGuardar texto="Generar reporte" className="azul" onClick={handleClick} />
 
       </div>
-      <TablaBasica headers={headers} data={data} />
+      {/* <TablaBasica headers={headers} data={data} /> */}
+      <TablaReporteSeleccion headers={headers} data={data}/>
     </>
   )
 }

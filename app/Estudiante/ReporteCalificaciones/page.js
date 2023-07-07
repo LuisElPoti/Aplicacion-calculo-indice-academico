@@ -5,6 +5,7 @@ import TablaBasica from '@/app/components/TablaBasica'
 import Tarjeta from '@/app/components/Tarjeta';
 import BotonGuardar from '@/app/components/BotonGuardar';
 import Cookies from 'js-cookie';
+import TablaReporteCalificaciones from '@/app/components/TablaReporteCalificaciones';
 
 function ReporteCalificaciones() {
   const [data, setData] = useState([]);
@@ -97,7 +98,7 @@ function ReporteCalificaciones() {
   return (
     <>
 
-      <div className='flex'>
+      <div className='flex items-center mb-5'>
         <FiltroReporteSeleccion items={menuItemsYear} label="Año" onChange={handleOnChangeAño} selectedItem={año} />
         <FiltroReporteSeleccion items={menuItemsTrimestre} label="Trimestre" onChange={handleOnChangeTrim} selectedItem={trimestre} />
         <BotonGuardar texto="Generar reporte" className="azul" onClick={handleClick} />
@@ -110,7 +111,8 @@ function ReporteCalificaciones() {
       </div>
 
       <h1 className='text-xl mb-6 font-bold'>Calificaciones del trimestre</h1>
-      <TablaBasica headers={headers} data={data} />
+      {/* <TablaBasica headers={headers} data={data}/> */}
+      <TablaReporteCalificaciones headers={headers} data={data}/>
 
     </>
 

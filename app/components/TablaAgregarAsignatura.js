@@ -16,7 +16,7 @@ export default function TablaAgregarAsignatura({headers, data}) {
         <TableHead>
           <TableRow>
             {headers.map((header, index) => (
-              <TableCell align="center" key={index}>
+              <TableCell align="left" key={index}>
                 {header}
               </TableCell>
             ))}
@@ -26,7 +26,7 @@ export default function TablaAgregarAsignatura({headers, data}) {
           {data.map((row, rowIndex) => (
             <TableRow key={rowIndex} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               {Object.values(row).map((value, columnIndex) => (
-                <TableCell align="center" key={columnIndex}>
+                <TableCell align="left" key={columnIndex}>
                   {value}
                 </TableCell>
               ))}

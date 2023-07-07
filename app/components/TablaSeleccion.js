@@ -25,7 +25,7 @@ const TablaSeleccion = ({ headers, data, subData, handleDropdownClick }) => {
         <TableHead >
           <TableRow>
             {headers.map((header, index) => (
-              <TableCell align="center" key={index}>
+              <TableCell align="left" key={index}>
                 {header}
               </TableCell>
             ))}
@@ -36,7 +36,7 @@ const TablaSeleccion = ({ headers, data, subData, handleDropdownClick }) => {
             <>
               <TableRow key={rowIndex} sx={{ backgroundColor: expandedRows.includes(rowIndex) ? '#E5ECFF' : 'white' }}>
                 {Object.entries(row).map(([key, value], columnIndex) => (
-                  <TableCell align="center" key={columnIndex}>
+                  <TableCell align="left" key={columnIndex}>
                     {key === 'DropdownAsignatura' ? (
                       <button onClick={() => handleExpandRow(rowIndex)}>
                         {value}
