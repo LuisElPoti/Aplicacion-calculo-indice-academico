@@ -64,6 +64,12 @@ function Encabezado({ userName }) {
           role = 'Estudiante'
           break;
 
+        case '/Estudiante/SeleccionAsignatura':
+          menuTitle = 'Seleccionar Asignaturas';
+          color = 'color-estudiante'; // replace with actual color value
+          role = 'Estudiante'
+          break;
+
 
    // Pantallas Profesor
    case '/Profesor':

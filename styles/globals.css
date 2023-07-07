@@ -1357,7 +1357,7 @@
   padding: 5px;
   text-align: center;
 }
-
+/* Graficos */
 .grafico {
   font-family: sans-serif;
   text-align: center;
@@ -1401,3 +1401,37 @@
   font-weight: bold;
 }
 
+/* SELECCION ASIGNATURAS */
+
+.buscar-seleccionAsignaturas {
+  width: 180px;
+}
+
+.filtroBoton-seleccionarAsignaturas {
+  width: 400px;
+  height: 50px;
+  font-size: 14px;
+  background-color: #1F1F37;
+  color: white;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-bottom: 0.5%;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.botonGuardar-seleccionAsignaturas{
+  background-color: #D176FF;
+  border-radius: 1.5625rem;
+  color: white;
+  font-weight: 600;
+  padding: 10px 30px;
+}
+
+.botonCancelar-seleccionAsignaturas{
+  background-color: #ED6F71;
+  border-radius: 1.5625rem;
+  color: white;
+  font-weight: 600;
+  padding: 10px 30px;
+}
