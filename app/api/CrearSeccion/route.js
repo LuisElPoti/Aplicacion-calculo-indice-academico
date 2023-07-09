@@ -1,8 +1,6 @@
-import { areas_academicas } from '@/prisma/client';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../_base';
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
 
 export async function POST(req) {
     const{capacidad, asignatura, profesor, cupo} = await req.json();

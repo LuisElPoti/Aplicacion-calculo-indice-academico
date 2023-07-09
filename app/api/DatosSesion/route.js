@@ -1,10 +1,8 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../_base';
 
 import { NextResponse } from "next/server";
-
-const prisma = new PrismaClient();
 
 export async function POST(req) {
 
@@ -34,14 +32,14 @@ export async function POST(req) {
             direccion: true,
             contrase_a: true,
             documento: true,
-            tipo_documento:{
-              select:{
+            tipo_documento: {
+              select: {
                 id: true,
                 nombre: true
               }
             },
             carreras: {
-              select:{
+              select: {
                 id: true,
                 nombre: true,
                 descripcion: true
@@ -71,8 +69,8 @@ export async function POST(req) {
             direccion: true,
             contrase_a: true,
             documento: true,
-            tipo_documento:{
-              select:{
+            tipo_documento: {
+              select: {
                 id: true,
                 nombre: true
               }
@@ -95,8 +93,8 @@ export async function POST(req) {
             direccion: true,
             contrase_a: true,
             documento: true,
-            tipo_documento:{
-              select:{
+            tipo_documento: {
+              select: {
                 id: true,
                 nombre: true
               }
@@ -110,7 +108,7 @@ export async function POST(req) {
       }
 
     }
-    return NextResponse.json( respuesta, { status: 200 })
+    return NextResponse.json(respuesta, { status: 200 })
   }
 
 }
