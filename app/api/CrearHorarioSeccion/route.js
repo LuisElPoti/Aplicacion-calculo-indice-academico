@@ -3,9 +3,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(req){
     const{idSeccion, dia, horaInicio, horaFin, aula} = await req.json();
+    console.log(idSeccion, dia, horaInicio, horaFin, aula);
 
     try{
-        if( !dia || !horaInicio || !horaFin || !aula){
+        if( !dia || !horaInicio || !horaFin || !aula || !idSeccion){
             return NextResponse.json({ message: 'Uno o varios de los parámetros están vacíos' }, { status: 500 });
         }
         else{
