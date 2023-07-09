@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function TablaSeleccionOficial({ headers, data, width, height }) {
+export default function TablaSeleccionOficial({ headers, data }) {
     const [showSubData, setShowSubData] = useState({});
     const [selectedSubData, setSelectedSubData] = useState({});
 
