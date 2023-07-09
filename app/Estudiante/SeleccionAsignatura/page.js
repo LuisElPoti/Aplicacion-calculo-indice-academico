@@ -67,7 +67,7 @@ export default function SeleccionAsignatura() {
             Aula: '',
             Profesor: '',
             seccionesDisponibles: [{ id: 'IDS300-1', Asignatura: 'Estructuras de Datos', Codigo: 'IDS305', Cupos: '40', Seccion: '01', Horario: 'LU-MI 14/16', Aula: 'GC402', Profesor: 'Allen Silverio' },
-            { id: 'IDS300-2', Asignatura: 'Estructuras de Datos', Codigo: 'IDS305', Cupos: '40', Seccion: '01', Horario: 'LU-MI 14/16', Aula: 'GC402', Profesor: 'Allen Silverio' }]
+            { id: 'IDS300-2', Asignatura: 'Estructuras de Datos', Codigo: 'IDS305', Cupos: '40', Seccion: '02', Horario: 'LU-MI 14/16', Aula: 'GC402', Profesor: 'Allen Silverio' }]
         },
         {
             id: '02',
