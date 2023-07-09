@@ -15,9 +15,7 @@ function CrearSeccionForm() {
     const [profesores, setProfesores] = useState([]);
     const [cupo, setCupo] = useState('');
     const [diasSeleccionados, setDiasSeleccionados] = useState([]);
-    const [horaInicio, setHoraInicio] = useState('');
-    const [horaFin, setHoraFin] = useState('');
-    const [aulaSeleccionada, setAulaSeleccionada] = useState('');
+    const [horarios, setHorarios] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,23 +61,24 @@ function CrearSeccionForm() {
     }, [asignatura]);
 
     const handleAsignaturaChange = async (event) => {
-
         const selectedAsignatura = event.target.value;
         setAsignatura(selectedAsignatura);
         const profesoresData = await getProfesores(selectedAsignatura);
-        const ProfesoresFormatted = profesoresData.map((profesor) => ({
+        const profesoresFormatted = profesoresData.map((profesor) => ({
             value: profesor.id,
             label: profesor.nombre,
         }));
-        setProfesores(ProfesoresFormatted);
+        setProfesores(profesoresFormatted);
     };
       
     const handleProfesorChange = (event) => {
         setProfesor(event.target.value);
     };
     
-    const handleAulaChange = (selectedAula) => {
-        setAulaSeleccionada(selectedAula);
+    const handleAulaChange = (selectedAula, index) => {
+        const newHorarios = [...horarios];
+        newHorarios[index].aula = selectedAula;
+        setHorarios(newHorarios);
     };      
 
     const handleCupoChange = (event) => {
@@ -89,23 +88,29 @@ function CrearSeccionForm() {
     const handleDiaSeleccionado = (event) => {
         const { value, checked } = event.target;
         if (checked) {
-            // Agregar el día seleccionado a la lista de días seleccionados
-            setDiasSeleccionados([...diasSeleccionados, value]);
+            // Agregar el día seleccionado a la lista de horarios
+            setHorarios([...horarios, {
+                dia: value,
+                horaInicio: '',
+                horaFin: '',
+                aula: ''
+            }]);
         } else {
-            // Remover el día deseleccionado de la lista de días seleccionados
-            setDiasSeleccionados(diasSeleccionados.filter((dia) => dia !== value));
+            // Remover el horario correspondiente al día deseleccionado
+            setHorarios(horarios.filter((horario) => horario.dia !== value));
         }
     };
 
-    const [horarios, setHorarios] = useState({});
-    
-
-    const handleHoraInicioChange = (event) => {
-        setHoraInicio(event.target.value);
+    const handleHoraInicioChange = (event, index) => {
+        const newHorarios = [...horarios];
+        newHorarios[index].horaInicio = event.target.value;
+        setHorarios(newHorarios);
     };
 
-    const handleHoraFinChange = (event) => {
-        setHoraFin(event.target.value);
+    const handleHoraFinChange = (event, index) => {
+        const newHorarios = [...horarios];
+        newHorarios[index].horaFin = event.target.value;
+        setHorarios(newHorarios);
     };
 
     const handleSubmit = async (event) => {
@@ -123,30 +128,26 @@ function CrearSeccionForm() {
             const responseSeccion = await axios.post('../api/CrearSeccion', data);
             console.log(responseSeccion.data);
             const seccionId = responseSeccion.data.id;
+            
             // Crear los horarios de sección
-            for (const dia of diasSeleccionados) {
+            for (const horario of horarios) {
+                const horarioData = {
+                    dia: horario.dia,
+                    horaInicio: parseInt(horario.horaInicio),
+                    horaFin: parseInt(horario.horaFin),
+                    idSeccion: seccionId,
+                    aula: horario.aula
+                };
 
-              console.log(aulaSeleccionada)
-              const horarioData = {
-                dia: dia,
-                horaInicio: parseInt(horaInicio) ,
-                horaFin: parseInt(horaFin),
-                idSeccion: seccionId,
-                aula: aulaSeleccionada
-              };
-              console.log(horarioData)
-      
-              const responseHorario = await axios.post('../api/CrearHorarioSeccion', horarioData);
-              console.log(responseHorario.data)
+                const responseHorario = await axios.post('../api/CrearHorarioSeccion', horarioData);
+                console.log(responseHorario.data);
             }
 
-            
-      
             console.log("Sección y horarios creados con éxito");
-            alert("Sección y horarios creados con éxito")
+            alert("Sección y horarios creados con éxito");
             // Hacer algo con la respuesta, como redireccionar a otra página o mostrar un mensaje de éxito
-          } catch (error) {
-            alert("Error al enviar la solicitud POST")
+        } catch (error) {
+            alert("Error al enviar la solicitud POST");
             console.error('Error al enviar la solicitud POST:', error);
             // Mostrar un mensaje de error al usuario
         }
@@ -156,10 +157,7 @@ function CrearSeccionForm() {
         <form method="" onSubmit={handleSubmit}>
 
             <div className="form-crearSeccion flex">
-
-
                 <div className="fields-crearSeccion w-1/2">
-
                     <div className="formElement-crearSeccion">
                         <DynamicSelect
                             options={asignaturas}
@@ -189,21 +187,26 @@ function CrearSeccionForm() {
                         <DiasSemanaSelector onChange={handleDiaSeleccionado} />
                     </div>
 
-                <BotonGuardar texto={"Crear Seccion"} className={"amarillo"} onClick={""} />
-
+                    <BotonGuardar texto={"Crear Seccion"} className={"amarillo"} onClick={""} />
                 </div>
 
                 <div className="horarios-crearSeccion ml-12">
                     <h6>Horarios</h6>
                     <div className="mt-5">
-                        {diasSeleccionados.map((dia, index) => (
-                            <CardHorario key={index} dia={dia} horaInicio={horaInicio} horaFin={horaFin} 
-                                handleHoraInicioChange={handleHoraInicioChange} handleHoraFinChange={handleHoraFinChange} handleAulaChange={handleAulaChange}/>
+                        {horarios.map((horario, index) => (
+                            <CardHorario
+                                key={index}
+                                dia={horario.dia}
+                                horaInicio={horario.horaInicio}
+                                horaFin={horario.horaFin}
+                                aulaSeleccionada={horario.aula}
+                                handleHoraInicioChange={(event) => handleHoraInicioChange(event, index)}
+                                handleHoraFinChange={(event) => handleHoraFinChange(event, index)}
+                                handleAulaChange={(selectedAula) => handleAulaChange(selectedAula, index)}
+                            />
                         ))}
                     </div>
-
                 </div>
-
             </div>
         </form>
     )
@@ -213,7 +216,6 @@ async function getProfesores(asignaturaId){
     const requestData = {
         asignatura: parseInt(asignaturaId),
     };
-    console.log(asignaturaId)
     const response = await axios.get('../api/ObtenerProfesor', {
         params: requestData,
     });

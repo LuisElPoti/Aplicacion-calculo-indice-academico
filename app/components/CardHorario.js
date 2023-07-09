@@ -1,9 +1,13 @@
 "use client"
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import DynamicSelect from "./DynamicSelect";
 
-export default function CardHorario({ dia, handleHoraInicioChange, handleHoraFinChange, handleAulaChange}) {
-  const [aulaSeleccionada, setAulaSeleccionada] = useState('');
+export default function CardHorario({ dia, handleHoraInicioChange, aulaInicial, handleHoraFinChange, handleAulaChange}) {
+  const [aulaSeleccionada, setAulaSeleccionada] = useState(aulaInicial);
+
+  useEffect(() => {
+    handleAulaChange(aulaInicial);  // Llamar a la función de actualización con el valor inicial del aula al inicializar el componente
+  }, []);
 
   const handleAulaSelectChange = (event) => {
     const selectedAula = event.target.value;
