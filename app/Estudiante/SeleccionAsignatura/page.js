@@ -120,11 +120,11 @@ export default function SeleccionAsignatura() {
             <div className='agregarAsignaturas-container mt-5 mb-8 flex'>
 
                 <div className='filtrosBotones-seleccionarAsignaturas mr-7 flex flex-col'>
-                    <BotonGuardar texto="CIENCIAS BASICAS Y AMBIENTALES (CB)" className={'filtroBoton-seleccionarAsignaturas'} onClick={""} />
-                    <BotonGuardar texto="CIENCIAS DE LA SALUD (SA)" className={'filtroBoton-seleccionarAsignaturas'} onClick={""} />
-                    <BotonGuardar texto="CIENCIAS SOCIALES Y HUMANIDADES (SH)" className={'filtroBoton-seleccionarAsignaturas'} onClick={""} />
-                    <BotonGuardar texto="ECONOMIA Y NEGOCIOS (ING)" className={'filtroBoton-seleccionarAsignaturas'} onClick={""} />
-                    <BotonGuardar texto="INGENIERIAS (IN)" className={'filtroBoton-seleccionarAsignaturas'} onClick={""} />
+                    <BotonGuardar texto="CIENCIAS BASICAS Y AMBIENTALES (CB)" className={'filtroBoton-seleccionarAsignaturas'} />
+                    <BotonGuardar texto="CIENCIAS DE LA SALUD (SA)" className={'filtroBoton-seleccionarAsignaturas'}/>
+                    <BotonGuardar texto="CIENCIAS SOCIALES Y HUMANIDADES (SH)" className={'filtroBoton-seleccionarAsignaturas'}/>
+                    <BotonGuardar texto="ECONOMIA Y NEGOCIOS (ING)" className={'filtroBoton-seleccionarAsignaturas'}/>
+                    <BotonGuardar texto="INGENIERIAS (IN)" className={'filtroBoton-seleccionarAsignaturas'}/>
                 </div>
 
                 <div className='tablaAgregarAsignatura-seleccionAsignaturas'>
