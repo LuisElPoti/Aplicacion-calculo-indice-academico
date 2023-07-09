@@ -1,0 +1,33 @@
+'use server'
+
+import { prisma } from '../_base';
+import { NextResponse } from "next/server";
+
+export async function POST(req){
+    const {clave, nombre, creditos, area_academica, id} = await req.json();
+
+    try {
+        if (!clave || !nombre || !creditos || !area_academica || !id) {
+            return NextResponse.json({ message: 'Uno o varios de los parámetros están vacíos' }, { status: 500 });
+        }
+        else{
+            const asignatura = await prisma.asignaturas.update({
+                data: {
+                    clave,
+                    creditos,
+                    nombre,
+                    id_area_academica: area_academica,
+                },
+                where:{
+                    id: id
+                }
+
+            })
+            console.log("Asignatura modificada con éxito");
+            return NextResponse.json({ message: 'Asignatura registrada con éxito' }, { status: 200 });
+        }
+    } catch (error) {
+        console.error('Error al modificar la asignatura:', error);
+        return NextResponse.json({ message: 'Error al registrar la asignatura' }, { status: 500 });
+    }
+}

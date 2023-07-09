@@ -73,7 +73,7 @@ function ListadoAsignaturas() {
         <TableComponent headers={headers} data={data} />
       </div>
       <div className="mt-5">
-        {showEditContainer && <CrearAsignaturaform buttonText={'Actualizar Datos'} modo='editar' clave={clave} />}
+        {showEditContainer && <CrearAsignaturaform buttonText={'Actualizar Datos'} modo='editar' clave_asignatura={clave} />}
       </div>
     </>
 
