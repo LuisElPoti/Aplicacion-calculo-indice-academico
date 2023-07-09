@@ -69,6 +69,18 @@ export default function SeleccionAsignatura() {
             seccionesDisponibles: [{ id: 'IDS300-1', Asignatura: 'Estructuras de Datos', Codigo: 'IDS305', Cupos: '40', Seccion: '01', Horario: 'LU-MI 14/16', Aula: 'GC402', Profesor: 'Allen Silverio' },
             { id: 'IDS300-2', Asignatura: 'Estructuras de Datos', Codigo: 'IDS305', Cupos: '40', Seccion: '01', Horario: 'LU-MI 14/16', Aula: 'GC402', Profesor: 'Allen Silverio' }]
         },
+        {
+            id: '02',
+            Asignatura: 'Algoritmos Computacionales',
+            Codigo: 'INF322',
+            Cupos: '',
+            Seccion: '',
+            Horario: '',
+            Aula: '',
+            Profesor: '',
+            seccionesDisponibles: [{ id: 'INF322-1', Asignatura: 'Algoritmos Computacionales', Codigo: 'INF322', Cupos: '40', Seccion: '01', Horario: 'LU-MI 14/16', Aula: 'GC402', Profesor: 'Allen Silverio' },
+            { id: 'INF322-2', Asignatura: 'Algoritmos Computacionales', Codigo: 'INF322', Cupos: '40', Seccion: '02', Horario: 'LU-MI 14/16', Aula: 'GC402', Profesor: 'Allen Silverio' }]
+        },
     ];
 
 
