@@ -1435,3 +1435,24 @@
   font-weight: 600;
   padding: 10px 30px;
 }
+
+/* TABLA SELECCION OFICIAL */
+
+.tabla-seleccion-oficial {
+  font-size: 14px;
+  font-family: "Poppins", Helvetica;;
+
+  
+
+  
+}
+
+.tablaSeleccion-container {
+  height: fit-content;
+  
+  
+}
+
+.bg-F3F6FF {
+  background-color: #F3F6FF;
+}
