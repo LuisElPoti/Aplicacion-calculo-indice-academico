@@ -29,13 +29,38 @@ function CrearSeccionForm() {
                   label: asignatura.nombre,
                 }));
                 setAsignaturas(asignaturasOptions);
-              } catch (error) {
+
+                // Establecer el valor inicial de asignatura
+                if (asignaturasOptions.length > 0) {
+                    setAsignatura(asignaturasOptions[0].value);
+                }
+            } catch (error) {
                 console.error("Error al obtener las asignaturas:", error);
-              }
+            }
         };
       
         fetchData();
     }, []);
+
+    useEffect(() => {
+        const fetchProfesores = async () => {
+            if (asignatura) {
+                const profesoresData = await getProfesores(asignatura);
+                const profesoresFormatted = profesoresData.map((profesor) => ({
+                    value: profesor.id,
+                    label: profesor.nombre,
+                }));
+                setProfesores(profesoresFormatted);
+
+                // Establecer el valor inicial de profesor
+                if (profesoresFormatted.length > 0) {
+                    setProfesor(profesoresFormatted[0].value);
+                }
+            }
+        };
+
+        fetchProfesores();
+    }, [asignatura]);
 
     const handleAsignaturaChange = async (event) => {
 
