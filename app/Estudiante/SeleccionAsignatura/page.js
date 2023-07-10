@@ -53,24 +53,28 @@ export default function SeleccionAsignatura() {
   const headersSeleccion = ['', 'Asignatura', 'Codigo', 'Cupos', 'Seccion', 'Horario', 'Aula', 'Profesor', ''];
 
   const handleAgregarAsignatura = (asignatura) => {
-    const asignaturaExistente = dataSeleccion.find(asignaturaSeleccionada => asignaturaSeleccionada.Codigo === asignatura.clave);
-
+    const asignaturaExistente = dataSeleccion.find(
+      (asignaturaSeleccionada) => asignaturaSeleccionada.Codigo === asignatura.clave
+    );
+  
     if (asignaturaExistente) {
       alert('La asignatura ya fue agregada');
     } else {
       const seccionesDisponibles = asignatura.secciones?.map(seccion => {
+        const horarios = seccion.horario_secciones.map(horario => `${horario.dia} ${horario.hora_inicio}/${horario.hora_fin}`);
+        const aulas = seccion.horario_secciones.map(horario => horario.aula);
         return {
           id: seccion.id,
           Asignatura: asignatura.nombre,
           Codigo: asignatura.clave,
-          Cupos: seccion.cupos,
+          Cupos: seccion.cupo,
           Seccion: seccion.numero,
-          Horario: `${seccion.horario_secciones[0].dia} ${seccion.horario_secciones[0].hora_inicio}/${seccion.horario_secciones[0].hora_fin}`,
-          Aula: seccion.horario_secciones[0].aula,
-          Profesor: seccion.profesores.nombre,
+          Horario: horarios.join(', '), 
+          Aula: aulas.join(', '),
+          Profesor: seccion.profesores.nombre + ' ' + seccion.profesores.apellido
         };
       }) || [];
-
+  
       const nuevaAsignatura = {
         id: asignatura.id,
         Asignatura: asignatura.nombre,
@@ -85,6 +89,7 @@ export default function SeleccionAsignatura() {
       setDataSeleccion(prevData => [...prevData, nuevaAsignatura]);
     }
   };
+  
 
   return (
     <>

@@ -15,6 +15,15 @@ export async function GET(req) {
                     areas_academicas:{
                         descripcion: area
                     }
+                },
+                include: {
+                    secciones: {
+                        
+                        include: {
+                            profesores: true,
+                            horario_secciones: true
+                        }
+                    }
                 }
 
             }
