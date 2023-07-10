@@ -27,7 +27,7 @@ VALUES
 ('Finalizado');
 
 
-INSERT INTO Periodos (id_trimestre, id_estado_periodo, año) 
+INSERT INTO Periodos (id_trimestre, id_estado_periodo, `año`) 
 VALUES 
 (1,3,2023),
 (2,3,2023),
@@ -78,17 +78,17 @@ VALUES
 ('Ingenieria Biomédica', 'IBI',1, 280, 112)
 ;
 
-INSERT INTO Administradores(nombre, apellido, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
+INSERT INTO Administradores(nombre, apellido, telefono, direccion, `contraseña`, correo, id_tipo_documento, documento, matricula, activo)
 VALUES ('Gustavo', 'Mejia', '0000000000', 'Calle Gustavo Mejia Ricart', 'Pepito1234', 'Gustavo.Mejia@gradehub.edu.do', 1, '123456789', '3000001',  true);
 
-INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo, indice_trimestral, asignaturas_aprobadas, creditos_aprobados, trimestres_aprobados)
+INSERT INTO Estudiantes(nombre, apellido, indice_general, id_carrera, telefono, direccion, `contraseña`, correo, id_tipo_documento, documento, matricula, activo, indice_trimestral, asignaturas_aprobadas, creditos_aprobados, trimestres_aprobados)
 VALUES 
     ('Juan', 'Pérez', 0.0, 1, '8094567890', 'Calle Principal 123', 'secreta123', '1101001@gradehub.edu.do', 2, '40112345672', '1101001', true, 0, 0, 0, 0),
     ('Paula', 'Mateo', 0.0, 1, '8099975490', 'Calle Segunda 456', 'secret123', '1101111@gradehub.edu.do', 2, '40102645071', '1101111', true, 0, 0, 0, 0),
     ('William', 'Lee', 0.0, 1, '8097889090', 'Calle Primada II', 'heyhey456', '1100000@gradehub.edu.do', 2, '40102456070', '1100000', true, 0, 0, 0, 0);
 
 
-INSERT INTO Profesores (nombre, apellido, id_area_academica, telefono, direccion, contraseña, correo, id_tipo_documento, documento, matricula, activo)
+INSERT INTO Profesores (nombre, apellido, id_area_academica, telefono, direccion, `contraseña`, correo, id_tipo_documento, documento, matricula, activo)
 VALUES
     ('Jose', 'Adames', 1, '8494567890', 'Calle Principal 123', 'secreta123', 'jose.adames@gradehub.edu.do', 2, '40312345678', '2021001', true),
     ('Huan', 'Perez', 2, '8496543210', 'Avenida Central 456', 'password456', 'Huan.Perez@gradehub.edu.do', 1, '40198765432', '2021002', true),

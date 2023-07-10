@@ -93,9 +93,6 @@ function CalificarSeccion() {
 
   async function handleClick() {
     const newData = await getEstudiantes(asignaturaSeleccionada, SeccionAsignaturaSeleccionada);
-    // for(let i=0; i<newData.length; i++){
-    //   setCalificacionesEstudiantes((prev) => ({ ...prev, [newData[i].ID]: 0 }));
-    // }
 
     setData(newData.map((estudiante) => ({
       ...estudiante,
@@ -104,48 +101,24 @@ function CalificarSeccion() {
     })));
   }
 
+  async function handleSendCalificaciones() {
+    const requestData = {
+      seccion: parseInt(SeccionAsignaturaSeleccionada),
+      calificaciones: calificacionesEstudiantes
+    };
+
+    const response = await axios.post('../api/CalificarEstudiantes', requestData);
+    
+    if (response.status == 200) {
+      alert('Calificaciones guardadas exitosamente');
+    } else {
+      alert('Error al guardar las calificaciones');
+    }
+  }
+
 
   // TABLE DATA
   const headers = ['Nombre', 'Id', 'Calificacion', 'Alpha'];
-
-  // const data = [
-  //   {
-  //     Nombre: 'Allen Silverio',
-  //     Id: '1104221',
-  //     Calificacion: <input type='number' onChange={(event)=> handleCalificacionChange(event, "1104221")} required className="textboxCalificacion-calificarEstudiantes"/>,
-  //     Alpha: calcularLetra(calificacionesEstudiantes["1104221"]),
-  //   },
-  //   {
-  //     Nombre: 'Allen Silverio',
-  //     Id: '1104220',
-  //     Calificacion: <input type='number' onChange={(event)=> handleCalificacionChange(event, "1104220")} required className="textboxCalificacion-calificarEstudiantes"/>,
-  //     Alpha: calcularLetra(calificacionesEstudiantes["1104220"]),
-  //   }
-
-  // ]
-
-  // SELECT DATA
-
-  // const menuItemsCodigosAsignatura = [
-  //   { value: 'CBM207', label: 'CBM207' },
-  //   { value: 'CBM301', label: 'CBM301' },
-  //   { value: 'IDS402', label: 'IDS402' },
-
-  // ]
-
-
-
-
-
-  // const menuItemsSeccionAsignatura = [
-  //   { value: '01', label: '01' },
-  //   { value: '02', label: '02' },
-  //   { value: '03', label: '03' },
-
-  // ]
-
-
-
 
 
   return (
@@ -175,12 +148,10 @@ function CalificarSeccion() {
 
 
         <BotonGuardar texto={'Cargar Listado'} className={"botonCargarListado-calificarEstudiantes"} onClick={handleClick} />
-        <BotonGuardar texto={'Confirmar Calificaciones'} className={"botonConfirmarCalificaciones-calificarEstudiantes ml-5"} onClick={""} />
+        <BotonGuardar texto={'Confirmar Calificaciones'} className={"botonConfirmarCalificaciones-calificarEstudiantes ml-5"} onClick={handleSendCalificaciones} />
       </div>
 
       <TablaBasica headers={headers} data={data} />
-
-
     </>
 
   )
