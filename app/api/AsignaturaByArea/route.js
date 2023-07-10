@@ -10,12 +10,7 @@ export async function GET(req) {
 
         const asignatura = await prisma.asignaturas.findMany(
             {
-                select: {
-                    nombre: true,
-                    clave: true,
-                    creditos: true,
-                },
-
+               
                 where: {
                     areas_academicas:{
                         descripcion: area
