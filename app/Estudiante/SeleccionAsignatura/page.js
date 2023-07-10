@@ -5,49 +5,66 @@ import BotonGuardar from '@/app/components/BotonGuardar';
 import TablaAgregarAsignatura from '@/app/components/TablaAgregarAsignatura';
 import Image from 'next/image';
 import TablaSeleccionOficial from '@/app/components/TablaSeleccionOficial';
-
+import axios from 'axios';
 
 
 export default function SeleccionAsignatura() {
 
     const [searchText, setSearchText] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
+    const [selectedArea, setSelectedArea] = useState('');
+
 
     // CAMPOS PARA LA TABLA DE AGREGAR ASIGNATURAS
-
+    
     const headers = ['Asignatura', 'Clave', 'Creditos', 'Agregar']
-    const data = [
-        {
-            Asignatura: 'Estructura de Datos',
-            Clave: 'IDS305',
-            Creditos: '4',
-            Agregar: <button><Image src='/icons/plus-circle.svg' width={25} height={25} alt='Boton Agregar' onClick={""} /></button>, // BOTON PARA AGREGAR ASIGNATURA A LA SELECCION
-        },
-        {
-            Asignatura: 'Team Building',
-            Clave: 'IDS355',
-            Creditos: '4',
-            Agregar: <button><Image src='/icons/plus-circle.svg' width={25} height={25} alt='Boton Agregar' onClick={""} /></button>, // BOTON PARA AGREGAR ASIGNATURA A LA SELECCION
-        },
-        {
-            Asignatura: 'Aseguramiento de Calidad',
-            Clave: 'IDS342',
-            Creditos: '4',
-            Agregar: <button><Image src='/icons/plus-circle.svg' width={25} height={25} alt='Boton Agregar' onClick={""} /></button>, // BOTON PARA AGREGAR ASIGNATURA A LA SELECCION
-        },
-    ]
-
-    // FILTER DATA AGREGAR ASIGNATURAS
-
-    const [filteredData, setFilteredData] = useState(data);
 
     useEffect(() => {
-        const filtered = data.filter((row) =>
+        const fetchData = async () => {
+          try {
+            const requestData = {
+                area: selectedArea,
+            };
+            const response = await axios.get('../api/AsignaturaByArea', { params: requestData });
+            const data = response.data.map(asignatura => ({
+                Asignatura: asignatura.nombre,
+                Clave: asignatura.clave,
+                Creditos: asignatura.creditos,
+                Agregar: <button><Image src='/icons/plus-circle.svg' width={25} height={25} alt='Boton Agregar' onClick={() => handleAgregarAsignatura(asignatura)} /></button>,
+            }));
+
+            const filtered = data.filter((row) =>
             Object.values(row).some((value) =>
                 value.toString().toLowerCase().includes(searchText.toLowerCase())
             )
-        );
-        setFilteredData(filtered);
-    }, [searchText, data]);
+            );
+            setFilteredData(filtered);
+            
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+    
+        fetchData();
+
+        
+        
+
+    }, [selectedArea, searchText]);
+
+    
+
+    // FILTER DATA AGREGAR ASIGNATURAS
+
+    
+    // useEffect(() => {
+    //     const filtered = data.filter((row) =>
+    //         Object.values(row).some((value) =>
+    //             value.toString().toLowerCase().includes(searchText.toLowerCase())
+    //         )
+    //     );
+    //     setFilteredData(filtered);
+    // }, [searchText, data]);
 
 
 
@@ -120,11 +137,11 @@ export default function SeleccionAsignatura() {
             <div className='agregarAsignaturas-container mt-5 mb-8 flex'>
 
                 <div className='filtrosBotones-seleccionarAsignaturas mr-7 flex flex-col'>
-                    <BotonGuardar texto="CIENCIAS BASICAS Y AMBIENTALES (CB)" className={'filtroBoton-seleccionarAsignaturas'} />
-                    <BotonGuardar texto="CIENCIAS DE LA SALUD (SA)" className={'filtroBoton-seleccionarAsignaturas'}/>
-                    <BotonGuardar texto="CIENCIAS SOCIALES Y HUMANIDADES (SH)" className={'filtroBoton-seleccionarAsignaturas'}/>
-                    <BotonGuardar texto="ECONOMIA Y NEGOCIOS (ING)" className={'filtroBoton-seleccionarAsignaturas'}/>
-                    <BotonGuardar texto="INGENIERIAS (IN)" className={'filtroBoton-seleccionarAsignaturas'}/>
+                    <BotonGuardar texto="CIENCIAS BASICAS Y AMBIENTALES (CB)" className={'filtroBoton-seleccionarAsignaturas'} onClick={() => setSelectedArea('CB')} />
+                    <BotonGuardar texto="CIENCIAS DE LA SALUD (SA)" className={'filtroBoton-seleccionarAsignaturas'} onClick={() => setSelectedArea('SA')}/>
+                    <BotonGuardar texto="CIENCIAS SOCIALES Y HUMANIDADES (SH)" className={'filtroBoton-seleccionarAsignaturas'} onClick={() => setSelectedArea('SH')}/>
+                    <BotonGuardar texto="ECONOMIA Y NEGOCIOS (NG)" className={'filtroBoton-seleccionarAsignaturas'} onClick={() => setSelectedArea('NG')}/>
+                    <BotonGuardar texto="INGENIERIAS (IN)" className={'filtroBoton-seleccionarAsignaturas'} onClick={() => setSelectedArea('IN')}/>
                 </div>
 
                 <div className='tablaAgregarAsignatura-seleccionAsignaturas'>
