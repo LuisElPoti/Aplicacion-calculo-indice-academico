@@ -32,14 +32,25 @@ export default function SeleccionAsignatura() {
                 Creditos: asignatura.creditos,
                 Agregar: <button><Image src='/icons/plus-circle.svg' width={25} height={25} alt='Boton Agregar' onClick={() => handleAgregarAsignatura(asignatura)} /></button>,
             }));
-            setFilteredData(data);
+
+            const filtered = data.filter((row) =>
+            Object.values(row).some((value) =>
+                value.toString().toLowerCase().includes(searchText.toLowerCase())
+            )
+            );
+            setFilteredData(filtered);
+            
           } catch (error) {
             console.error('Error fetching data:', error);
           }
         };
     
         fetchData();
-    }, [selectedArea]);
+
+        
+        
+
+    }, [selectedArea, searchText]);
 
     
 
