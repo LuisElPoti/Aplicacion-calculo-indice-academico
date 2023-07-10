@@ -50,7 +50,6 @@ const TableComponent = ({ headers, data }) => {
           <MenuItem value="Profesor">Profesor</MenuItem>
         </TextField>
 
-      <BotonGuardar texto='Cargar Estudiante' className={'amarillo ml-10'} onClick={" "}/> 
 
       </div>
       <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '3%', paddingLeft:'2%'}}>

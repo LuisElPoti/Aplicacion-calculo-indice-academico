@@ -34,9 +34,6 @@ const TableComponent = ({ headers, data }) => {
           sx={{width: '50%', backgroundColor: '#fff',  outline:'none'}}
           className='mr-3'
         />
-
-      <BotonGuardar texto='Cargar Asignaturas' className={'amarillo ml-10'} onClick={" "}/> 
-
       </div>
       <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '3%', paddingLeft:'2%'}}>
         <Table sx={{ width: 1000, height: 100}} aria-label="simple table">

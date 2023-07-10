@@ -1,3 +1,5 @@
+USE `app-calculo-indice-academico`;
+
 CREATE TABLE IF NOT EXISTS `Tipo_Documento` (
     `id` int AUTO_INCREMENT,
     `nombre` varchar(50),

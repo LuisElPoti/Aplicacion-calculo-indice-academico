@@ -1,5 +1,7 @@
+DROP PROCEDURE IF EXISTS CalcularIndiceEstudiante;
+
 DELIMITER // 
-CREATE PROCEDURE CalcularIndiceEstudiante (IN Matricula_Estudiante varchar(7)) BEGIN
+CREATE PROCEDURE IF NOT EXISTS CalcularIndiceEstudiante (IN Matricula_Estudiante varchar(7)) BEGIN
 DECLARE Puntos_Generales DECIMAL(6, 2);
 DECLARE Puntos_Trimestre DECIMAL(6, 2);
 DECLARE Creditos_Generales DECIMAL(6, 2);
@@ -125,8 +127,3 @@ WHERE matricula = Matricula_Estudiante;
 END; 
 
 //
-
--- CALL CalcularIndiceEstudiante('1101001')
--- DROP PROCEDURE CalcularIndiceEstudiante
-
--- select * from estudiantes

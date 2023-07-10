@@ -36,9 +36,6 @@ function CrearAsignaturaform({ buttonText = "Crear Asignatura", modo = 'crear', 
             console.error("Error al obtener los datos de la asignatura", error);
           });
       }
-      else {
-        setIsReadOnly(false);
-      }
     };
 
     fetchData();
