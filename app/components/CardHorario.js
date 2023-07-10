@@ -2,11 +2,17 @@
 import React, { useState, useEffect } from 'react';
 import DynamicSelect from "./DynamicSelect";
 
-export default function CardHorario({ dia, handleHoraInicioChange, aulaInicial, handleHoraFinChange, handleAulaChange}) {
-  const [aulaSeleccionada, setAulaSeleccionada] = useState(aulaInicial);
+export default function CardHorario({ dia, handleHoraInicioChange, handleHoraFinChange, handleAulaChange}) {
+  const Aulas = [
+    { value: 'GC305', label: 'GC305' },
+    { value: 'GC308', label: 'GC308' },
+    { value: 'GC306', label: 'GC306' },
+  ];
+  
+  const [aulaSeleccionada, setAulaSeleccionada] = useState(Aulas[0].value);
 
   useEffect(() => {
-    handleAulaChange(aulaInicial);  // Llamar a la función de actualización con el valor inicial del aula al inicializar el componente
+    handleAulaChange(Aulas[0].value);  // Llamar a la función de actualización con el valor inicial del aula al inicializar el componente
   }, []);
 
   const handleAulaSelectChange = (event) => {
@@ -15,11 +21,7 @@ export default function CardHorario({ dia, handleHoraInicioChange, aulaInicial, 
     handleAulaChange(selectedAula);
   };
 
-  const Aulas = [
-    { value: 'GC305', label: 'GC305' },
-    { value: 'GC308', label: 'GC308' },
-    { value: 'GC306', label: 'GC306' },
-  ];
+  
   console.log(aulaSeleccionada)
 
   return (

@@ -126,9 +126,8 @@ function CrearSeccionForm() {
         try {
             // Crear la sección
             const responseSeccion = await axios.post('../api/CrearSeccion', data);
-            console.log(responseSeccion.data);
             const seccionId = responseSeccion.data.id;
-            
+
             // Crear los horarios de sección
             for (const horario of horarios) {
                 const horarioData = {
@@ -187,7 +186,7 @@ function CrearSeccionForm() {
                         <DiasSemanaSelector onChange={handleDiaSeleccionado} />
                     </div>
 
-                    <BotonGuardar texto={"Crear Seccion"} className={"amarillo"} onClick={""} />
+                    <BotonGuardar texto={"Crear Seccion"} className={"amarillo"} />
                 </div>
 
                 <div className="horarios-crearSeccion ml-12">
@@ -195,11 +194,7 @@ function CrearSeccionForm() {
                     <div className="mt-5">
                         {horarios.map((horario, index) => (
                             <CardHorario
-                                key={index}
                                 dia={horario.dia}
-                                horaInicio={horario.horaInicio}
-                                horaFin={horario.horaFin}
-                                aulaSeleccionada={horario.aula}
                                 handleHoraInicioChange={(event) => handleHoraInicioChange(event, index)}
                                 handleHoraFinChange={(event) => handleHoraFinChange(event, index)}
                                 handleAulaChange={(selectedAula) => handleAulaChange(selectedAula, index)}

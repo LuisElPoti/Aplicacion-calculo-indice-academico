@@ -15,6 +15,16 @@ export default function TablaSeleccionOficial({ headers, data }) {
         setSelectedSubData(prevState => ({ ...prevState, [parentId]: subData }));
     }
 
+    const handleClearSelection = (id) => {
+        setSelectedSubData(prevState => {
+            const newState = { ...prevState };
+            delete newState[id];
+            return newState;
+        });
+    }
+
+
+
     return (
         <table className="tabla-seleccion-oficial w-full text-left table-auto border-collapse border-none">
             <thead>
@@ -47,7 +57,7 @@ export default function TablaSeleccionOficial({ headers, data }) {
                                     )
                                 }
                                 <td className="border-none px-4 py-2">
-                                    <button>
+                                    <button onClick={() => handleClearSelection(row.id)}>
                                         <Image
                                             src="/icons/IconX.svg"
                                             width={10}
