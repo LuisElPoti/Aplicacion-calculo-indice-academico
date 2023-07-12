@@ -1,9 +1,8 @@
 'use client'
-'use client'
 import { useState } from "react";
 import Image from "next/image";
 
-export default function TablaSeleccionOficial({ headers, data, onEliminarAsignatura}) {
+export default function TablaSeleccionOficial({ headers, data, onEliminarAsignatura, setSelectedSections}) {
     const [showSubData, setShowSubData] = useState({});
     const [selectedSubData, setSelectedSubData] = useState({});
 
@@ -13,7 +12,8 @@ export default function TablaSeleccionOficial({ headers, data, onEliminarAsignat
 
     const handleSubDataSelection = (parentId, subData) => {
         setSelectedSubData(prevState => ({ ...prevState, [parentId]: subData }));
-    }
+        setSelectedSections(prevSections => ({ ...prevSections, [parentId]: subData.id }));
+      };
 
     const handleClearSelection = (id) => {
         setSelectedSubData(prevState => {
