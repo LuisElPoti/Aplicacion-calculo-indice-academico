@@ -124,6 +124,11 @@ export default function SeleccionAsignatura() {
     }
   };
   
+  const handleCancelar = () => {
+    setDataSeleccion([]);
+    setSelectedSections({});
+  };
+  
 
   return (
     <>
@@ -131,7 +136,7 @@ export default function SeleccionAsignatura() {
         <div className='seleccion-header flex mb-5'>
           <h1 className='mr-auto text-xl font-semibold' style={{ color: '#1F1F37' }}>Selección</h1>
           <BotonGuardar texto="Guardar" className={'botonGuardar-seleccionAsignaturas'} onClick={handleGuardar} />
-          <BotonGuardar texto="Cancelar" className={'botonCancelar-seleccionAsignaturas ml-5'} onClick={""} />
+          <BotonGuardar texto="Cancelar" className={'botonCancelar-seleccionAsignaturas ml-5'} onClick={handleCancelar} />
         </div>
         <div className='tablaSeleccion-container bg-white rounded-lg'>
           <TablaSeleccionOficial data={dataSeleccion} headers={headersSeleccion} onEliminarAsignatura={handleEliminarAsignatura} setSelectedSections={setSelectedSections} />
