@@ -31,14 +31,16 @@ const TableComponent = ({ headers, data }) => {
           placeholder="Search by Clave, Asignatura, Area"
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
-          sx={{width: '50%', backgroundColor: '#fff',  outline:'none'}}
+          sx={{ width: '50%', backgroundColor: '#fff', outline: 'none' }}
           className='mr-3'
         />
+        <BotonGuardar texto={"Cargar listado"} className="amarillo" />
+
       </div>
-      <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '3%', paddingLeft:'2%'}}>
-        <Table sx={{ width: 1000, height: 100}} aria-label="simple table">
+      <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '3%', paddingLeft: '2%' }}>
+        <Table sx={{ width: 1000, height: 100 }} aria-label="simple table">
           <TableHead>
-            <TableRow style={{marginBottom:'5px'}} >
+            <TableRow style={{ marginBottom: '5px' }} >
               {headers.map((header, index) => (
                 <TableCell align="left" key={index}>
                   {header}
@@ -48,7 +50,7 @@ const TableComponent = ({ headers, data }) => {
           </TableHead>
           <TableBody>
             {filteredData.map((row, rowIndex) => (
-              <TableRow key={rowIndex}  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableRow key={rowIndex} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 {Object.values(row).map((value, columnIndex) => (
                   <TableCell align="left" key={columnIndex}>
                     {value}
@@ -60,7 +62,7 @@ const TableComponent = ({ headers, data }) => {
         </Table>
       </TableContainer>
 
-     
+
     </div>
   );
 };
