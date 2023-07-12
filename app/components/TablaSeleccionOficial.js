@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function TablaSeleccionOficial({ headers, data }) {
+export default function TablaSeleccionOficial({ headers, data, onEliminarAsignatura}) {
     const [showSubData, setShowSubData] = useState({});
     const [selectedSubData, setSelectedSubData] = useState({});
 
@@ -21,6 +21,7 @@ export default function TablaSeleccionOficial({ headers, data }) {
             delete newState[id];
             return newState;
         });
+        onEliminarAsignatura(id);
     }
 
 

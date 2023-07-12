@@ -90,6 +90,9 @@ export default function SeleccionAsignatura() {
     }
   };
   
+  const handleEliminarAsignatura = (id) => {
+    setDataSeleccion(prevData => prevData.filter(asignatura => asignatura.id !== id));
+  };
 
   return (
     <>
@@ -100,7 +103,7 @@ export default function SeleccionAsignatura() {
           <BotonGuardar texto="Cancelar" className={'botonCancelar-seleccionAsignaturas ml-5'} onClick={""} />
         </div>
         <div className='tablaSeleccion-container bg-white rounded-lg'>
-          <TablaSeleccionOficial data={dataSeleccion} headers={headersSeleccion} />
+          <TablaSeleccionOficial data={dataSeleccion} headers={headersSeleccion} onEliminarAsignatura={handleEliminarAsignatura}/>
         </div>
       </div>
       <div className='filters-seleccionarAsignaturas flex mt-5'>
