@@ -49,7 +49,7 @@ const TableComponent = ({ headers, data }) => {
           <MenuItem value="Administrador">Administrador</MenuItem>
           <MenuItem value="Profesor">Profesor</MenuItem>
         </TextField>
-
+        <BotonGuardar texto={"Cargar listado"} className="amarillo" />
 
       </div>
       <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '3%', paddingLeft:'2%'}}>
