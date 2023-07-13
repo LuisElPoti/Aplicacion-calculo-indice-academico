@@ -126,6 +126,7 @@ CREATE TABLE IF NOT EXISTS `Secciones` (
     `id_profesor` int,
     `cupo` int,
     `id_periodo` int,
+    `activo` bool DEFAULT (true),
     PRIMARY KEY (`id`),
     FOREIGN KEY (`id_asignatura`) REFERENCES `Asignaturas`(`id`),
     FOREIGN KEY (`id_profesor`) REFERENCES `Profesores`(`id`),

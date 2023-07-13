@@ -28,7 +28,7 @@ const TableComponent = ({ headers, data }) => {
       <div className="filters flex items-center mt-5">
         <TextField
           label="Search"
-          placeholder="Search by Clave, Asignatura, Area"
+          placeholder="Search by Clave, Asignatura y Area"
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
           sx={{ width: '50%', backgroundColor: '#fff', outline: 'none' }}
