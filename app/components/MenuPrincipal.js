@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AiFillHome, AiFillBook, AiFillStar, AiOutlineDown, AiOutlineUp, AiOutlineProject } from "react-icons/ai";
+import {CiLogout} from  "react-icons/ci";
 
 const Sidebar = () => {
   const [showSubMenu, setShowSubMenu] = useState(false);
@@ -41,6 +42,12 @@ const Sidebar = () => {
           <AiFillStar />
           <Link href="/Estudiante/ReporteCalificaciones">Calificaciones</Link>
         </li>
+        <div className="mt-auto sidebar-bottom">
+          <li className="mb-6 flex items-center gap-2 nav-link">
+            <CiLogout style={{ fontWeight: "20px" }} />
+            <Link href="/login">Logout</Link>
+          </li>
+        </div>
       </ul>
     </div>
   );
