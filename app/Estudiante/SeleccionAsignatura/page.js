@@ -6,6 +6,7 @@ import TablaAgregarAsignatura from '@/app/components/TablaAgregarAsignatura';
 import Image from 'next/image';
 import TablaSeleccionOficial from '@/app/components/TablaSeleccionOficial';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 
 export default function SeleccionAsignatura() {
@@ -13,6 +14,9 @@ export default function SeleccionAsignatura() {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedArea, setSelectedArea] = useState('');
   const [dataSeleccion, setDataSeleccion] = useState([]);
+  const [selectedSections, setSelectedSections] = useState({});
+  const [id_usuario, setID] = useState('');
+
 
 
   // CAMPOS PARA LA TABLA DE AGREGAR ASIGNATURAS
@@ -21,6 +25,8 @@ export default function SeleccionAsignatura() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const resultado = Cookies.get('ID');
+      setID(resultado);
       try {
         const requestData = {
           area: selectedArea,
@@ -87,6 +93,7 @@ export default function SeleccionAsignatura() {
         seccionesDisponibles,
       };
       setDataSeleccion(prevData => [...prevData, nuevaAsignatura]);
+      setSelectedSections(prevSections => ({ ...prevSections, [asignatura.id]: '' }));
     }
   };
   
@@ -94,16 +101,45 @@ export default function SeleccionAsignatura() {
     setDataSeleccion(prevData => prevData.filter(asignatura => asignatura.id !== id));
   };
 
+  const handleGuardar = async () => {
+    try {
+      for (const asignatura of dataSeleccion) {
+        const asignaturaGuardada = {
+          idEstudiante: id_usuario,
+          idSeccion: parseInt(selectedSections[asignatura.id]),
+        };
+  
+        console.log(asignaturaGuardada);
+  
+        await axios.post('../api/RegistroSeleccion', asignaturaGuardada, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        console.log('Datos guardados exitosamente para la asignatura:', asignatura.Asignatura);
+      }
+    } catch (error) {
+      console.error('Error al guardar los datos:', error);
+    }
+  };
+  
+  const handleCancelar = () => {
+    setDataSeleccion([]);
+    setSelectedSections({});
+  };
+  
+
   return (
     <>
       <div className='seleccion-container mt-5 mb-8'>
         <div className='seleccion-header flex mb-5'>
           <h1 className='mr-auto text-xl font-semibold' style={{ color: '#1F1F37' }}>Selección</h1>
-          <BotonGuardar texto="Guardar" className={'botonGuardar-seleccionAsignaturas'} onClick={""} />
-          <BotonGuardar texto="Cancelar" className={'botonCancelar-seleccionAsignaturas ml-5'} onClick={""} />
+          <BotonGuardar texto="Guardar" className={'botonGuardar-seleccionAsignaturas'} onClick={handleGuardar} />
+          <BotonGuardar texto="Cancelar" className={'botonCancelar-seleccionAsignaturas ml-5'} onClick={handleCancelar} />
         </div>
         <div className='tablaSeleccion-container bg-white rounded-lg'>
-          <TablaSeleccionOficial data={dataSeleccion} headers={headersSeleccion} onEliminarAsignatura={handleEliminarAsignatura}/>
+          <TablaSeleccionOficial data={dataSeleccion} headers={headersSeleccion} onEliminarAsignatura={handleEliminarAsignatura} setSelectedSections={setSelectedSections} />
         </div>
       </div>
       <div className='filters-seleccionarAsignaturas flex mt-5'>
