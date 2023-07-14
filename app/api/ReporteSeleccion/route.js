@@ -24,6 +24,7 @@ export async function POST(req) {
           horario_secciones: {
             select: {
               aula: true,
+              dia: true,
               hora_fin: true,
               hora_inicio: true
             }

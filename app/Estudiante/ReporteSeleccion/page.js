@@ -95,7 +95,7 @@ async function getSeleccion(id_usuario, año, trimestre) {
 
     for (let i = 0; i < historico.secciones.horario_secciones.length; i++) {
       aula += historico.secciones.horario_secciones[i].aula + '  ';
-      horario += historico.secciones.horario_secciones[i].hora_inicio + '/' + historico.secciones.horario_secciones[i].hora_fin + '  ';
+      horario += historico.secciones.horario_secciones[i].dia + ': ' + historico.secciones.horario_secciones[i].hora_inicio + '/' + historico.secciones.horario_secciones[i].hora_fin + '  ';
     }
 
     const profesor = historico.secciones?.profesores?.nombre + " " + historico.secciones?.profesores?.apellido || 'Prueba';
