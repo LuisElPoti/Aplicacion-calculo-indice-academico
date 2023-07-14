@@ -18,6 +18,7 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
   const [areasAcademicas, setAreasAcademicas] = useState([]);
   const [formularioEnviado, setFormularioEnviado] = useState(false);
   const [isReadOnly, setIsReadOnly] = useState(false);
+  const [isDocumentoEnUso, setIsDocumentoEnUso] = useState(false);
 
 
   useEffect(() => {
@@ -120,6 +121,11 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      if (isDocumentoEnUso) {
+        alert('El documento proporcionado ya está en uso');
+        return;
+      }
+
       if (modo == 'crear') {
         const requestData = {
           nombre,
@@ -212,6 +218,30 @@ function CrearUsuarioForm({ width, height, buttonText, modo = 'crear', id_usuari
     }
 
   };
+
+  useEffect(() => {
+    const verificarDocumentoEnUso = async () => {
+      try {
+        const response = await axios.post(
+          "../api/VerificarDocumento",
+          { documento: documento },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          setIsDocumentoEnUso(response.data.enUso);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    verificarDocumentoEnUso();
+  }, [documento]);
 
   return (
     <form
