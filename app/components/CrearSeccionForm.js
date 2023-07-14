@@ -145,6 +145,7 @@ function CrearSeccionForm() {
             console.log("Sección y horarios creados con éxito");
             alert("Sección y horarios creados con éxito");
             // Hacer algo con la respuesta, como redireccionar a otra página o mostrar un mensaje de éxito
+            window.location.reload(false);
         } catch (error) {
             alert("Error al enviar la solicitud POST");
             console.error('Error al enviar la solicitud POST:', error);
@@ -179,7 +180,7 @@ function CrearSeccionForm() {
 
                     <div className="formElement-crearSeccion">
                         <label htmlFor='CantidadCupos'>Cantidad de Cupos</label>
-                        <input type="number" className="textbox-crearSeccion w-1/2 p-5" name="CantidadCupos" onChange={handleCupoChange} />
+                        <input required type="number" min="1" max="60" className="textbox-crearSeccion w-1/2 p-5" name="CantidadCupos" onChange={handleCupoChange} />
                     </div>
 
                     <div className="formElement-crearSeccion">

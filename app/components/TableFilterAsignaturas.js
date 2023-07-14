@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import BotonGuardar from '@/app/components/BotonGuardar';
 
 
-const TableComponent = ({ headers, data }) => {
+const TableComponent = ({ headers, data, onClick }) => {
   const [searchText, setSearchText] = useState('');
 
   const filteredData = data.filter(item => {
@@ -34,7 +34,7 @@ const TableComponent = ({ headers, data }) => {
           sx={{ width: '50%', backgroundColor: '#fff', outline: 'none' }}
           className='mr-3'
         />
-        <BotonGuardar texto={"Buscar asignatura"} className="amarillo" />
+        <BotonGuardar texto={"Buscar asignatura"} className="amarillo" onClick={onClick}/>
 
       </div>
       <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '3%', paddingLeft: '2%' }}>

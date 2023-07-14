@@ -8,7 +8,8 @@ import ProgressChart from './ProgressChart';
 function CalcularIndiceForm() {
     const [nombre, setNombre] = useState('')
     const [carrera, setCarrera] = useState('')
-    const [indice, setIndice] = useState(1)
+    const [indice, setIndice] = useState(0)
+    const [existe, setExiste] = useState(false)
 
 
     async function handleSubmit(event) {
@@ -17,23 +18,29 @@ function CalcularIndiceForm() {
             id_usuario: event.target.id_estudiante.value
         };
         try {
-            const response = await axios.post(
-                "../api/CalcularIndice",
-                requestData,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+            if(existe == true){
+                const response = await axios.post(
+                    "../api/CalcularIndice",
+                    requestData,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                );
+                if (response.status === 200) {
+                    setIndice(parseFloat(response?.data[0]?.f0 || 0));
+                    alert('Indice actualizado con éxito, el indice general es: ' + response.data[0].f0);
+                } else {
+                    console.log("Problema");
+                    alert('Hubo problemas al calcular el indice, inténtelo de nuevo');
                 }
-            );
-
-            if (response.status === 200) {
-                setIndice(parseFloat(response?.data[0]?.f0 || 0));
-                alert('Indice actualizado con éxito, el indice general es: ' + response.data[0].f0);
-            } else {
-                console.log("Problema");
-                alert('Hubo problemas al calcular el indice, inténtelo de nuevo');
             }
+            else{
+                alert('El ID ingresado no existe, no se puede calcular el indice');
+                
+            }
+            
         } catch (error) {
             console.error('Error:', error);
             alert('Hubo problemas al calcular el indice, inténtelo de nuevo');
@@ -53,10 +60,14 @@ function CalcularIndiceForm() {
                         setNombre(data.nombre);
                         setCarrera(data.carreras?.nombre);
                         setIndice(parseFloat(data.indice_general));
+                        setExiste(true);
                     }
                     else {
+                        alert('El ID ingresado no existe');
                         setNombre('');
                         setCarrera('');
+                        setExiste(false);
+                        setIndice(0);
                     }
 
                 })
@@ -90,8 +101,6 @@ function CalcularIndiceForm() {
                     </div>
 
                 </div>
-
-
 
                 <div className='w-1/2 flex items-center'>
 

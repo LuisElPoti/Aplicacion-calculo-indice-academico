@@ -44,33 +44,40 @@ function ListadoAsignaturas() {
 
   };
 
-  useEffect(() => {
-    const fetchData = () => {
-      axios.get("../api/Asignatura")
-        .then(response => {
-          const newData = response.data.map(obj => {
-            return {
-              Clave: obj.clave,
-              Asignatura: obj.nombre,
-              Creditos: obj.creditos,
-              Area: obj.areas_academicas.nombre,
-              Opciones: <button onClick={(e) => handleDeleteClick(e, obj.clave)}><CiTrash style={{ width: "50px", height: "25px", color: '#DE5462' }} /></button>,
-              Editar: <button onClick={(e) => handleEditClick(e, obj.clave)}><CiPen style={{ width: "50px", height: "25px", color: 'gray' }} /></button>
-            };
-          });
-          setData(newData);
-
-        })
-        .catch(error => {
-          console.error("Error al obtener a los usuarios:", error);
+  const fetchData = () => {
+    axios.get("../api/Asignatura")
+      .then(response => {
+        const newData = response.data.map(obj => {
+          return {
+            Clave: obj.clave,
+            Asignatura: obj.nombre,
+            Creditos: obj.creditos,
+            Area: obj.areas_academicas.nombre,
+            Opciones: <button onClick={(e) => handleDeleteClick(e, obj.clave)}><CiTrash style={{ width: "50px", height: "25px", color: '#DE5462' }} /></button>,
+            Editar: <button onClick={(e) => handleEditClick(e, obj.clave)}><CiPen style={{ width: "50px", height: "25px", color: 'gray' }} /></button>
+          };
         });
-    };
+        setData(newData);
+
+      })
+      .catch(error => {
+        console.error("Error al obtener a los usuarios:", error);
+      });
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const handleClick = () => {
+    fetchData();
+    alert('Listado actualizado')
+  }
+
   return (
     <>
       <div classname="flex items-center t-30">
-        <TableComponent headers={headers} data={data} />
+        <TableComponent headers={headers} data={data} onClick={handleClick}/>
       </div>
       <div className="mt-5">
         {showEditContainer && <CrearAsignaturaform buttonText={'Actualizar Datos'} modo='editar' clave_asignatura={clave} />}

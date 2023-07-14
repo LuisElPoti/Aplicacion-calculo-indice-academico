@@ -31,12 +31,12 @@ export default function CardHorario({ dia, handleHoraInicioChange, handleHoraFin
       <div className="card-allFields-crearSeccion flex">
         <div className="card-field-crearSeccion flex flex-col">
           <label htmlFor="horaInicio">Hora Inicio</label>
-          <input type="time" name="horaInicio" onChange={handleHoraInicioChange} />
+          <input required type="time" name="horaInicio" onChange={handleHoraInicioChange} />
         </div>
 
         <div className="card-field-crearSeccion flex flex-col">
           <label htmlFor="horaFin">Hora Fin</label>
-          <input type="time" name="horaFin" onChange={handleHoraFinChange} />
+          <input required type="time" name="horaFin" onChange={handleHoraFinChange} />
         </div>
 
         <div className="card-field-crearSeccion">
