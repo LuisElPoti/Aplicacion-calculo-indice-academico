@@ -23,13 +23,15 @@ function CambiarPasswordForm() {
       },
       body: JSON.stringify(requestData),
     });
+    
 
     if(response.status == 200){
       alert("Contraseña cambiada");
       document.getElementById("SubmitForm").reset();
     }
     else{
-      alert("Hubo problemas al cambiar la contraseña, intentelo de nuevo");
+      const resultado = await response.json();
+      alert(resultado.message || "Error al cambiar contraseña");
     }
   }
 
