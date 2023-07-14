@@ -7,7 +7,7 @@ export async function POST(req) {
     const { seccion, calificaciones } = await req.json();
 
     try {
-        if (!seccion || !calificaciones) {
+        if (!seccion || !calificaciones || Object.keys(calificaciones).length == 0) {
             return NextResponse.json({ message: 'Uno o varios de los parámetros están vacíos' }, { status: 500 });
         }
         else {
@@ -24,7 +24,6 @@ export async function POST(req) {
             creditos = creditos[0]?.asignaturas?.creditos;
             for (let key in calificaciones) {
                 if (calificaciones.hasOwnProperty(key)) { // to ensure that the key is not from the object's prototype chain
-                    
                     const calificacion = await prisma.historico_academico.updateMany({
                         data: {
                             calificacion_numerica: parseFloat(calificaciones[key]),
