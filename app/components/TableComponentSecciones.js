@@ -31,7 +31,7 @@ const TableComponent = ({ headers, data }) => {
           placeholder="Search by Clave, Asignatura y Area"
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
-          sx={{ width: '50%', backgroundColor: '#fff', outline: 'none' }}
+          sx={{ width: '75%', backgroundColor: '#fff', outline: 'none' }}
           className='mr-3'
         />
         <BotonGuardar texto={"Buscar asignatura"} className="amarillo" />
