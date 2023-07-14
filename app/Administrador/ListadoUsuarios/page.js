@@ -2,7 +2,7 @@
 import TableComponent from "@/app/components/TableComponentFilter"
 import CrearUsuarioForm from "@/app/components/CrearUsuarioForm";
 import { CiTrash, CiPen } from "react-icons/ci";
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import axios from 'axios';
 
 
@@ -56,31 +56,39 @@ export default function ListadoUsuarios() {
 
   // Headers de la tabla
   const headers = ['Tipo', 'Id', 'Nombre', 'Documento', 'Carrera', 'Area', 'Eliminar', 'Editar'];
-  useEffect(() => {
-    const fetchData = () => {
-      axios.get("../api/ListadoUsuarios")
-        .then(response => {
-          const newData = response.data.map(obj => {
-            return {
-              ...obj,
-              Opciones: <button onClick={(e) => handleDeleteClick(e, obj.Id, obj.Tipo)}><CiTrash style={{ width: "50px", height: "25px", color: '#DE5462' }} /></button>,
-              Editar: <button onClick={(e) => handleEditClick(e, obj.Id, obj.Tipo)}><CiPen style={{ width: "50px", height: "25px", color: 'gray' }} /></button>
-            };
-          });
-          setData(newData);
-
-        })
-        .catch(error => {
-          console.error("Error al obtener a los usuarios:", error);
+  
+  const fetchData = () => {
+    axios.get("../api/ListadoUsuarios")
+      .then(response => {
+        const newData = response.data.map(obj => {
+          return {
+            ...obj,
+            Opciones: <button onClick={(e) => handleDeleteClick(e, obj.Id, obj.Tipo)}><CiTrash style={{ width: "50px", height: "25px", color: '#DE5462' }} /></button>,
+            Editar: <button onClick={(e) => handleEditClick(e, obj.Id, obj.Tipo)}><CiPen style={{ width: "50px", height: "25px", color: 'gray' }} /></button>
+          };
         });
-    };
+        setData(newData);
+
+      })
+      .catch(error => {
+        console.error("Error al obtener a los usuarios:", error);
+      });
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
+
+
+  const handleClick = () => {
+    fetchData();
+    alert('Listado actualizado')
+  }
 
   return (
     <>
 
-      <TableComponent headers={headers} data={data} />
+      <TableComponent headers={headers} data={data} onClick={handleClick}/>
       <div className="mt-5">
         {showEditContainer && <CrearUsuarioForm buttonText={'Actualizar Datos'} modo='editar' id_usuario={id_usuario} tipo={rol} />}
       </div>

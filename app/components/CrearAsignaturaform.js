@@ -146,12 +146,12 @@ function CrearAsignaturaform({ buttonText = "Crear Asignatura", modo = 'crear', 
 
           <div className='nombre pl-5 l-20'>
             <p className='nombre-header pt-10'>Clave</p>
-            <input className='nombre-textbox p-5' type='text' id="clave" value={clave} onChange={handleClaveChange} />
+            <input className='nombre-textbox p-5' required type='text' id="clave" value={clave} onChange={handleClaveChange} />
           </div>
 
           <div className='nombre pl-5 l-20'>
             <p className='nombre-header pt-20'>Nombre</p>
-            <input className='nombre-textbox p-5' type='text' id="nombre" value={nombre} onChange={handleNombreChange} />
+            <input className='nombre-textbox p-5' required type='text' id="nombre" value={nombre} onChange={handleNombreChange} />
           </div>
 
           <div className='nombre pl-5 l-20 '>

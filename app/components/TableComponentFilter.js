@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import BotonGuardar from '@/app/components/BotonGuardar';
 
 
-const TableComponent = ({ headers, data }) => {
+const TableComponent = ({ headers, data, onClick}) => {
   const [searchText, setSearchText] = useState('');
   const [filterType, setFilterType] = useState('');
 
@@ -25,6 +25,22 @@ const TableComponent = ({ headers, data }) => {
     return searchTextMatch && filterTypeMatch;
   });
 
+  const handleChange = (e) => {
+    if (searchText.length <= 60) {
+      setSearchText(e.target.value);
+    }
+    else {
+      if (e.target.value.length > searchText.length) {
+        alert('El texto a buscar no puede tener más de 50 caracteres');
+        e.preventDefault();
+      }
+      else{
+        setSearchText(e.target.value);
+      }
+    }
+
+  }
+
   return (
     <div>
       <div className="filters flex items-center mt-5">
@@ -32,7 +48,7 @@ const TableComponent = ({ headers, data }) => {
           label="Search"
           placeholder="Search by Nombre, Id, Documento"
           value={searchText}
-          onChange={e => setSearchText(e.target.value)}
+          onChange={(e) => handleChange(e)}
           sx={{width: '50%', backgroundColor: '#fff',  outline:'none'}}
           className='mr-3'
         />
@@ -49,7 +65,7 @@ const TableComponent = ({ headers, data }) => {
           <MenuItem value="Administrador">Administrador</MenuItem>
           <MenuItem value="Profesor">Profesor</MenuItem>
         </TextField>
-        <BotonGuardar texto={"Cargar listado"} className="amarillo" />
+        <BotonGuardar texto={"Cargar listado"} className="amarillo" onClick={onClick} />
 
       </div>
       <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '3%', paddingLeft:'2%'}}>
