@@ -42,7 +42,6 @@ function CalificarSeccion() {
           }
         })
         .catch((error) => {
-          // Manejar errores
           console.error("Error al obtener las áreas asignaturas:", error);
           console.error(error);
         });
@@ -107,13 +106,13 @@ function CalificarSeccion() {
       calificaciones: calificacionesEstudiantes
     };
 
-    const response = await axios.post('../api/CalificarEstudiantes', requestData);
-    
-    if (response.status == 200) {
+    const response = axios.post('../api/CalificarEstudiantes', requestData).then(respuesta => {
       alert('Calificaciones guardadas exitosamente');
-    } else {
-      alert('Error al guardar las calificaciones');
-    }
+    })
+    .catch(error => {
+      alert(error.response.data.message);
+    });
+    
   }
 
 
@@ -150,7 +149,7 @@ function CalificarSeccion() {
         <BotonGuardar texto={'Cargar Listado'} className={"botonCargarListado-calificarEstudiantes"} onClick={handleClick} />
         <BotonGuardar texto={'Confirmar Calificaciones'} className={"botonConfirmarCalificaciones-calificarEstudiantes ml-5"} onClick={handleSendCalificaciones} />
       </div>
-
+      
       <TablaBasica headers={headers} data={data} />
     </>
 

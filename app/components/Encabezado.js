@@ -22,6 +22,8 @@ function getFormattedDate() {
 function Encabezado({ userName }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const currentRoute = usePathname();
+  const parentDirectory = currentRoute.split('/').slice(0, -1).join('/')
+  console.log(parentDirectory);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -58,39 +60,45 @@ function Encabezado({ userName }) {
         role = 'Estudiante'
         break;
 
-        case '/Estudiante/cambiarPassword':
-          menuTitle = 'Cambiar Contraseña';
-          color = 'color-estudiante'; // replace with actual color value
-          role = 'Estudiante'
-          break;
+      case '/Estudiante/cambiarPassword':
+        menuTitle = 'Cambiar Contraseña';
+        color = 'color-estudiante'; // replace with actual color value
+        role = 'Estudiante'
+        break;
 
-        case '/Estudiante/SeleccionAsignatura':
-          menuTitle = 'Seleccionar Asignaturas';
-          color = 'color-estudiante'; // replace with actual color value
-          role = 'Estudiante'
-          break;
+      case '/Estudiante/SeleccionAsignatura':
+        menuTitle = 'Seleccionar Asignaturas';
+        color = 'color-estudiante'; // replace with actual color value
+        role = 'Estudiante'
+        break;
 
 
-   // Pantallas Profesor
-   case '/Profesor':
-    menuTitle = 'Menu Principal Profesor ';
-    color = 'color-profesor'; // replace with actual color value
-    role = '  Profesor'
-    break;
+      // Pantallas Profesor
+      case '/Profesor':
+        menuTitle = 'Menu Principal Profesor ';
+        color = 'color-profesor'; // replace with actual color value
+        role = '  Profesor'
+        break;
 
-  case '/Profesor/ListadoEstudiantes':
-    menuTitle = 'Listado de Estudiantes';
-    color = 'color-profesor'; // replace with actual color value
-    role = 'Profesor'
-    break;
+      case '/Profesor/ListadoEstudiantes':
+        menuTitle = 'Listado de Estudiantes';
+        color = 'color-profesor'; // replace with actual color value
+        role = 'Profesor'
+        break;
 
-    case '/Profesor/CalificarSeccion':
-      menuTitle = 'Calificar Estudiantes';
-      color = 'color-profesor'; // replace with actual color value
-      role = 'Profesor'
-      break;
+      case '/Profesor/CalificarSeccion':
+        menuTitle = 'Calificar Estudiantes';
+        color = 'color-profesor'; // replace with actual color value
+        role = 'Profesor'
+        break;
 
-      
+      case '/Profesor/cambiarPassword':
+        menuTitle = 'Calificar Estudiantes';
+        color = 'color-profesor'; // replace with actual color value
+        role = 'Profesor'
+        break;
+
+
 
       // Pantallas Admin
       case '/Administrador':
@@ -117,31 +125,35 @@ function Encabezado({ userName }) {
         role = 'Administrador'
         break;
 
-        case '/Administrador/ListadoUsuarios':
-          menuTitle = 'Listado de Usuarios del Sistema';
-          color = 'color-admin'; // replace with actual color value
-          role = 'Administrador'
-          break;
+      case '/Administrador/ListadoUsuarios':
+        menuTitle = 'Listado de Usuarios del Sistema';
+        color = 'color-admin'; // replace with actual color value
+        role = 'Administrador'
+        break;
 
-          case '/Administrador/ListadoAsignaturas':
-            menuTitle = 'Listado de Asignaturas del Sistema';
-            color = 'color-admin'; // replace with actual color value
-            role = 'Administrador'
-            break;
+      case '/Administrador/ListadoAsignaturas':
+        menuTitle = 'Listado de Asignaturas del Sistema';
+        color = 'color-admin'; // replace with actual color value
+        role = 'Administrador'
+        break;
 
-          case '/Administrador/CrearSeccion':
-          menuTitle = 'Crear nueva seccion';
-          color = 'color-admin'; // replace with actual color value
-          role = 'Administrador'
-          break;
+      case '/Administrador/CrearSeccion':
+        menuTitle = 'Crear nueva seccion';
+        color = 'color-admin'; // replace with actual color value
+        role = 'Administrador'
+        break;
 
-          case '/Administrador/ListadoSecciones':
-          menuTitle = 'Listado de secciones';
-          color = 'color-admin'; // replace with actual color value
-          role = 'Administrador'
-          break;
+      case '/Administrador/ListadoSecciones':
+        menuTitle = 'Listado de secciones';
+        color = 'color-admin'; // replace with actual color value
+        role = 'Administrador'
+        break;
 
-
+      case '/Administrador/cambiarPassword':
+        menuTitle = 'Listado de secciones';
+        color = 'color-admin'; // replace with actual color value
+        role = 'Administrador'
+        break;
 
       // add more cases as needed...
       default:
@@ -153,7 +165,7 @@ function Encabezado({ userName }) {
     setMenuTitle(menuTitle);
     setColor(color);
     setRole(role);
-    
+
   }, [currentRoute]);
 
   const [menuTitle, setMenuTitle] = useState('');
@@ -178,7 +190,7 @@ function Encabezado({ userName }) {
         </button>
         {isDropdownOpen && (
           <div className="dropdown">
-            <Link href="/Estudiante/cambiarPassword" style={{ display: 'block' }}>
+            <Link href={`http://localhost:3000/${parentDirectory}/cambiarPassword`} style={{ display: 'block' }}>
               Cambiar Password
             </Link>
           </div>
@@ -186,7 +198,7 @@ function Encabezado({ userName }) {
       </div>
       <div className="titulo-fecha">
         <div className="men-principal">{menuTitle}</div>
-       
+
 
         <div className={`junio ${color}`}>{getFormattedDate()}</div>
       </div>
