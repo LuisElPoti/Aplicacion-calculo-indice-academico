@@ -24,6 +24,8 @@ SET Asignaturas_Aprobadas = (
             )
     );
 
+SET Asignaturas_Aprobadas = IFNULL(Asignaturas_Aprobadas, 0);
+
 SET Trimestres_Aprobados = (
         SELECT COUNT(distinct SI.id_periodo)
         FROM Historico_Academico as HI
@@ -36,6 +38,9 @@ SET Trimestres_Aprobados = (
                 WHERE matricula = Matricula_Estudiante
             )
     );
+
+SET Trimestres_Aprobados = IFNULL(Trimestres_Aprobados, 0);
+
 SET Puntos_Generales = (
         SELECT SUM(puntos_honor)
         FROM Historico_Academico
@@ -46,6 +51,9 @@ SET Puntos_Generales = (
             )
             AND id_estado_historico IN (1, 2)
     );
+
+SET Puntos_Generales = IFNULL(Puntos_Generales, 0);
+
 SET Puntos_Trimestre = (
         SELECT SUM(H.puntos_honor)
         FROM Historico_Academico as H
@@ -69,6 +77,9 @@ SET Puntos_Trimestre = (
                     )
             )
     );
+
+SET Puntos_Trimestre = IFNULL(Puntos_Trimestre, 0);
+
 SET Creditos_Generales = (
         SELECT SUM(A.creditos)
         FROM Historico_Academico as H
@@ -81,6 +92,9 @@ SET Creditos_Generales = (
             )
             AND H.id_estado_historico IN (1, 2)
     );
+
+SET Creditos_Generales = IFNULL(Creditos_Generales, 0);
+
 SET Creditos_Trimestre = (
         SELECT SUM(A.creditos)
         FROM Historico_Academico as H
@@ -105,6 +119,9 @@ SET Creditos_Trimestre = (
                     )
             )
     );
+
+SET Creditos_Trimestre = IFNULL(Creditos_Trimestre, 0);
+
 IF Creditos_Generales = 0 THEN
 SET Creditos_Generales = 1;
 SET Puntos_Generales = 0;

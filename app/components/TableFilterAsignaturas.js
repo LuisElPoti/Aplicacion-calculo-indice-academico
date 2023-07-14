@@ -16,12 +16,29 @@ const TableComponent = ({ headers, data, onClick }) => {
   const [searchText, setSearchText] = useState('');
 
   const filteredData = data.filter(item => {
+
     const searchTextMatch =
       item?.Clave?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
       item?.Asignatura?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
       item?.Area?.toString().toLowerCase().includes(searchText.toString().toLowerCase());
     return searchTextMatch;
   });
+
+  const handleChange = (e) => {
+    if (searchText.length <= 60) {
+      setSearchText(e.target.value);
+    }
+    else {
+      if (e.target.value.length > searchText.length) {
+        alert('El texto a buscar no puede tener más de 50 caracteres');
+        e.preventDefault();
+      }
+      else{
+        setSearchText(e.target.value);
+      }
+    }
+
+  }
 
   return (
     <div>
@@ -30,11 +47,11 @@ const TableComponent = ({ headers, data, onClick }) => {
           label="Search"
           placeholder="Search by Clave, Asignatura, Area"
           value={searchText}
-          onChange={e => setSearchText(e.target.value)}
+          onChange={(e) => handleChange(e)}
           sx={{ width: '50%', backgroundColor: '#fff', outline: 'none' }}
           className='mr-3'
         />
-        <BotonGuardar texto={"Buscar asignatura"} className="amarillo" onClick={onClick}/>
+        <BotonGuardar texto={"Buscar asignatura"} className="amarillo" onClick={onClick} />
 
       </div>
       <TableContainer component={Paper} sx={{ width: '95%', fontFamily: 'Poppins', height: 'fit-content', borderRadius: '25px', marginTop: '3%', paddingLeft: '2%' }}>

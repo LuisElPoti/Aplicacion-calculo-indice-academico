@@ -18,7 +18,7 @@ function CalcularIndiceForm() {
             id_usuario: event.target.id_estudiante.value
         };
         try {
-            if(existe == true){
+            if (existe == true) {
                 const response = await axios.post(
                     "../api/CalcularIndice",
                     requestData,
@@ -29,18 +29,25 @@ function CalcularIndiceForm() {
                     }
                 );
                 if (response.status === 200) {
-                    setIndice(parseFloat(response?.data[0]?.f0 || 0));
-                    alert('Indice actualizado con éxito, el indice general es: ' + response.data[0].f0);
+                    const indice_r = response?.data[0]?.f0 || 0;
+                    if (indice_r == 0) {
+                        alert('No se puede calcular el indice, el estudiante no tiene asignaturas aprobadas todavía');
+                    }
+                    else {
+                        setIndice(parseFloat(indice_r));
+                        alert('Indice actualizado con éxito, el indice general es: ' + indice_r);
+                    }
+
                 } else {
                     console.log("Problema");
                     alert('Hubo problemas al calcular el indice, inténtelo de nuevo');
                 }
             }
-            else{
+            else {
                 alert('El ID ingresado no existe, no se puede calcular el indice');
-                
+
             }
-            
+
         } catch (error) {
             console.error('Error:', error);
             alert('Hubo problemas al calcular el indice, inténtelo de nuevo');
@@ -104,7 +111,7 @@ function CalcularIndiceForm() {
 
                 <div className='w-1/2 flex items-center'>
 
-                    <ProgressChart value={indice}/>
+                    <ProgressChart value={indice} />
 
                 </div>
 
