@@ -156,7 +156,7 @@ function CrearAsignaturaform({ buttonText = "Crear Asignatura", modo = 'crear', 
 
           <div className='nombre pl-5 l-20 '>
             <p className='nombre-header pt-20'>Créditos</p>
-            <input className='nombre-textbox p-5' type='text' id="creditos" value={creditos} onChange={handleCreditosChange} />
+            <input className='nombre-textbox p-5' required type="number" min="1" max="5" id="creditos" value={creditos} onChange={handleCreditosChange} />
           </div>
         </div>
 
