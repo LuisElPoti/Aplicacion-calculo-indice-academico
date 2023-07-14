@@ -12,7 +12,8 @@ function ReporteCalificaciones() {
   const [id_usuario, setID] = useState("0");
   const [año, setAño] = useState(2023);
   const [trimestre, setTrimestre] = useState(1);
-  const [nombre, setNombre] = useState("Paola");
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
   const [carrera, setCarrera] = useState("Ingenieria de Software");
   const [headerValuesPurpleCard, setHeaderValuesPurpleCard] = useState([
     { headerName: 'Acumulados del Trimestre' },
@@ -28,6 +29,7 @@ function ReporteCalificaciones() {
       const newData = await getDatosSesion(resultado);
       setID(resultado);
       setNombre(newData?.nombre || "Paola");
+      setApellido(newData?.apellido || "Saldaña");
       setCarrera(newData?.carreras?.nombre || "Ingenieria de Software");
     }
 
@@ -91,7 +93,7 @@ function ReporteCalificaciones() {
 
   const headerValuesRedCard = [
     { headerName: 'ID', headerValue: id_usuario },
-    { headerName: 'Nombre', headerValue: nombre },
+    { headerName: 'Nombre', headerValue: nombre + " " + apellido },
     { headerName: 'Programa', headerValue: carrera },
   ];
 

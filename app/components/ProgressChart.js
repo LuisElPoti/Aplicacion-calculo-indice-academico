@@ -1,6 +1,6 @@
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 
 export default function ProgressChart({ value }) {
@@ -10,25 +10,39 @@ export default function ProgressChart({ value }) {
     setIndiceAcademico(value);
   }, [value]);
 
+  const isIndiceZero = indiceAcademico === 0;
+
   return (
-    <Box sx={{ position: 'relative', display: 'inline-flex', width: 250, height: 250}}>
-      <CircularProgress variant="determinate" value={((indiceAcademico - 1.0) / 3.0) * 100} size={250} color="secondary" />
-      <Box
-        sx={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          position: 'absolute',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Typography variant="caption" component="div" className='tipografia-grafico'>
-          {indiceAcademico.toFixed(2)}
-        </Typography>
+    <Tooltip
+      title={isIndiceZero ? 'El índice aún no ha sido calculado' : ''}
+      placement="top"
+    >
+      <Box sx={{ position: 'relative', display: 'inline-flex', width: 250, height: 250 }}>
+        <CircularProgress
+          variant="determinate"
+          value={((indiceAcademico - 1.0) / 3.0) * 100}
+          size={250}
+          color="secondary"
+        />
+        <Box
+          sx={{
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <span
+            className={`tipografia-grafico ${isIndiceZero ? 'show-label' : ''}`}
+          >
+            {indiceAcademico.toFixed(2)}
+          </span>
+        </Box>
       </Box>
-    </Box>
+    </Tooltip>
   );
 }
