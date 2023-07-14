@@ -130,30 +130,37 @@ async function getSecciones(asignaturaId, profesor) {
 }
 
 async function getEstudiantes(asignatura, seccion) {
-  const requestData = {
-    asignatura: parseInt(asignatura),
-    seccion: parseInt(seccion),
-  };
-
-  const response = await axios.get('../api/ListadoEstudiantes', {
-    params: requestData,
-  });
-
-  const historico_academico = response.data;
-
-  const data = historico_academico.map((historico) => {
-    const matricula = historico.estudiantes?.matricula || 'Prueba';
-    const estudiante = historico.estudiantes?.nombre || 'Prueba';
-    const carrera = historico.estudiantes?.carreras?.nombre || 'Prueba'
-
-    return {
-      ID: matricula,
-      Nombre: estudiante,
-      Carrera: carrera,
+  try{
+    const requestData = {
+      asignatura: parseInt(asignatura),
+      seccion: parseInt(seccion),
     };
-  });
-  console.log(data)
-  return data;
+  
+    const response = await axios.get('../api/ListadoEstudiantes', {
+      params: requestData,
+    });
+  
+    const historico_academico = response.data;
+  
+    const data = historico_academico.map((historico) => {
+      const matricula = historico.estudiantes?.matricula || 'Prueba';
+      const estudiante = historico.estudiantes?.nombre || 'Prueba';
+      const carrera = historico.estudiantes?.carreras?.nombre || 'Prueba'
+  
+      return {
+        ID: matricula,
+        Nombre: estudiante,
+        Carrera: carrera,
+      };
+    });
+    console.log(data)
+    return data;
+  }
+  catch(error){
+    alert("Este profesor no tiene secciones asignadas en este periodo")
+    return [];
+  }
+  
 }
 
 export default ListadoEstudiante
