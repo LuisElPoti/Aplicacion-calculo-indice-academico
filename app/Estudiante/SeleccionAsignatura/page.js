@@ -116,9 +116,10 @@ export default function SeleccionAsignatura() {
             'Content-Type': 'application/json',
           },
         });
-  
+        
         console.log('Datos guardados exitosamente para la asignatura:', asignatura.Asignatura);
       }
+      alert('La seleccion de Asignatuas de ha guardado exitosamente');
     } catch (error) {
       console.error('Error al guardar los datos:', error);
     }
